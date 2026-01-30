@@ -1,0 +1,60 @@
+# Two containers sharing app directory: app (VS Code) + agent (optional sidecar)
+
+services:
+  # App container - VS Code attaches here; In real usage, this would be actual project's DevContainer.
+  app:
+    build:
+      context: ./test-app
+      dockerfile: Dockerfile
+    container_name: devcontainer-app
+
+    # Share app directory with agent
+    volumes:
+      - ./app:/app
+
+    networks:
+      - devnet
+
+  # OpenCode Agent sidecar
+  agent:
+    profiles:
+      - ai # Only runs when: docker compose --profile ai up
+
+    # Option A: Build from local Dockerfile (development)
+    build:
+      context: .
+      dockerfile: agent.Dockerfile
+    image: ${AGENT_IMAGE:-agent-opencode}
+
+    # Option B: Use pre-built image (production)
+    # Comment out 'build' above and set AGENT_IMAGE in .env
+    # Example: AGENT_IMAGE=ghcr.io/your-org/agent-opencode:latest
+
+    container_name: ${AGENT_NAME:-agent-opencode}
+    volumes:
+      - ./app:/app
+
+      # Persistent cache - speeds up rebuilds, keeps state between restarts
+      - ${AGENT_NAME:-agent-opencode}-cache:/home/opencode/.cache
+    environment:
+      # API Keys - loaded from .env file (git-ignored!)
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+
+    networks:
+      - devnet
+
+    # Restart policy - agent should always be available
+    restart: unless-stopped
+    # Healthcheck defined in agent.Dockerfile
+
+networks:
+  devnet:
+    driver: bridge
+    name: devnet
+
+volumes:
+  # Persistent cache for agent (name derived from AGENT_NAME)
+  ${AGENT_NAME:-agent-opencode}-cache:
+    name: ${AGENT_NAME:-agent-opencode}-cache
