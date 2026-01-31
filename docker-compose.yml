@@ -35,7 +35,7 @@ services:
       - ./app:/app
 
       # Persistent cache - speeds up rebuilds, keeps state between restarts
-      - ${AGENT_NAME:-agent-opencode}-cache:/home/opencode/.cache
+      - agent-cache:/home/opencode/.cache
     environment:
       # API Keys - loaded from .env file (git-ignored!)
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
@@ -56,5 +56,5 @@ networks:
 
 volumes:
   # Persistent cache for agent (name derived from AGENT_NAME)
-  ${AGENT_NAME:-agent-opencode}-cache:
+  agent-cache:
     name: ${AGENT_NAME:-agent-opencode}-cache
