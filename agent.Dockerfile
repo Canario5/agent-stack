@@ -19,12 +19,14 @@ ARG USER_GID=${USER_UID}
 
 RUN groupadd --gid ${USER_GID} ${USERNAME} \
     && useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} \
-    # Create app directory with proper permissions
-    && mkdir -p /app \
-    && chown -R ${USERNAME}:${USERNAME} /app
+    # Create app and cache directories with proper permissions
+    && mkdir -p /app /home/${USERNAME}/.cache \
+    && chown -R ${USERNAME}:${USERNAME} /app /home/${USERNAME}
 
-# Install OpenCode binary using the official install script
-RUN curl -fsSL https://opencode.ai/install | VERSION=${OPENCODE_VERSION} bash
+# Install OpenCode binary as root; move to system-wide location; clean residuals
+RUN curl -fsSL https://opencode.ai/install | VERSION=${OPENCODE_VERSION} bash -s -- --no-modify-path \
+    && mv /root/.opencode/bin/opencode /usr/local/bin/opencode \
+    && rm -rf /root/.opencode
 
 # Switch to non-root user
 USER ${USERNAME}
