@@ -1,0 +1,14 @@
+/*! Every change validate this file with: */
+/*? npx --yes --package renovate -- renovate-config-validator renovate.json5 */
+
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices',
+  ],
+  timezone: 'Europe/Prague',
+  schedule: [
+    'after 3:15pm and before 4:20pm on Monday',
+    'after 3:15pm and before 4:20pm on Thursday',
+  ]
+}
