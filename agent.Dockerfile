@@ -1,6 +1,6 @@
 # Agent OpenCode - Sidecar container
 
-FROM debian:trixie-slim
+FROM debian:trixie-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b
 
 # renovate: datasource=github-releases depName=anomalyco/opencode
 ARG OPENCODE_VERSION=1.1.42
