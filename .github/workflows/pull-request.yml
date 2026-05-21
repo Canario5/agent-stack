@@ -1,0 +1,24 @@
+name: pull-request
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-fast-forward:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      #* We appear to need write permission for both pull-requests and
+      #* issues in order to post a comment to a pull request.
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checking if fast forwarding is possible
+        uses: sequoia-pgp/fast-forward@ea7628bedcb0b0b96e94383ada458d812fca4979 # v1.0.0
+        with:
+          merge: false
+          comment: on-error
