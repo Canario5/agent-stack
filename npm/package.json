@@ -1,4 +1,7 @@
 {
   "name": "pi-extensions",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "pi-provider-litellm": "1.2.3"
+  }
 }
