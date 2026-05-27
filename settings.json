@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.75.5",
+  "defaultProvider": "litellm",
+  "defaultModel": "opencode-go/deepseek-v4-pro",
+  "defaultThinkingLevel": "medium",
+  "packages": []
+}
