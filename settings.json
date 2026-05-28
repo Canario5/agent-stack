@@ -5,6 +5,7 @@
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-provider-litellm@1.2.3",
-    "npm:pi-mcp-adapter@2.8.0"
+    "npm:pi-mcp-adapter@2.8.0",
+    "npm:context-mode@1.0.151"
   ]
 }
