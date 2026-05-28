@@ -1,7 +1,8 @@
 ## pi-provider-litellm
-- **Why** It fetches extra info from litellm `/model/info` route if available. Good for context, price etc informations.
-- **Issue:** Interactive login with pi `/login litellm` didnt worked (windows issue maybe?)
-- **Workaround:** Manually paste config directly into pi´s config file `.pi/agent/auth.json`:  
+- **Install:** `pi install npm:pi-provider-litellm@x.x.x`
+- **Purpose:** Fetches extra information from LiteLLM's `/model/info` route, such as context size and pricing.
+- **Issue:** Interactive login with `pi /login litellm` did not worked (maybe Windows issue?).
+- **Workaround:** Manually add the config to pi's auth file at `.pi/agent/auth.json`:  
 ```
 "litellm": {
   "type": "oauth",
@@ -11,6 +12,6 @@
   "baseUrl": "https://litellm.redacted.com"
 }
 ```
-- **Note:** Expires field doesnt matter in this case.
-- **Note2:** LiteLLM server MUST have the model info route `/model/info` explicitly allowed for the token.
-- **Usage:** new slash command added into pi `/litellm-refresh` — force re-fetch the model list, ignoring cache
+- **Note:** The `expires` field does not matter in this case.
+- **Requirement:** The LiteLLM token must be allowed to call `/model/info`.
+- **Usage:** Automatic. Also manual way with slash command `/litellm-refresh` which refreshes the model list and ignores the cache.
