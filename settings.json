@@ -1,11 +1,12 @@
 {
   "lastChangelogVersion": "0.75.5",
-  "defaultProvider": "litellm",
-  "defaultModel": "opencode/big-pickle",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.4",
   "defaultThinkingLevel": "medium",
   "packages": [
     "npm:pi-provider-litellm@1.2.3",
     "npm:pi-mcp-adapter@2.8.0",
-    "npm:context-mode@1.0.151"
+    "npm:context-mode@1.0.151",
+    "npm:pi-hashline-readmap@0.8.16"
   ]
 }
