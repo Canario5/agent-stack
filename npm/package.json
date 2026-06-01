@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@narumitw/pi-codex-usage": "0.1.36",
-    "context-mode": "1.0.151",
+    "context-mode": "1.0.161",
     "pi-hashline-readmap": "0.8.16",
     "pi-mcp-adapter": "2.8.0",
     "pi-provider-litellm": "1.2.3"
