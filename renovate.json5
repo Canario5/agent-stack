@@ -6,6 +6,7 @@
   extends: [
     'config:best-practices',
   ],
+  minimumReleaseAge: '2 days',
   customManagers: [
     {
       customType: 'regex',
