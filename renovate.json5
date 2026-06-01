@@ -1,3 +1,6 @@
+/*! Every change validate this file with: */
+/*? npx --yes --package renovate@latest -- renovate-config-validator renovate.json5 */
+
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
@@ -7,45 +10,13 @@
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/(^|/)settings\\.json$/',
+        '/^settings\\.json$/',
       ],
       matchStrings: [
         'npm:(?<depName>@[^/"]+/[^@"]+|[^@"]+)@(?<currentValue>[^"/]+)',
       ],
       datasourceTemplate: 'npm',
       versioningTemplate: 'npm',
-    },
-  ],
-  packageRules: [
-    {
-      matchPackageNames: [
-        'pi-provider-litellm',
-      ],
-      groupName: 'pi-provider-litellm',
-    },
-    {
-      matchPackageNames: [
-        'pi-mcp-adapter',
-      ],
-      groupName: 'pi-mcp-adapter',
-    },
-    {
-      matchPackageNames: [
-        'context-mode',
-      ],
-      groupName: 'context-mode',
-    },
-    {
-      matchPackageNames: [
-        'pi-hashline-readmap',
-      ],
-      groupName: 'pi-hashline-readmap',
-    },
-    {
-      matchPackageNames: [
-        '@narumitw/pi-codex-usage',
-      ],
-      groupName: '@narumitw/pi-codex-usage',
     },
   ],
   timezone: 'Europe/Prague',

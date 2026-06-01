@@ -7,7 +7,7 @@ Rules for agents:
 - Add or update one extension at a time unless explicitly asked otherwise.
 - Extension docs live in `docs/extensions/<package-name>.md`.
 - Update `docs/extensions/extensions.md` whenever adding, removing, or renaming an extension doc.
-- Verify that package versions are aligned between `settings.json` and `npm/package.json`.
+- Treat `settings.json` as the source of truth for pinned Pi extension packages.
 - Keep wording concise, practical, and specific to Pi usage.
 - Preserve install commands, purpose bullets, usage notes, and important caveats.
 - Do not expand docs with generic background or marketing text.
