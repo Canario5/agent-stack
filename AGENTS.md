@@ -11,5 +11,4 @@ Rules for agents:
 - Keep wording concise, practical, and specific to Pi usage.
 - Preserve install commands, purpose bullets, usage notes, and important caveats.
 - Do not expand docs with generic background or marketing text.
-- If touching `renovate.json5`, validate it with Renovate config validator.
-- Use repo tools for file edits; do not rewrite unrelated files.
+- Do not rewrite unrelated files.
