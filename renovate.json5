@@ -1,6 +1,3 @@
-/*! Every change validate this file with: */
-/*? npx --yes --package renovate -- renovate-config-validator renovate.json5 */
-
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
@@ -9,8 +6,8 @@
   customManagers: [
     {
       customType: 'regex',
-      fileMatch: [
-        '(^|/)settings\\.json$',
+      managerFilePatterns: [
+        '/(^|/)settings\\.json$/',
       ],
       matchStrings: [
         'npm:(?<depName>@[^/"]+/[^@"]+|[^@"]+)@(?<currentValue>[^"/]+)',
@@ -21,23 +18,33 @@
   ],
   packageRules: [
     {
-      matchPackageNames: ['pi-provider-litellm'],
+      matchPackageNames: [
+        'pi-provider-litellm',
+      ],
       groupName: 'pi-provider-litellm',
     },
     {
-      matchPackageNames: ['pi-mcp-adapter'],
+      matchPackageNames: [
+        'pi-mcp-adapter',
+      ],
       groupName: 'pi-mcp-adapter',
     },
     {
-      matchPackageNames: ['context-mode'],
+      matchPackageNames: [
+        'context-mode',
+      ],
       groupName: 'context-mode',
     },
     {
-      matchPackageNames: ['pi-hashline-readmap'],
+      matchPackageNames: [
+        'pi-hashline-readmap',
+      ],
       groupName: 'pi-hashline-readmap',
     },
     {
-      matchPackageNames: ['@narumitw/pi-codex-usage'],
+      matchPackageNames: [
+        '@narumitw/pi-codex-usage',
+      ],
       groupName: '@narumitw/pi-codex-usage',
     },
   ],
@@ -45,5 +52,5 @@
   schedule: [
     'after 3:15pm and before 4:20pm on Monday',
     'after 3:15pm and before 4:20pm on Thursday',
-  ]
+  ],
 }
