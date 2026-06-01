@@ -6,6 +6,41 @@
   extends: [
     'config:best-practices',
   ],
+  customManagers: [
+    {
+      customType: 'regex',
+      fileMatch: [
+        '(^|/)settings\\.json$',
+      ],
+      matchStrings: [
+        'npm:(?<depName>@[^/"]+/[^@"]+|[^@"]+)@(?<currentValue>[^"/]+)',
+      ],
+      datasourceTemplate: 'npm',
+      versioningTemplate: 'npm',
+    },
+  ],
+  packageRules: [
+    {
+      matchPackageNames: ['pi-provider-litellm'],
+      groupName: 'pi-provider-litellm',
+    },
+    {
+      matchPackageNames: ['pi-mcp-adapter'],
+      groupName: 'pi-mcp-adapter',
+    },
+    {
+      matchPackageNames: ['context-mode'],
+      groupName: 'context-mode',
+    },
+    {
+      matchPackageNames: ['pi-hashline-readmap'],
+      groupName: 'pi-hashline-readmap',
+    },
+    {
+      matchPackageNames: ['@narumitw/pi-codex-usage'],
+      groupName: '@narumitw/pi-codex-usage',
+    },
+  ],
   timezone: 'Europe/Prague',
   schedule: [
     'after 3:15pm and before 4:20pm on Monday',
