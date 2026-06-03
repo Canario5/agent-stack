@@ -8,3 +8,4 @@
 | 4 | [pi-hashline-readmap](./pi-hashline-readmap.md) | Replaces Pi’s native read/edit tools with hashline-based ones for safer edits, file maps, symbol reads, AST search, and a few other useful upgrades. |
 | 5 | [@narumitw/pi-codex-usage](./pi-codex-usage.md) | Shows ChatGPT Codex subscription usage inside Pi. |
 | 6 | [pi-subagents](./pi-subagents.md) | Gives Pi focused helper agents to review code, scout files, plan changes, implement tasks, or run work in parallel. |
+| 7 | [@plannotator/pi-extension](./plannotator-pi-extension.md) | Adds browser-based plan approval, markdown annotation, and code review feedback workflows to Pi. |
