@@ -11,3 +11,4 @@
 | 7 | [@plannotator/pi-extension](./plannotator-pi-extension.md) | Adds browser-based plan approval, markdown annotation, and code review feedback workflows to Pi. |
 | 8 | [@juicesharp/rpiv-ask-user-question](./rpiv-ask-user-question.md) | Adds a structured questionnaire dialog so Pi can ask clarifying questions with typed options, previews, and multi-select choices. |
 | 9 | [@juicesharp/rpiv-btw](./rpiv-btw.md) | Adds `/btw <question>` for context-aware side questions without adding answers to the main conversation context. |
+| 10 | [@juicesharp/rpiv-args](./rpiv-args.md) | Adds shell-style `$1`, `$ARGUMENTS`, runtime variables, and inline shell substitutions for Pi skills. |
