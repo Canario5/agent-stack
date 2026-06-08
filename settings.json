@@ -3,6 +3,7 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
+  "enableInstallTelemetry": false,
   "packages": [
     "npm:pi-provider-litellm@1.2.3",
     "npm:pi-mcp-adapter@2.8.0",
