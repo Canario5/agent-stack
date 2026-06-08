@@ -9,3 +9,4 @@
 | 5 | [@narumitw/pi-codex-usage](./pi-codex-usage.md) | Shows ChatGPT Codex subscription usage inside Pi. |
 | 6 | [pi-subagents](./pi-subagents.md) | Gives Pi focused helper agents to review code, scout files, plan changes, implement tasks, or run work in parallel. |
 | 7 | [@plannotator/pi-extension](./plannotator-pi-extension.md) | Adds browser-based plan approval, markdown annotation, and code review feedback workflows to Pi. |
+| 8 | [@juicesharp/rpiv-ask-user-question](./rpiv-ask-user-question.md) | Adds a structured questionnaire dialog so Pi can ask clarifying questions with typed options, previews, and multi-select choices. |
