@@ -14,6 +14,7 @@
     "npm:@plannotator/pi-extension@0.19.26",
     "npm:@juicesharp/rpiv-ask-user-question@1.18.2",
     "npm:@juicesharp/rpiv-btw@1.18.2",
-    "npm:@juicesharp/rpiv-args@1.18.2"
+    "npm:@juicesharp/rpiv-args@1.18.2",
+    "npm:pi-smart-fetch@0.3.11"
   ]
 }
