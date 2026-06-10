@@ -85,7 +85,7 @@ Expected result: the browser opens, you add one comment to the plan, Pi revises 
 Annotate this documentation file:
 
 ```text
-/plannotator-annotate docs/extensions/pi-extension.md
+/plannotator-annotate docs/extensions/plannotator-pi-extension.md
 ```
 
 Use this for documents, specs, README changes, or anything where inline comments are clearer than a long chat message.
@@ -105,7 +105,16 @@ Use this after Pi has made changes and you want to mark exact lines as `fix this
 - `/plannotator-annotate <file.md>` — open markdown or converted content in the annotation UI.
 - `/plannotator-last` — annotate the latest rendered assistant message.
 - `/plannotator-review` — open current git changes in the code review UI.
-- `/plannotator-setup-goal` — interview, review facts, and prepare a goal package for `/goal`.
+- `/plannotator-setup-goal` — interview, review facts, and prepare a goal package for `/goal`; this may need the separate `plannotator` CLI.
+
+### Pi extension vs CLI
+
+The Plannotator Pi extension and the `plannotator` CLI are related but not the same install.
+
+| Need | Install required |
+|---|---|
+| Use `/plannotator`, `/plannotator-annotate`, `/plannotator-last`, or `/plannotator-review` inside Pi | `pi install npm:@plannotator/pi-extension@x.x.x` |
+| Run skills that shell out to `plannotator ...`, especially `/plannotator-setup-goal` | A `plannotator` CLI executable on `PATH` |
 
 ### Which workflow to use
 
