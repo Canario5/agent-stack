@@ -20,6 +20,16 @@
       versioningTemplate: 'npm',
     },
   ],
+  packageRules: [
+    {
+      groupName: 'Juicesharp RPIV extensions',
+      matchPackageNames: [
+        '@juicesharp/rpiv-ask-user-question',
+        '@juicesharp/rpiv-btw',
+        '@juicesharp/rpiv-args',
+      ],
+    },
+  ],
   timezone: 'Europe/Prague',
   schedule: [
     'after 3:15pm and before 4:20pm on Monday',
