@@ -13,3 +13,4 @@
 | 9 | [@juicesharp/rpiv-btw](./rpiv-btw.md) | Adds `/btw <question>` for context-aware side questions without adding answers to the main conversation context. |
 | 10 | [@juicesharp/rpiv-args](./rpiv-args.md) | Adds shell-style `$1`, `$ARGUMENTS`, runtime variables, and inline shell substitutions for Pi skills. |
 | 11 | [pi-smart-fetch](./pi-smart-fetch.md) | Lets Pi fetch websites more reliably and turn them into readable markdown/text. |
+| 12 | [pi-powerline](./pi-powerline.md) | Improves Pi's terminal UI with a Powerline-style header, footer, and breadcrumb. |
