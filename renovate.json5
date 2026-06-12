@@ -29,6 +29,18 @@
         '@juicesharp/rpiv-args',
       ],
     },
+    {
+      groupName: 'Firstpick Pi skills',
+      matchPackageNames: [
+        '@firstpick/pi-skill-tech-deep-dive',
+        '@firstpick/pi-skill-code-quality',
+        '@firstpick/pi-skill-repo-explorer',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+    },
   ],
   timezone: 'Europe/Prague',
   schedule: [
