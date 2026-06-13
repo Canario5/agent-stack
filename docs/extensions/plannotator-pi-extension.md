@@ -23,7 +23,6 @@ Good uses:
 - Safer changes: plan mode restricts destructive commands and limits writes while planning.
 - Precise feedback: annotate exact plan items, markdown sections, assistant text, or diff lines.
 - Code review: inspect current git changes in a browser diff UI.
-- Goal setup: turn a rough idea into a reviewed package for `/goal`.
 
 ### What it adds
 
@@ -31,7 +30,7 @@ Good uses:
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
 - Code review UI for current git changes, staged changes, last commit, or branch diffs.
-- Slash-command skills for annotation, review, and goal setup workflows.
+- Slash commands for plan mode, annotation, and code review workflows.
 
 ### First test: plan review flow
 
@@ -105,16 +104,10 @@ Use this after Pi has made changes and you want to mark exact lines as `fix this
 - `/plannotator-annotate <file.md>` — open markdown or converted content in the annotation UI.
 - `/plannotator-last` — annotate the latest rendered assistant message.
 - `/plannotator-review` — open current git changes in the code review UI.
-- `/plannotator-setup-goal` — interview, review facts, and prepare a goal package for `/goal`; this may need the separate `plannotator` CLI.
 
-### Pi extension vs CLI
+### Optional extra skills
 
-The Plannotator Pi extension and the `plannotator` CLI are related but not the same install.
-
-| Need | Install required |
-|---|---|
-| Use `/plannotator`, `/plannotator-annotate`, `/plannotator-last`, or `/plannotator-review` inside Pi | `pi install npm:@plannotator/pi-extension@x.x.x` |
-| Run skills that shell out to `plannotator ...`, especially `/plannotator-setup-goal` | A `plannotator` CLI executable on `PATH` |
+`@plannotator/pi-extension@0.20.1` and newer no longer bundles the [optional Plannotator skills](../skills/plannotator-extra-skills.md). Those skills also require [Plannotator CLI](../external-utilities/plannotator-cli.md) on `PATH`.
 
 ### Which workflow to use
 
@@ -124,7 +117,6 @@ The Plannotator Pi extension and the `plannotator` CLI are related but not the s
 | You want to review a markdown doc/spec | `/plannotator-annotate <file.md>` |
 | You want to comment on Pi's latest answer | `/plannotator-last` |
 | You want to review changed code lines | `/plannotator-review` |
-| You want to turn a vague idea into a structured goal | `/plannotator-setup-goal` |
 
 ### Tips for useful feedback
 

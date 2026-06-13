@@ -25,7 +25,8 @@ Skills installed mainly as skills. These get their own short docs page.
 | 1 | [llm-wiki](./micuintus-llm-wiki.md) | `@micuintus/llm-wiki` | Context / memory | Trial | Build a separate markdown knowledge wiki from saved articles, chats, notes, and project sources. |
 | 2 | [repo-explorer](./firstpick-pi-skill-repo-explorer.md) | `@firstpick/pi-skill-repo-explorer` | Discovery / understanding | Needs adaptation | Useful idea, but upstream workflow may need Pi-specific cleanup before regular use. |
 | 3 | [tech-deep-dive](./firstpick-pi-skill-tech-deep-dive.md) | `@firstpick/pi-skill-tech-deep-dive` | Planning / decision support | Trial | Use before choosing libraries, frameworks, tools, APIs, models, or architecture. |
-| 4 | [code-quality](./firstpick-pi-skill-code-quality.md) | `@firstpick/pi-skill-code-quality` | Quality / review | Needs adaptation | Review before relying on it; upstream assumptions may not fit this setup. |
+| 4 | [Plannotator extra skills](./plannotator-extra-skills.md) | `backnotprop/plannotator/apps/skills/extra` via `npx skills add` | Planning / decision support | Trial | Adds goal setup and advanced Plannotator planning workflows. Install [Plannotator CLI](../external-utilities/plannotator-cli.md) first; the skills call `plannotator`. |
+| 5 | [code-quality](./firstpick-pi-skill-code-quality.md) | `@firstpick/pi-skill-code-quality` | Quality / review | Needs adaptation | Review before relying on it; upstream assumptions may not fit this setup. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.
 
@@ -44,9 +45,5 @@ Skills bundled with broader Pi extensions. List them here for discoverability, b
 | 7 | `ctx-upgrade` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Utility | Upgrade context-mode and refresh hook setup. |
 | 8 | `ctx-purge` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Dangerous | Permanently delete indexed context-mode knowledge. |
 | 9 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, chains, parallel runs, and async workflows. |
-| 10 | `plannotator-annotate` | [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md) | Annotation / review UI | Utility | Open annotation UI for markdown, rendered HTML, URLs, or folders. |
-| 11 | `plannotator-last` | [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md) | Annotation / review UI | Utility | Annotate the latest rendered assistant message and revise from feedback. |
-| 12 | `plannotator-review` | [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md) | Annotation / review UI | Utility | Open browser-based code review for the current worktree or PR URL. |
-| 13 | `plannotator-setup-goal` | [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md) | Annotation / review UI | Utility | Turn an idea into a reviewed goal package and execution plan. |
 
 Rule of thumb: standalone skill package = table row plus own page. Extension-provided skill = table row only, linked back to the extension docs.
