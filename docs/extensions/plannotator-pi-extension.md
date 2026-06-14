@@ -22,14 +22,15 @@ Good uses:
 - Planning before coding: Pi writes a checklist plan, then waits for approval.
 - Safer changes: plan mode restricts destructive commands and limits writes while planning.
 - Precise feedback: annotate exact plan items, markdown sections, assistant text, or diff lines.
-- Code review: inspect current git changes in a browser diff UI.
+- Code review: inspect Pi's local changes in a browser diff UI, mark exact risky lines, then send feedback back to Pi.
+- Pull request review: open a PR diff, review changed files visually, and feed review notes back to the agent.
 
 ### What it adds
 
 - Plan mode with a browser UI for approving or annotating markdown checklist plans.
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
-- Code review UI for current git changes, staged changes, last commit, or branch diffs.
+- Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
 - Slash commands for plan mode, annotation, and code review workflows.
 
 ### First test: plan review flow
@@ -97,26 +98,52 @@ Review current git changes:
 
 Use this after Pi has made changes and you want to mark exact lines as `fix this`, `this is unclear`, or `this risk needs tests`.
 
+Review a pull request URL:
+
+```text
+/plannotator-review https://github.com/owner/repo/pull/123
+```
+
 ### Slash commands
 
 - `/plannotator` — start or toggle plan mode.
 - `/plannotator <file.md>` — start plan mode with a specific plan file.
 - `/plannotator-annotate <file.md>` — open markdown or converted content in the annotation UI.
 - `/plannotator-last` — annotate the latest rendered assistant message.
-- `/plannotator-review` — open current git changes in the code review UI.
+- `/plannotator-review` — review the current local git changes in this repo.
+- `/plannotator-review <PR URL or diff target>` — review a specific pull request, branch diff, or other supported diff target.
+
+Choose the command by what you need to inspect. Use `/plannotator-annotate <target>` when the thing you want to review already exists and you want comments on the current content. For example, use it to review a plan, README, spec, instructions file, or other supported text/document source.
+
+Use `/plannotator-review` when Pi or another developer changed files and you want to review those changes before accepting them. It opens a diff view: added lines, removed lines, renamed files, and changed files. This is the mode to use after Pi edits code or docs, or when reviewing a pull request.
 
 ### Optional extra skills
 
 `@plannotator/pi-extension@0.20.1` and newer no longer bundles the [optional Plannotator skills](../skills/plannotator-extra-skills.md). Those skills also require [Plannotator CLI](../external-utilities/plannotator-cli.md) on `PATH`.
 
-### Which workflow to use
+### Core workflows
 
-| Situation | Best command |
-|---|---|
-| You want Pi to plan before editing | `/plannotator <plan-file.md>` |
-| You want to review a markdown doc/spec | `/plannotator-annotate <file.md>` |
-| You want to comment on Pi's latest answer | `/plannotator-last` |
-| You want to review changed code lines | `/plannotator-review` |
+| Workflow | Command | Use when |
+|---|---|---|
+| Approve a plan before coding | `/plannotator <plan-file.md>` | You want Pi blocked until you approve the plan. |
+| Review Pi's code changes | `/plannotator-review` | Pi edited files and you want line-level feedback before it continues. |
+| Review a PR or branch diff | `/plannotator-review <PR-or-diff-target>` | You want Plannotator as a browser review UI for pull requests or larger diffs. |
+| Review docs or specs | `/plannotator-annotate <file.md>` | You want inline comments on requirements, README edits, or docs before Pi codes against them. |
+| Correct Pi's latest answer | `/plannotator-last` | Pi gave a long plan or explanation and exact visual feedback is clearer than chat. |
+| Clarify the goal first | `plannotator-setup-goal` extra skill | The request is vague, risky, or easy to misunderstand. |
+| Break up big work | `plannotator-compound` extra skill | You want staged plan/review/execute cycles instead of one large run. |
+
+### Code review loop
+
+Use `/plannotator-review` after Pi changes code or when you want to inspect a PR:
+
+1. Pi edits files, or you provide a pull request URL.
+2. Plannotator opens the diff in a browser.
+3. You annotate exact changed lines with comments such as `fix this`, `missing test`, or `this behavior changed`.
+4. Send feedback back to Pi.
+5. Pi should triage the feedback, verify it against the code, and then discuss or make repairs.
+
+This is most useful for risky refactors, dependency upgrades, behavior changes, and large pull requests where plain chat feedback would be too vague.
 
 ### Tips for useful feedback
 
