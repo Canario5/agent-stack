@@ -31,7 +31,7 @@ Good uses:
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
 - Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
-- Slash commands for plan mode, annotation, and code review workflows.
+- Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
 
 ### First test: plan review flow
 
@@ -116,6 +116,14 @@ Review a pull request URL:
 Choose the command by what you need to inspect. Use `/plannotator-annotate <target>` when the thing you want to review already exists and you want comments on the current content. For example, use it to review a plan, README, spec, instructions file, or other supported text/document source.
 
 Use `/plannotator-review` when Pi or another developer changed files and you want to review those changes before accepting them. It opens a diff view: added lines, removed lines, renamed files, and changed files. This is the mode to use after Pi edits code or docs, or when reviewing a pull request.
+
+### Programmatic plan mode
+
+Users normally start plan mode with `/plannotator`, `Ctrl+Alt+P`, or `pi --plan`.
+
+Since v0.20.2, other Pi extensions can control Plannotator plan mode through Pi's event bus. This lets extension-driven workflows enter, exit, toggle, or check plan mode without the user to run `/plannotator` manually.
+
+For example, another extension could recognize a request like `plan this first` and call Plannotator's `plan-mode` event before the agent continues.
 
 ### Optional extra skills
 
