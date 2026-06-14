@@ -5,7 +5,7 @@
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
   "packages": [
-    "npm:pi-provider-litellm@1.2.3",
+    "npm:pi-provider-litellm@1.2.7",
     "npm:pi-mcp-adapter@2.8.0",
     "npm:context-mode@1.0.162",
     "npm:pi-hashline-readmap@0.9.1",
