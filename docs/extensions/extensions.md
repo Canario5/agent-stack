@@ -14,3 +14,4 @@
 | 10 | [@juicesharp/rpiv-args](./rpiv-args.md) | Adds shell-style `$1`, `$ARGUMENTS`, runtime variables, and inline shell substitutions for Pi skills. |
 | 11 | [pi-smart-fetch](./pi-smart-fetch.md) | Lets Pi fetch websites more reliably and turn them into readable markdown/text. |
 | 12 | [pi-powerline](./pi-powerline.md) | Improves Pi's terminal UI with a Powerline-style header, footer, and breadcrumb. |
+| 13 | [pi-skillful](./pi-skillful.md) | Allows skills to be invoked anywhere in a prompt, selected skills to be hidden to reduce prompt context, and skill visibility to be toggled directly in a session. |

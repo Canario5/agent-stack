@@ -20,6 +20,14 @@
     "npm:@firstpick/pi-skill-tech-deep-dive@0.1.3",
     "npm:@firstpick/pi-skill-code-quality@0.1.3",
     "npm:@firstpick/pi-skill-repo-explorer@0.1.9",
-    "npm:@micuintus/llm-wiki@1.4.8"
-  ]
+    "npm:@micuintus/llm-wiki@1.4.8",
+    "npm:pi-skillful@0.3.8"
+  ],
+  "skillful": {
+    "hiddenSkills": [
+      "ctx-doctor",
+      "ctx-stats",
+      "ctx-upgrade"
+    ]
+  }
 }
