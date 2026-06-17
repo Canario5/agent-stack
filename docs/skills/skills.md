@@ -2,7 +2,14 @@
 
 Skills are documented as a lightweight registry: what each package adds, when to use it, and the caveats worth remembering later. Keep upstream docs as the source of truth for full behavior.
 
-New skills start as **Trial** until they prove useful in normal Pi work.
+### Maintenance workflow
+
+Update skills from the `agent-stack` repo root, not from an arbitrary local Pi config directory.
+
+```bash
+npx skills update -p -y
+```
+
 
 ### Categories
 
@@ -16,6 +23,8 @@ New skills start as **Trial** until they prove useful in normal Pi work.
 | Orchestration | Delegating work to agents, sessions, dashboards, or review flows. |
 | Annotation / review UI | Browser-based annotation, plan review, and code review feedback. |
 
+New skills start as **Trial** until they prove useful in normal Pi work.
+
 ### Standalone skill packages
 
 Skills installed mainly as skills. These get their own short docs page.
@@ -25,7 +34,7 @@ Skills installed mainly as skills. These get their own short docs page.
 | 1 | [llm-wiki](./micuintus-llm-wiki.md) | `@micuintus/llm-wiki` | Context / memory | Trial | Build a separate markdown knowledge wiki from saved articles, chats, notes, and project sources. |
 | 2 | [repo-explorer](./firstpick-pi-skill-repo-explorer.md) | `@firstpick/pi-skill-repo-explorer` | Discovery / understanding | Needs adaptation | Useful idea, but upstream workflow may need Pi-specific cleanup before regular use. |
 | 3 | [tech-deep-dive](./firstpick-pi-skill-tech-deep-dive.md) | `@firstpick/pi-skill-tech-deep-dive` | Planning / decision support | Trial | Use before choosing libraries, frameworks, tools, APIs, models, or architecture. |
-| 4 | [Plannotator extra skills](./plannotator-extra-skills.md) | `backnotprop/plannotator/apps/skills/extra` via `npx skills add` | Planning / decision support | Trial | Adds goal setup and advanced Plannotator planning workflows. Install [Plannotator CLI](../external-utilities/plannotator-cli.md) first; the skills call `plannotator`. |
+| 4 | [Plannotator extra skills](./plannotator-extra-skills.md) | `backnotprop/plannotator/apps/skills/extra` via `npx skills add --agent pi --copy` | Planning / decision support | Trial | Adds goal setup and advanced Plannotator planning workflows. Install [Plannotator CLI](../external-utilities/plannotator-cli.md) first; the skills call `plannotator`. |
 | 5 | [code-quality](./firstpick-pi-skill-code-quality.md) | `@firstpick/pi-skill-code-quality` | Quality / review | Needs adaptation | Review before relying on it; upstream assumptions may not fit this setup. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.

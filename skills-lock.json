@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "plannotator-compound": {
+      "source": "backnotprop/plannotator",
+      "sourceType": "github",
+      "skillPath": "apps/skills/extra/plannotator-compound/SKILL.md",
+      "computedHash": "414e2a06b37ed0ed64b1b6fdf7a57458574c066e33833bba20fc53ab417cd78a"
+    },
+    "plannotator-setup-goal": {
+      "source": "backnotprop/plannotator",
+      "sourceType": "github",
+      "skillPath": "apps/skills/extra/plannotator-setup-goal/SKILL.md",
+      "computedHash": "b1aeb0c5ada49569ae9f05255a6b34cd45e98fcba91169ee14545cdaced35b94"
+    },
+    "plannotator-visual-explainer": {
+      "source": "backnotprop/plannotator",
+      "sourceType": "github",
+      "skillPath": "apps/skills/extra/plannotator-visual-explainer/SKILL.md",
+      "computedHash": "004ed7947dbebd19d8664cba381eb7693351ca03d37d5d364fca88d2b3863b6b"
+    }
+  }
+}

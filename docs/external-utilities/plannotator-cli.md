@@ -34,5 +34,5 @@ irm https://plannotator.ai/install.ps1 | iex
 Install [optional Plannotator skills](../skills/plannotator-extra-skills.md) separately with:
 
 ```bash
-npx skills add backnotprop/plannotator/apps/skills/extra
+npx skills add backnotprop/plannotator/apps/skills/extra --agent pi --copy -y
 ```

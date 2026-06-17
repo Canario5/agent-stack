@@ -1,7 +1,7 @@
 ## Plannotator extra skills
 
 - **Install CLI:** install [Plannotator CLI](../external-utilities/plannotator-cli.md) first so `plannotator` is on `PATH`.
-- **Install skills:** `npx skills add backnotprop/plannotator/apps/skills/extra`
+- **Install skills:** `npx skills add backnotprop/plannotator/apps/skills/extra --agent pi --copy -y`
 - **Category:** Planning / Plannotator
 - **Full docs:** [Plannotator installation guide](https://plannotator.ai/docs/getting-started/installation/)
 
@@ -20,10 +20,10 @@ First install [Plannotator CLI](../external-utilities/plannotator-cli.md). The s
 Then install the extra skills:
 
 ```bash
-npx skills add backnotprop/plannotator/apps/skills/extra
+npx skills add backnotprop/plannotator/apps/skills/extra --agent pi --copy -y
 ```
 
-In the `skills` installer UI, choose the Pi/OpenAI Agent Skills target that writes to `~/.agents/skills` when available.
+This writes the skill files under `.pi/skills/` and tracks upstream source hashes in `skills-lock.json`, so changes can be reviewed with the repo.
 
 ### Usage
 
