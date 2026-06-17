@@ -1,9 +1,11 @@
 {
+  "//": "Full Pi config used by scripts/sync-pi.mjs --devcontainer.",
   "lastChangelogVersion": "0.79.1",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
+  "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-provider-litellm@1.2.7",
     "npm:pi-mcp-adapter@2.8.0",

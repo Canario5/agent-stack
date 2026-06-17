@@ -3,6 +3,9 @@
 .env.local
 .env.*.local
 
+# Machine-local Pi stack overrides
+.pi/settings.local.json
+
 # OS files
 .DS_Store
 Thumbs.db

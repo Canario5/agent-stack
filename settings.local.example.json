@@ -1,0 +1,4 @@
+{
+  "//": "Copy to ~/.pi/agent/settings.local.json for machine-local Pi overrides. scripts/sync-pi.mjs merges it after the selected tracked config.",
+  "defaultThinkingLevel": "medium"
+}

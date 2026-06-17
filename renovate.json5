@@ -11,11 +11,23 @@
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^settings\\.json$/',
+        '/^\\.pi/settings(?:\\.devcontainer)?\\.json$/',
       ],
       matchStrings: [
         'npm:(?<depName>@[^/"]+/[^@"]+|[^@"]+)@(?<currentValue>[^"/]+)',
       ],
+      datasourceTemplate: 'npm',
+      versioningTemplate: 'npm',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: [
+        '/^scripts/install-pi\\.mjs$/',
+      ],
+      matchStrings: [
+        "const PI_VERSION = '(?<currentValue>[^']+)'",
+      ],
+      depNameTemplate: '@earendil-works/pi-coding-agent',
       datasourceTemplate: 'npm',
       versioningTemplate: 'npm',
     },
