@@ -8,8 +8,19 @@ const PI_PACKAGE = `@earendil-works/pi-coding-agent@${PI_VERSION}`;
 const flags = new Set(process.argv.slice(2));
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dryRun = flags.has('--dry-run');
-const packageManager = findPackageManager();
+const installedPiVersion = getInstalledPiVersion();
 
+if (installedPiVersion === PI_VERSION) {
+  console.log(`pi ${PI_VERSION} is already installed; skipping install.`);
+  process.exit(0);
+}
+
+const installMessage = installedPiVersion
+  ? `pi ${installedPiVersion} is installed; syncing to ${PI_VERSION}.`
+  : `pi is not installed; installing ${PI_VERSION}.`;
+console.log(installMessage);
+
+const packageManager = findPackageManager();
 installGlobal(PI_PACKAGE);
 console.log(`install-pi ${dryRun ? 'dry run ' : ''}complete using ${packageManager}`);
 
@@ -26,6 +37,17 @@ function commandExists(command) {
   });
 
   return status === 0;
+}
+
+function getInstalledPiVersion() {
+  const { status, stdout } = spawnSync('pi', ['--version'], {
+    shell: process.platform === 'win32',
+    encoding: 'utf8',
+  });
+
+  if (status !== 0) return null;
+
+  return stdout.trim() || null;
 }
 
 function installGlobal(packageSpec) {
