@@ -11,7 +11,7 @@
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^\\.pi/settings(?:\\.devcontainer)?\\.json$/',
+        '/^settings(?:\\.devcontainer)?\\.json$/',
       ],
       matchStrings: [
         'npm:(?<depName>@[^/"]+/[^@"]+|[^@"]+)@(?<currentValue>[^"/]+)',
