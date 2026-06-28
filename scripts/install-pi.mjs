@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +9,7 @@ const PI_PACKAGE = `@earendil-works/pi-coding-agent@${PI_VERSION}`;
 const flags = new Set(process.argv.slice(2));
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dryRun = flags.has('--dry-run');
+const devcontainer = flags.has('--devcontainer');
 const installedPiVersion = getInstalledPiVersion();
 
 if (installedPiVersion === PI_VERSION) {
@@ -19,6 +21,12 @@ const installMessage = installedPiVersion
   ? `pi ${installedPiVersion} is installed; syncing to ${PI_VERSION}.`
   : `pi is not installed; installing ${PI_VERSION}.`;
 console.log(installMessage);
+
+if (devcontainer) {
+  installInDevcontainer(PI_PACKAGE);
+  console.log(`install-pi ${dryRun ? 'dry run ' : ''}complete using npm user prefix`);
+  process.exit(0);
+}
 
 const packageManager = findPackageManager();
 installGlobal(PI_PACKAGE);
@@ -56,6 +64,24 @@ function installGlobal(packageSpec) {
     : ['install', '-g', '--ignore-scripts', packageSpec];
 
   run(packageManager, args);
+}
+
+function installInDevcontainer(packageSpec) {
+  if (!commandExists('npm')) fail('npm is required to install Pi in a devcontainer.');
+
+  const home = process.env.HOME;
+  if (!home) fail('HOME is not set; cannot install Pi in a devcontainer.');
+
+  const prefix = process.env.PI_NPM_PREFIX || path.join(home, '.local');
+
+  if (dryRun) {
+    console.log(`[dry-run] mkdir -p ${prefix}`);
+    console.log(`[dry-run] npm install -g --prefix ${prefix} --ignore-scripts ${packageSpec}`);
+    return;
+  }
+
+  fs.mkdirSync(prefix, { recursive: true });
+  run('npm', ['install', '-g', '--prefix', prefix, '--ignore-scripts', packageSpec]);
 }
 
 function run(command, commandArgs) {

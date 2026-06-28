@@ -12,7 +12,7 @@ if (flags.has('--help') || flags.has('-h')) {
 }
 
 if (!flags.has('--skip-install')) {
-  runScript('install-pi.mjs', pickFlags('--dry-run'));
+  runScript('install-pi.mjs', pickFlags('--dry-run', '--devcontainer'));
 }
 
 runScript('sync-pi-config.mjs', pickFlags('--dry-run', '--devcontainer'));
