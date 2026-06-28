@@ -20,7 +20,7 @@ const settings = mergeJson(
 
 write(path.join(agentDir, 'settings.json'), `${JSON.stringify(settings, null, 2)}\n`);
 write(path.join(agentDir, 'mcp.json'), fs.readFileSync(repoPath('mcp.json'), 'utf8'));
-copyDirectory(repoPath('.pi/skills'), path.join(agentDir, 'skills'));
+mirrorDirectory(repoPath('.pi/skills'), path.join(agentDir, 'skills'));
 
 console.log(`sync-pi-config ${dryRun ? 'dry run ' : ''}complete`);
 
@@ -39,11 +39,12 @@ function write(file, text) {
   fs.writeFileSync(file, text);
 }
 
-function copyDirectory(source, target) {
+function mirrorDirectory(source, target) {
   if (!fs.existsSync(source)) return;
-  if (dryRun) return console.log(`[dry-run] copy ${source} -> ${target}`);
+  if (dryRun) return console.log(`[dry-run] mirror ${source} -> ${target}`);
 
-  fs.mkdirSync(target, { recursive: true });
+  fs.rmSync(target, { recursive: true, force: true });
+  fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.cpSync(source, target, { recursive: true, force: true });
 }
 
