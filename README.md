@@ -49,15 +49,29 @@ cp settings.local.example.json ~/.pi/agent/settings.local.json
 
 Then edit `~/.pi/agent/settings.local.json`. It is merged by `scripts/sync-pi.mjs` after the selected tracked config.
 
-## Devcontainer apply
+## Devcontainer dotfiles usage
 
-Inside a devcontainer, use:
-
-```bash
-node scripts/sync-pi.mjs --devcontainer
+Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User Settings (JSON)`)
+```
+"dotfiles.repository": "https://github.com/Canario5/agent-stack.git",
+"dotfiles.targetPath": "~/agent-stack",
+"dotfiles.installCommand": "node scripts/sync-pi.mjs --devcontainer",
 ```
 
-This uses `settings.devcontainer.json` which is a full independent config file.
+When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
+
+After the container is created, update this Pi stack from any directory in the container terminal:
+
+```bash
+update-pi-stack
+```
+
+`update-pi-stack` goes to the cloned dotfiles repo, pulls the latest changes, and reapplies the devcontainer Pi config:
+
+```bash
+git pull --ff-only
+node scripts/sync-pi.mjs --devcontainer
+```
 
 ## Indexes
 

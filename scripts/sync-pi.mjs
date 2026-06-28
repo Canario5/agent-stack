@@ -6,16 +6,14 @@ import { fileURLToPath } from 'node:url';
 const flags = new Set(process.argv.slice(2));
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 
-if (flags.has('--help') || flags.has('-h')) {
-  console.log('Usage: node scripts/sync-pi.mjs [--dry-run] [--devcontainer] [--skip-install]');
-  process.exit(0);
-}
-
 if (!flags.has('--skip-install')) {
   runScript('install-pi.mjs', pickFlags('--dry-run', '--devcontainer'));
 }
 
 runScript('sync-pi-config.mjs', pickFlags('--dry-run', '--devcontainer'));
+if (flags.has('--devcontainer')) {
+  runScript('install-devcontainer-update-command.mjs', pickFlags('--dry-run', '--devcontainer'));
+}
 console.log('sync-pi complete');
 
 function pickFlags(...allowedFlags) {
