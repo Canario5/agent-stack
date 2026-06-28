@@ -2,98 +2,96 @@
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 const PI_VERSION = '0.79.1';
 const PI_PACKAGE = `@earendil-works/pi-coding-agent@${PI_VERSION}`;
+
 const flags = new Set(process.argv.slice(2));
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dryRun = flags.has('--dry-run');
-const devcontainer = flags.has('--devcontainer');
-const installedPiVersion = getInstalledPiVersion();
 
-if (installedPiVersion === PI_VERSION) {
-  console.log(`pi ${PI_VERSION} is already installed; skipping install.`);
-  process.exit(0);
+if (flags.has('--devcontainer')) {
+  installInDevcontainer();
+} else {
+  installOnMachine();
 }
 
-const installMessage = installedPiVersion
-  ? `pi ${installedPiVersion} is installed; syncing to ${PI_VERSION}.`
-  : `pi is not installed; installing ${PI_VERSION}.`;
-console.log(installMessage);
+function installInDevcontainer() {
+  const home = process.env.HOME || fail('HOME is not set; cannot install Pi.');
+  const prefix = path.join(home, '.pi');
+  const binDir = path.join(prefix, 'bin');
+  const env = { PATH: `${binDir}${path.delimiter}${process.env.PATH ?? ''}` };
 
-if (devcontainer) {
-  installInDevcontainer(PI_PACKAGE);
-  console.log(`install-pi ${dryRun ? 'dry run ' : ''}complete using npm user prefix`);
-  process.exit(0);
+  if (!commandExists('npm')) fail('npm is required for devcontainer install.');
+
+  if (getInstalledPiVersion(env) === PI_VERSION) {
+    console.log(`pi ${PI_VERSION} is already installed; skipping install.`);
+    return;
+  }
+
+  console.log(`Installing pi ${PI_VERSION} in devcontainer using npm prefix ${prefix}.`);
+  ensureDevcontainerPath();
+  if (!dryRun) fs.mkdirSync(prefix, { recursive: true });
+  run('npm', ['install', '-g', '--prefix', prefix, '--ignore-scripts', PI_PACKAGE], env);
 }
 
-const packageManager = findPackageManager();
-installGlobal(PI_PACKAGE);
-console.log(`install-pi ${dryRun ? 'dry run ' : ''}complete using ${packageManager}`);
+function installOnMachine() {
+  const installedVersion = getInstalledPiVersion();
+  if (installedVersion === PI_VERSION) {
+    console.log(`pi ${PI_VERSION} is already installed; skipping install.`);
+    return;
+  }
 
-function findPackageManager() {
-  return ['pnpm', 'npm'].find(commandExists) ?? fail('Neither pnpm nor npm is available on PATH.');
+  const packageManager = commandExists('pnpm') ? 'pnpm' : commandExists('npm') ? 'npm' : null;
+  if (!packageManager) fail('Neither pnpm nor npm is available on PATH.');
+
+  console.log(installedVersion
+    ? `pi ${installedVersion} is installed; syncing to ${PI_VERSION}.`
+    : `pi is not installed; installing ${PI_VERSION}.`);
+
+  run(packageManager, packageManager === 'pnpm'
+    ? ['add', '-g', '--ignore-scripts', PI_PACKAGE]
+    : ['install', '-g', '--ignore-scripts', PI_PACKAGE]);
+}
+
+function getInstalledPiVersion(extraEnv = {}) {
+  const { status, stdout } = spawnSync('pi', ['--version'], {
+    shell: process.platform === 'win32',
+    encoding: 'utf8',
+    env: { ...process.env, ...extraEnv },
+  });
+
+  return status === 0 ? stdout.trim() : null;
 }
 
 function commandExists(command) {
   if (dryRun) return true;
-
-  const { status } = spawnSync(command, ['--version'], {
+  return spawnSync(command, ['--version'], {
     shell: process.platform === 'win32',
     stdio: 'ignore',
-  });
-
-  return status === 0;
+  }).status === 0;
 }
 
-function getInstalledPiVersion() {
-  const { status, stdout } = spawnSync('pi', ['--version'], {
-    shell: process.platform === 'win32',
-    encoding: 'utf8',
-  });
+function ensureDevcontainerPath() {
+  const bashrc = path.join(process.env.HOME, '.bashrc');
+  const line = 'export PATH="$HOME/.pi/bin:$PATH"';
+  const current = fs.existsSync(bashrc) ? fs.readFileSync(bashrc, 'utf8') : '';
 
-  if (status !== 0) return null;
+  if (current.includes(line)) return;
+  if (dryRun) return console.log(`[dry-run] append Pi PATH to ${bashrc}`);
 
-  return stdout.trim() || null;
+  fs.appendFileSync(bashrc, `${current.endsWith('\n') || current.length === 0 ? '' : '\n'}${line}\n`);
 }
 
-function installGlobal(packageSpec) {
-  const args = packageManager === 'pnpm'
-    ? ['add', '-g', '--ignore-scripts', packageSpec]
-    : ['install', '-g', '--ignore-scripts', packageSpec];
-
-  run(packageManager, args);
-}
-
-function installInDevcontainer(packageSpec) {
-  if (!commandExists('npm')) fail('npm is required to install Pi in a devcontainer.');
-
-  const home = process.env.HOME;
-  if (!home) fail('HOME is not set; cannot install Pi in a devcontainer.');
-
-  const prefix = process.env.PI_NPM_PREFIX || path.join(home, '.local');
-
+function run(command, args, extraEnv = {}) {
   if (dryRun) {
-    console.log(`[dry-run] mkdir -p ${prefix}`);
-    console.log(`[dry-run] npm install -g --prefix ${prefix} --ignore-scripts ${packageSpec}`);
+    console.log(`[dry-run] ${command} ${args.join(' ')}`);
     return;
   }
 
-  fs.mkdirSync(prefix, { recursive: true });
-  run('npm', ['install', '-g', '--prefix', prefix, '--ignore-scripts', packageSpec]);
-}
-
-function run(command, commandArgs) {
-  if (dryRun) {
-    console.log(`[dry-run] ${[command, ...commandArgs].join(' ')}`);
-    return;
-  }
-
-  const { status } = spawnSync(command, commandArgs, {
-    cwd: repoRoot,
-    shell: process.platform === 'win32',
+  const { status } = spawnSync(command, args, {
     stdio: 'inherit',
+    shell: process.platform === 'win32',
+    env: { ...process.env, ...extraEnv },
   });
 
   if (status !== 0) process.exit(status ?? 1);
