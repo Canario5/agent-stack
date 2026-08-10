@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 
-const PI_VERSION = '0.79.1';
+const PI_VERSION = '0.84.1';
 const PI_PACKAGE = `@earendil-works/pi-coding-agent@${PI_VERSION}`;
 
 const flags = new Set(process.argv.slice(2));
