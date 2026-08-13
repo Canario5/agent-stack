@@ -17,6 +17,7 @@ It also adds or improves:
 - `write`
 - `ast_search`
 - optional `nu`
+- compressed `bash` output for noisier commands
 
 ### Usage
 
@@ -42,3 +43,4 @@ Useful extras if you want better fallbacks and nicer output:
 
 - Good when you want safer edits and easier navigation in larger files.
 - `read`, `grep`, `ast_search`, and `write` results can feed follow-up edits.
+- `bash` output is post-processed to reduce noise while preserving useful results.
