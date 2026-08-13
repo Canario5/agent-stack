@@ -8,11 +8,16 @@
 
 `pi-skillful` adds three skill-focused workflow improvements:
 
-- inline `/skill:name` invocation anywhere in a prompt, including multiple skills in one prompt
-- selected skills can be hidden from the model's automatic skill-discovery prompt to reduce prompt context
-- selected skills can be toggled on or off directly in the current Pi session
+a. progressive loading of `.agents/skills/` from ancestor directories above the git repository root
+b. inline `/skill:name` invocation anywhere in a prompt, including multiple skills in one prompt
+c. selected skills can be hidden from the model's automatic skill-discovery prompt to reduce prompt context
+d. selected skills can be toggled on or off directly in the current Pi session
 
 Hidden skills remain loaded and can still be invoked explicitly with `/skill:name`.
+
+### Progressive skill loading
+
+When a project is inside a Git repository, Pi normally stops discovering `.agents/skills/` at the repository root. `pi-skillful` also discovers existing `.agents/skills/` directories in ancestor folders up to the filesystem root, while preserving Pi's closer-directory-first name precedence. Projects without a Git repository are unchanged because Pi already walks to the filesystem root.
 
 ### Usage
 
@@ -22,7 +27,7 @@ Open the skill visibility and toggle menu:
 /skillful
 ```
 
-Use the Global or Project tab to choose which settings file to edit. Toggle a skill off to hide it from the model's automatic `<available_skills>` prompt. Toggle it back on to advertise it again.
+Use the Global or Project tab to choose which settings file to edit. Toggle a skill off to hide it from the model's automatic `<available_skills>` prompt. Only global and project skills are configurable; skills bundled inside Pi packages are not affected.
 
 You can still explicitly invoke hidden skills:
 
@@ -53,10 +58,14 @@ Assign up to nine skills to prompt-editor slots in settings:
 }
 ```
 
+Project settings are read and writable only when Pi trusts the current project. In an untrusted project, `pi-skillful` uses global settings only.
+
 Configured slots appear on the prompt editor border. Press `alt+1` through `alt+9` by default to toggle that skill for the current session. Supported `toggleModifier` values include `alt`, `ctrl`, `ctrl+shift`, `alt+shift`, `ctrl+alt`, and `ctrl+alt+shift`.
 
 ### Notes
 
 - Project settings inherit global `skillful` settings until changed in the Project tab.
+- Project-scope settings require a trusted project.
 - Hidden skills show in Pi's startup skill list with the error color.
 - `/new` preserves the current toggle state; resuming, forking, cloning, reloading, or restarting Pi resets toggles from settings.
+- When a project settings file contains only `skillful` settings and the project override is removed, `.pi/settings.json` is deleted instead of leaving an empty settings file behind.
