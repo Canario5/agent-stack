@@ -6,7 +6,8 @@
 
 ### Config
 
-Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for global mcp config.
+Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for shared global config. Pi also reads `~/.agents/mcp.json` and `~/.agents/mcp/mcp.json`.
+
 Currently: `<pi agent dir>/mcp.json` mcp config scoped for pi harness only.
 
 ```json
@@ -20,7 +21,8 @@ Currently: `<pi agent dir>/mcp.json` mcp config scoped for pi harness only.
 }
 ```
 
-Precedence: `~/.config/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `.mcp.json` > `.pi/mcp.json`
+Precedence (highest first): `~/.config/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `.mcp.json` > `.pi/mcp.json`
+
 
 ### Usage
 
@@ -34,7 +36,10 @@ The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type thi
 | Call tool | `mcp({ tool: "name", args: '{"key": "val"}' })` |
 | Connect server | `mcp({ connect: "server-name" })` |
 
-`args` is a JSON string, not an object.
+`args` may be a JSON object or a JSON string. Prefer the object form; use a string for providers that require simpler schemas.
+
+
+Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp disable` / `/mcp enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows.
 
 ### Tips
 
@@ -75,6 +80,7 @@ The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type thi
   - `"lazy"` (default) — connects on first tool call. Disconnects after `idleTimeout` (default 10 min).
   - `"eager"` — connects at startup, but **does not auto-reconnect** if the connection drops. No idle timeout by default (set `idleTimeout` explicitly to enable).
   - `"keep-alive"` — connects at startup, auto-reconnects on failure. No idle timeout. Use for critical servers (e.g., database).
+  - `"lazy-keep-alive"` — connects on first use, then stays resident and auto-reconnects.
 
   Set a global default under `"settings"`, then override per-server:
 
