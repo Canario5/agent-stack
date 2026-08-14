@@ -49,7 +49,7 @@ Expected result: the browser opens, you add one comment to the plan, Pi revises 
 2. In Pi chat, start plan mode with a temporary plan file:
 
    ```text
-   /plannotator test-plan.md
+   /plannotator-plan-mode test-plan.md
    ```
 
 3. Ask for a tiny plan:
@@ -106,8 +106,8 @@ Review a pull request URL:
 
 ### Slash commands
 
-- `/plannotator` — start or toggle plan mode.
-- `/plannotator <file.md>` — start plan mode with a specific plan file.
+- `/plannotator-plan-mode` — start or toggle plan mode.
+- `/plannotator-plan-mode <file.md>` — start plan mode with a specific plan file.
 - `/plannotator-annotate <file.md>` — open markdown or converted content in the annotation UI.
 - `/plannotator-last` — annotate the latest rendered assistant message.
 - `/plannotator-review` — review the current local git changes in this repo.
@@ -119,9 +119,9 @@ Use `/plannotator-review` when Pi or another developer changed files and you wan
 
 ### Programmatic plan mode
 
-Users normally start plan mode with `/plannotator`, `Ctrl+Alt+P`, or `pi --plan`.
+Users normally start plan mode with `/plannotator-plan-mode`, `Ctrl+Alt+P`, or `pi --plan`.
 
-Since v0.20.2, other Pi extensions can control Plannotator plan mode through Pi's event bus. This lets extension-driven workflows enter, exit, toggle, or check plan mode without the user to run `/plannotator` manually.
+Since v0.20.2, other Pi extensions can control Plannotator plan mode through Pi's event bus. This lets extension-driven workflows enter, exit, toggle, or check plan mode without the user to run `/plannotator-plan-mode` manually.
 
 For example, another extension could recognize a request like `plan this first` and call Plannotator's `plan-mode` event before the agent continues.
 
@@ -133,7 +133,7 @@ For example, another extension could recognize a request like `plan this first` 
 
 | Workflow | Command | Use when |
 |---|---|---|
-| Approve a plan before coding | `/plannotator <plan-file.md>` | You want Pi blocked until you approve the plan. |
+| Approve a plan before coding | `/plannotator-plan-mode <plan-file.md>` | You want Pi blocked until you approve the plan. |
 | Review Pi's code changes | `/plannotator-review` | Pi edited files and you want line-level feedback before it continues. |
 | Review a PR or branch diff | `/plannotator-review <PR-or-diff-target>` | You want Plannotator as a browser review UI for pull requests or larger diffs. |
 | Review docs or specs | `/plannotator-annotate <file.md>` | You want inline comments on requirements, README edits, or docs before Pi codes against them. |
