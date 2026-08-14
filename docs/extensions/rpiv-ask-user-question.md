@@ -10,12 +10,13 @@
 
 It supports:
 - one to four questions in a single dialog
-- single-select and multi-select options
-- per-option descriptions
-- optional markdown/code/ASCII previews beside options
-- custom free-text answers when no option fits
+- single-select and multi-select options with descriptions
+- markdown/code/ASCII previews beside options, or stacked below them on narrow terminals
 - a chat escape row when the user wants to discuss instead of choose
-- a submit/review tab for multi-question dialogs
+- notes attached to answers without marking a question answered
+- a Submit tab that reviews answers and identifies unanswered questions
+- collapsing the overlay with `Ctrl+]` by default, or a configured key
+- RPC/ACP host dialogs; the tool is omitted from non-interactive runs
 
 ### Usage
 
@@ -37,3 +38,5 @@ Before implementing, ask me structured questions for any choices you should not 
 
 - Do not use it for trivial confirmations when normal chat is faster.
 - Preview content is useful for comparing layouts, code snippets, diagrams, or config examples.
+- `Esc` abandons the questionnaire; `Tab` moves between question tabs.
+- Configuration is optional at `~/.config/rpiv-ask-user-question/config.json`; `collapseKey` and model-guidance overrides are supported.
