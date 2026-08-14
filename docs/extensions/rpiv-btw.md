@@ -6,15 +6,15 @@
 
 ### What it adds
 
-`rpiv-btw` gives Pi a bottom-panel side agent for quick context-aware questions.
+`rpiv-btw` gives Pi a bottom-panel side conversation for quick context-aware questions.
 
 It supports:
 - asking `/btw <question>` from an interactive Pi session
 - answering in a terminal panel without adding the answer to the main conversation context
-- reading a clone of the current conversation so the side answer has context
+- using a read-only clone of the current conversation as context
 - remembering prior `/btw` questions and answers during the same Pi process
-- follow-up side questions that use the `/btw` thread history
-- scrolling, clearing, closing, or cancelling the panel from the keyboard
+- scrolling with `↑`/`↓`, clearing history with lowercase `x`, and dismissing/cancelling with `Esc`
+- rebuilding context after compaction or branching, and retaining history across `/new`, `/fork`, `/resume`, and `/reload` during the same Pi process
 
 ### Usage
 
@@ -33,7 +33,7 @@ Useful for:
 
 ### Notes
 
-- Requires interactive Pi mode; it is not for `pi --print` or RPC runs.
+- Requires interactive Pi mode; it is unavailable under `pi --print` or RPC.
 - Needs a configured primary model and valid provider credentials.
-- Uses a fresh, tool-less side instance of the active primary llm used in active thread.
+- The side instance has no tools and can only answer in plain text.
 - `/btw` history is in-memory only and is lost when the Pi process restarts.
