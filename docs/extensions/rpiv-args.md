@@ -6,7 +6,7 @@
 
 ### What it adds
 
-`rpiv-args` lets skills consume invocation arguments through placeholders in `SKILL.md` bodies.
+`rpiv-args` lets skills consume invocation arguments and command output in `SKILL.md` bodies.
 
 It supports:
 - positional arguments with `$1`, `$2`, and higher numbers
@@ -14,13 +14,12 @@ It supports:
 - argument slices with `${@:N}` and `${@:N:L}`
 - shell-style quoting for multi-word values
 - `${SKILL_DIR}` and `${SESSION_ID}` runtime variables
-- inline shell output with `` !`command` `` syntax and multi-line shell blocks
-
-Skills without placeholders are left unchanged.
+- inline shell output with `` !`command` `` syntax and multi-line ```` ```! ```` blocks
+- an explicit `Skill input:` label and skill-invocation protocol so raw arguments are not mistaken for instructions
 
 ### Usage
 
-Add placeholders to a skill body, then pass arguments when invoking the skill:
+Add placeholders or shell substitutions to a skill body, then pass arguments when invoking it:
 
 ```text
 /skill:deploy api production
