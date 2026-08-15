@@ -53,6 +53,6 @@ Skills bundled with broader Pi extensions. List them here for discoverability, b
 | 6 | `ctx-doctor` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Utility | Diagnose context-mode setup, hooks, and registration. |
 | 7 | `ctx-upgrade` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Utility | Upgrade context-mode and refresh hook setup. |
 | 8 | `ctx-purge` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Dangerous | Permanently delete indexed context-mode knowledge. |
-| 9 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, chains, parallel runs, and async workflows. |
+| 9 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, scripted workflows, parallel runs, and async work. |
 
 Rule of thumb: standalone skill package = table row plus own page. Extension-provided skill = table row only, linked back to the extension docs.

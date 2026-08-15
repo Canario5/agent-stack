@@ -1,20 +1,34 @@
 ## pi-subagents
 
 - **Install:** `pi install npm:pi-subagents@x.x.x`
-- **Purpose:** Gives Pi focused helper agents to review code, scout files, plan changes, implement tasks, or run work in parallel.
+- **Purpose:** Gives Pi focused helper agents to review code, scout files, implement tasks, or run work in parallel.
 - **Full docs:** [pi-subagents README](https://github.com/nicobailon/pi-subagents#readme)
+
+### The mental model
+
+- **Agent Markdown files** define reusable worker roles. Project agents live in `.pi/agents/`; user-wide agents live in `~/.pi/agent/agents/`.
+- **Your prompt** gives an agent a task. You can use agents directly without creating a workflow.
+- **`workflowScript`** is an optional recipe for coordinating multiple agents when you repeat the same process.
+- **`return`** sends a workflow result back to the parent Pi conversation. It does not create a file or edit the project.
+- **Files and artifacts** are created only when you explicitly configure output or ask an agent to write one.
+
+Start simple:
+
+```text
+Ask the security reviewer agent to inspect this change.
+```
+
+Use a workflow only when you want a repeatable sequence, such as `scout → parallel reviewers → worker fixes`.
 
 ### What it adds
 
-`pi-subagents` gives Pi a `subagent` orchestration tool plus bundled agents, prompts, skills, and async run management.
+`pi-subagents` gives Pi a `subagent` orchestration tool plus bundled agents, prompts, skills, workflow execution, and async run management.
 
 Builtin agents include:
 - `scout` — fast local codebase reconnaissance
-- `researcher` — web/docs research with sources
-- `planner` — implementation plans from existing context
+- `researcher` — web/docs research with sources (default researcher requires `pi-web-access` for web tools)
 - `worker` — approved implementation work
 - `reviewer` — code review and small fixes
-- `context-builder` — stronger handoff context and meta-prompts
 - `oracle` — second-opinion advisory review
 - `delegate` — lightweight generic delegation
 
@@ -38,7 +52,7 @@ Ask oracle for a second opinion on my current plan. Challenge assumptions before
 Have worker implement this approved plan, then run reviewers and apply the feedback that makes sense.
 ```
 
-For a first workflow, use `scout` when you need orientation, `planner` before a bigger change, `worker` for approved edits, `reviewer` to check work, and `oracle` when the decision feels risky.
+For a first workflow, use `scout` when you need orientation, `worker` for approved edits, `reviewer` to check work, and `oracle` when the decision feels risky. Use `researcher` when you need sourced web or documentation research.
 
 ### Customizing agents
 
@@ -76,60 +90,43 @@ Review for security risks, unsafe defaults, missing validation, and risky depend
 
 Use `tools` to limit normal tools. Use `mcp:<server-or-tool-group>` entries for direct MCP tools when `pi-mcp-adapter` is installed. MCP servers themselves are still configured in `mcp.json`; the agent config only decides which tools the child may receive.
 
-### Simple team workflow
+### Recommended workflow
 
-A workflow is the idea; a chain is the saved file that runs it. For example, a small frontend team could be:
-
-```text
-frontend-lead → worker → code-quality
-```
-
-Subagents normally report back when their run finishes. If a child should ask the parent session a question while it is still running, add `pi-intercom` and mention that in the task.
-
-Save a reusable version as `.pi/chains/frontend-change.chain.md`:
-
-```md
----
-name: frontend-change
-description: Plan, implement, and clean up a frontend change
----
-
-## frontend-lead
-Review the requested frontend change and propose the safest component-level approach for: {task}
-
-## worker
-Implement the frontend lead's recommended approach.
-
-Frontend lead output:
-{previous}
-
-## code-quality
-Review the current implementation for simplicity, naming, duplication, and unnecessary abstraction.
-
-Worker summary:
-{previous}
-
-Return fixes worth doing now.
-```
-
-Then run it naturally:
+A workflow is simply a repeatable recipe for coordinating agents. You can also use agents directly without a workflow.
 
 ```text
-Run the frontend-change chain for the button redesign described in button-change.md.
+clarify requirements → scout the code → worker implements → fresh reviewers check → worker applies useful fixes
 ```
 
-In that run, `{task}` becomes `the button redesign described in button-change.md`, so the first step receives the original request. `{previous}` means “the result from the step directly above this one”: `worker` gets the `frontend-lead` result, and `code-quality` gets the `worker` result. The final reviewer should still inspect the changed files itself; `{previous}` only adds the worker’s summary and intent. For a more independent final review, omit `Worker summary: {previous}` and tell the reviewer to inspect the edited files directly.
+`clarify requirements` is a conversation step. The other steps are typical agent roles.
 
-Pi may show a preview/clarify screen before running a chain so you can inspect or edit the steps. Slash commands usually run directly; chain/tool workflows may show a preview screen first.
+For repeatable recipes, `workflowScript` is a small JavaScript program that starts agents, waits for their results, and returns a result to the parent Pi conversation:
 
-For parallel workflows, multiple subagents run at the same time. Use them for independent or read-only work, like several reviewers checking the same diff. Avoid parallel writers editing the same files; a safer pattern is `worker → parallel reviewers → worker fixes`.
+```js
+subagent({ workflowScript: `
+  const scan = await runs.run("scan", { agent: "scout", task: "Scan the codebase" });
+  const reviews = await runs.all([
+    { key: "correctness", agent: "reviewer", task: "Review correctness: " + scan.output },
+    { key: "tests", agent: "reviewer", task: "Review tests: " + scan.output }
+  ]);
+  return reviews.map(result => result.output);
+` });
+```
 
-You can also use the slash-command layer:
-- `/run` — launch a single agent
-- `/chain` — launch a chain of steps
-- `/parallel` — launch parallel tasks
-- `/run-chain` — run a saved workflow
+The `return` value is shown in the parent conversation. It does not create a file unless you explicitly configure output or ask an agent to write one.
+
+### Where workflows live
+
+- **One-off workflow:** Pi can create the `workflowScript` inline for the current request. You do not need to save it.
+- **Reusable workflow:** Put a prompt template in `.pi/prompts/` for this project or `~/.pi/agent/prompts/` for all projects, then run it with `/prompt-workflow`. Templates with `chain:` frontmatter are translated into `workflowScript`.
+- **Runtime state:** Active runs, mission state, status, and artifacts are managed under `.pi/subagents/`. Inspect them through Pi's status/Fleet commands; do not edit these files manually.
+
+Use `/run <agent> [task]` for a direct child run. The legacy `/chain`, `/parallel`, and `/run-chain` slash commands are not registered in current releases.
+
+Other useful commands:
+
 - `/subagents-doctor` — check setup and async/intercom state
+- `/subagents-guide [topic]` — read the installed package's current guide
 
 ### Optional shortcuts
 
@@ -137,8 +134,6 @@ Reusable prompt workflows include:
 - `/parallel-review`
 - `/review-loop`
 - `/parallel-research`
-- `/parallel-context-build`
-- `/parallel-handoff-plan`
 - `/gather-context-and-clarify`
 - `/parallel-cleanup`
 
