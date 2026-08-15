@@ -31,6 +31,7 @@ Good uses:
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
 - Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
+- Optional Call Flow analysis in code review, enabled from the review UI when needed.
 - Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
 
 ### First test: plan review flow
@@ -173,7 +174,10 @@ Plannotator config is loaded in this order:
 2. User config at `~/.pi/agent/plannotator.json`.
 3. Project config at `.pi/plannotator.json`.
 
-Later layers override earlier ones. Use config to customize per-phase model, thinking level, extra active tools, status label, and system prompt for `planning`, `executing`, and future `reviewing` phases.
+Later layers override earlier ones. Use config to set the model, thinking level, extra tools, status label, and instructions for each phase: `planning`, `executing`, or `reviewing`.
+
+
+Use `instructions` to add a one-time message when a phase starts. It does not change Pi's system prompt. `systemPrompt` is obsolete and ignored. During execution, Plannotator automatically adds the starting checklist if your instructions do not include `${todoList}`.
 
 Example project override:
 
