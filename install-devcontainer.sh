@@ -1,4 +1,5 @@
 #!/bin/sh
 set -eu
 
-node scripts/sync-pi.mjs --devcontainer
+cd "$(dirname "$0")"
+exec node scripts/sync-pi.mjs --devcontainer
