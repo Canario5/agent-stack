@@ -43,9 +43,13 @@ function mirrorDirectory(source, target) {
   if (!fs.existsSync(source)) return;
   if (dryRun) return console.log(`[dry-run] mirror ${source} -> ${target}`);
 
-  fs.rmSync(target, { recursive: true, force: true });
+  const staging = `${target}.tmp`;
+  // Preserve active skills if copying fails; dereference Windows junctions.
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  fs.cpSync(source, target, { recursive: true, force: true });
+  fs.rmSync(staging, { recursive: true, force: true });
+  fs.cpSync(source, staging, { recursive: true, force: true, dereference: true });
+  fs.rmSync(target, { recursive: true, force: true });
+  fs.renameSync(staging, target);
 }
 
 function mergeJson(...objects) {
