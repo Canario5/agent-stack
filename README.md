@@ -5,6 +5,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 ## Layout
 
 - `scripts/sync-pi.mjs` — user-facing sync script; installs Pi, syncs config, and copies skills.
+- `install-devcontainer.sh` — VS Code dotfiles entry point for the devcontainer sync.
 - `settings.json` — tracked default Pi settings and extension packages for the stack.
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
 - `mcp.json` — tracked Pi MCP config.
@@ -55,7 +56,7 @@ Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User 
 ```
 "dotfiles.repository": "https://github.com/Canario5/agent-stack.git",
 "dotfiles.targetPath": "~/agent-stack",
-"dotfiles.installCommand": "node scripts/sync-pi.mjs --devcontainer",
+"dotfiles.installCommand": "install-devcontainer.sh",
 ```
 
 When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
