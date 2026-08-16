@@ -54,8 +54,7 @@ function installOnMachine() {
 }
 
 function getInstalledPiVersion(extraEnv = {}) {
-  const { status, stdout } = spawnSync('pi', ['--version'], {
-    shell: process.platform === 'win32',
+  const { status, stdout } = spawnCommand('pi', ['--version'], {
     encoding: 'utf8',
     env: { ...process.env, ...extraEnv },
   });
@@ -65,10 +64,7 @@ function getInstalledPiVersion(extraEnv = {}) {
 
 function commandExists(command) {
   if (dryRun) return true;
-  return spawnSync(command, ['--version'], {
-    shell: process.platform === 'win32',
-    stdio: 'ignore',
-  }).status === 0;
+  return spawnCommand(command, ['--version'], { stdio: 'ignore' }).status === 0;
 }
 
 function ensureDevcontainerPath() {
@@ -88,13 +84,21 @@ function run(command, args, extraEnv = {}) {
     return;
   }
 
-  const { status } = spawnSync(command, args, {
+  const { status } = spawnCommand(command, args, {
     stdio: 'inherit',
-    shell: process.platform === 'win32',
     env: { ...process.env, ...extraEnv },
   });
 
   if (status !== 0) process.exit(status ?? 1);
+}
+
+function spawnCommand(command, args, options) {
+  const windows = process.platform === 'win32';
+  return spawnSync(
+    windows ? process.env.ComSpec || 'cmd.exe' : command,
+    windows ? ['/d', '/s', '/c', command, ...args] : args,
+    options,
+  );
 }
 
 function fail(message) {
