@@ -21,7 +21,8 @@
     "npm:@firstpick/pi-skill-code-quality@0.1.5",
     "npm:@firstpick/pi-skill-repo-explorer@0.2.2",
     "npm:@micuintus/llm-wiki@1.4.8",
-    "npm:pi-skillful@0.4.0"
+    "npm:pi-skillful@0.4.0",
+    "npm:@dietrichgebert/ponytail@4.9.0"
   ],
   "skillful": {
     "hiddenSkills": [
