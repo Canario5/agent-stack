@@ -25,6 +25,14 @@ npx skills update -p -y
 
 New skills start as **Trial** until they prove useful in normal Pi work.
 
+### Local skills
+
+Repository-tracked skills copied into Pi by `scripts/sync-pi.mjs`.
+
+| Skill | Category | Status | Notes |
+|---|---|---|---|
+| [upgrade-review](./upgrade-review.md) | Maintenance / diagnostics | Trial | Reviews Renovate dependency updates and updates only affected documentation. |
+
 ### Standalone skill packages
 
 Skills installed mainly as skills. These get their own short docs page.
