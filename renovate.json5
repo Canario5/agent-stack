@@ -22,10 +22,10 @@
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^scripts/install-pi\\.mjs$/',
+        '/^scripts/install-tools\\.mjs$',
       ],
       matchStrings: [
-        "const PI_VERSION = '(?<currentValue>[^']+)'",
+        "const PI_PACKAGE = '@earendil-works/pi-coding-agent@(?<currentValue>[^']+)'",
       ],
       depNameTemplate: '@earendil-works/pi-coding-agent',
       datasourceTemplate: 'npm',

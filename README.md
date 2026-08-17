@@ -2,10 +2,18 @@
 
 A small, practical home for the Pi extensions, skills, MCP config, and related external utilities I use.
 
+## TLDR: Commands you use
+
+- `node scripts/sync-pi.mjs` — install or update Pi, required CLI tools, and config on a normal machine.
+- `update-pi-stack` — for devcontainers - it git sync files + sync-pi.mjs
+
+
 ## Layout
 
-- `scripts/sync-pi.mjs` — user-facing sync script; installs Pi, syncs config, and copies skills.
-- `install-devcontainer.sh` — VS Code dotfiles entry point for the devcontainer sync.
+- `scripts/sync-pi.mjs` — public sync command; also creates `update-pi-stack` for devcontainers.
+- `scripts/install-tools.mjs` — internal installer for Pi and required CLI tools.
+- `scripts/sync-pi-config.mjs` — internal settings, MCP, and skills synchronizer.
+- `scripts/install-devcontainer.sh` — VS Code dotfiles entry point.
 - `settings.json` — tracked default Pi settings and extension packages for the stack.
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
 - `mcp.json` — tracked Pi MCP config.
@@ -16,7 +24,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
 
-## Sync Pi on a machine
+## Sync Pi on a normal machine
 
 Preview first:
 
@@ -24,7 +32,7 @@ Preview first:
 node scripts/sync-pi.mjs --dry-run
 ```
 
-Install the pinned Pi harness globally with `pnpm` or `npm`, then write the active Pi config:
+Install the pinned Pi harness and required CLI tools globally with `npm`, then write the active Pi config:
 
 ```bash
 node scripts/sync-pi.mjs
@@ -38,7 +46,7 @@ It syncs:
 ~/.pi/agent/skills/
 ```
 
-The Pi harness version is pinned in `scripts/install-pi.mjs`; extension package versions are pinned in `settings.json` and `settings.devcontainer.json`. Renovate tracks package versions there.
+The Pi harness version is pinned in `scripts/install-tools.mjs`. The `context-mode` CLI version follows its package version in the selected settings file. Renovate tracks both.
 
 ## Local extras
 
@@ -50,29 +58,25 @@ cp settings.local.example.json ~/.pi/agent/settings.local.json
 
 Then edit `~/.pi/agent/settings.local.json`. It is merged by `scripts/sync-pi.mjs` after the selected tracked config.
 
-## Devcontainer dotfiles usage
+## Devcontainer dotfiles setup
 
 Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User Settings (JSON)`)
 ```
 "dotfiles.repository": "https://github.com/Canario5/agent-stack.git",
 "dotfiles.targetPath": "~/agent-stack",
-"dotfiles.installCommand": "install-devcontainer.sh",
+"dotfiles.installCommand": "scripts/install-devcontainer.sh",
 ```
 
 When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
+The setup installs Pi and required CLIs such as `context-mode` privately under `~/.pi`, then syncs config and creates `update-pi-stack`.
 
-After the container is created, update this Pi stack from any directory in the container terminal:
+## Update an existing devcontainer
 
 ```bash
 update-pi-stack
 ```
 
-`update-pi-stack` goes to the cloned dotfiles repo, pulls the latest changes, and reapplies the devcontainer Pi config:
-
-```bash
-git pull --ff-only
-node scripts/sync-pi.mjs --devcontainer
-```
+It fast-forward pulls `~/agent-stack` and reapplies its pinned Pi, CLI tools, settings, MCP config, and skills.
 
 ## Indexes
 
