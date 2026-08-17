@@ -44,7 +44,7 @@ function mirrorDirectory(source, target) {
   if (dryRun) return console.log(`[dry-run] mirror ${source} -> ${target}`);
 
   const staging = `${target}.tmp`;
-  // Preserve active skills if copying fails; dereference Windows junctions.
+  // Preserve active skills if copying fails.
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.rmSync(staging, { recursive: true, force: true });
   fs.cpSync(source, staging, { recursive: true, force: true, dereference: true });
