@@ -1,28 +1,17 @@
 ## context-mode
 
-- **Install:** `pi install npm:context-mode@x.x.x`
+- **Install:** `pi install npm:context-mode@x.x.x` it requires - **CLI and MCP server:** [context-mode CLI](../external-utilities/context-mode.md).
 - **Purpose:** Keeps large outputs out of Pi chat context (= it saves the tokens). It adds sandboxed processing, a local searchable knowledge base, and automatic hook-based routing so logs, test output, API responses, and other heavy results are processed safely instead of dumped into the conversation.
 - **Full docs:** [context-mode README](https://github.com/mksglu/context-mode#readme)
 
 ### Install
 
-1. Install `context-mode` globally so the `context-mode` command exists:
-   ```bash
-   npm install -g context-mode
-   ```
+1.  [Install `context-mode` globally](../external-utilities/context-mode.md) so the `context-mode` command exists.
 2. Install the Pi package:
    ```bash
    pi install npm:context-mode@x.x.x
    ```
-3. Make sure `settings.json` contains:
-   ```json
-   {
-     "packages": [
-       "npm:context-mode@x.x.x"
-     ]
-   }
-   ```
-4. Make sure `mcp.json` contains the MCP server:
+3. Make sure `mcp.json` contains the MCP server:
    ```json
    {
      "mcpServers": {
@@ -32,7 +21,7 @@
      }
    }
    ```
-5. Restart Pi.
+4. Restart Pi.
 
 ### How it works
 
@@ -67,7 +56,7 @@ In practice, the extension nudges Pi away from raw `bash`/`read` when output may
 
 ### Usage
 
-Usually you use it **indirectly** by asking Pi naturally. The extension intercepts large-output workflows and Pi should route them to `ctx_*` tools automatically:
+Ask Pi naturally to analyze logs, run tests, process large data, or search documentation. The extension should select `ctx_*` tools when appropriate like:
 
 - “analyze this log file”
 - “run the tests and summarize failures”
@@ -78,15 +67,12 @@ Usually you use it **indirectly** by asking Pi naturally. The extension intercep
 Pi should prefer context-mode tools for those tasks instead of sending large raw outputs back into the chat.
 
 You can also explicitly trigger the utility commands in chat:
-
-- `ctx stats`
-- `ctx doctor`
-- `ctx upgrade`
-- `ctx insight`
-- `ctx purge`
+- `ctx_execute` / `ctx_execute_file` — process data without dumping it into chat.
+- `ctx_index` / `ctx_search` — store and query knowledge.
+- `ctx_doctor`, `ctx_stats`, `ctx_upgrade`, `ctx_purge`, `ctx_insight` — maintenance commands.
 
 ### Notes
 
 - Best for large outputs, logs, test runs, API responses, docs, and repo-wide analysis.
 - File edits still use Pi's normal `read`, `edit`, and `write` tools.
-- The MCP entry in `mcp.json` is required so Pi can call the `ctx_*` tools.
+- The `context-mode` executable and MCP configuration are required and documented separately in [context-mode CLI](../external-utilities/context-mode.md).
