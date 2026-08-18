@@ -32,8 +32,8 @@ brew install mise
 
 Linux and other methods: follow the [official installation guide](https://mise.jdx.dev/installing-mise.html).
 
-The stack deliberately does not install its own package manager. If Mise is absent, the sync command stops with installation guidance.
-Mise itself is the bootstrap exception: this repository and Renovate do not manage its version. Update it through Winget, Homebrew, the devcontainer feature, or the installation method you chose.
+The normal sync command deliberately does not install its package manager: if Mise is absent, it stops with installation guidance. The Bash-based devcontainer entry point is the exception; it uses Mise's official Bash installer when Mise is missing.
+Mise itself is the bootstrap exception: this repository and Renovate do not manage its version. Update it through Winget, Homebrew, the devcontainer installer, or the installation method you chose.
 
 
 ### Activate the tools

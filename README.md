@@ -9,7 +9,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 **Required**: 
 - Node.js required for the sync scripts. 
-- Mise manager. After installing with mise activation (=adding to the PATH) is required. Commands on [mise.md](docs/external-utilities/mise.md).
+- Mise is required on pc hosts and must be activated in your shell; in devcontainers for Bash is Mise installed and activated automatically. See [Mise setup](docs/external-utilities/mise.md).
 
 ## Layout
 
@@ -69,7 +69,7 @@ Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User 
 ```
 
 When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
-The container must already provide Mise. The setup installs the pinned tools, syncs Pi config, configures Bash activation, and creates `update-pi-stack` commnand.
+If Mise is absent, the setup installs it user-locally with Mise's [official Bash installer](https://mise.jdx.dev/installing-mise.html). It then installs the pinned tools, syncs Pi config, configures Bash activation, and creates `update-pi-stack`.
 
 ## Update an existing devcontainer
 
