@@ -14,7 +14,7 @@ Mise installs and pins executable developer tools across Windows, macOS, Linux, 
 - OpenSpec
 - hashline helper CLIs (`ast-grep`, Nu, `fd`, difftastic, ShellCheck, and `yq`)
 
-`scripts/sync-pi.mjs` applies the `[tools]` entries from tracked `mise.toml` with `mise use --global`, then syncs Pi settings, MCP config, and skills. It updates only tools declared by this stack; unrelated global Mise tools remain unchanged. The usual global config path is platform- and environment-dependent; use `mise cfg` to inspect it.
+`scripts/sync-pi.mjs` applies the `[tools]` entries from tracked `mise.toml` with `mise use --global`, then syncs Pi settings, MCP config, and skills. It updates only tools declared by this stack. Use `mise current` to see the versions currently selected for these tools, and `mise cfg` to inspect the active configuration. The usual global config path is platform- and environment-dependent.
 
 ### Install Mise once
 
@@ -37,7 +37,8 @@ Mise itself is the bootstrap exception: this repository and Renovate do not mana
 
 
 ### Activate the tools
-`mise install` downloads the pinned tools, but does not automatically add their executable directories to your shell's `PATH`. Run the activation command below once, then restart the terminal.
+
+**Important:** activation is required after installing with Mise. `mise install` downloads the pinned tools, but does not automatically add their executable directories to your shell's `PATH`! Run the activation command below once, then restart the terminal.
 
 PowerShell:
 
@@ -60,4 +61,6 @@ echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
 For `cmd.exe` or non-interactive launchers on Windows, add `%LOCALAPPDATA%\mise\shims` to the user `PATH`. Devcontainer setup configures Bash activation automatically.
 
 After activation, `pi`, `openspec`, `difft`, `nu`, and the other managed commands work from any repository.
+
+Run `mise current` again after activation if you want to verify the selected tool versions.
 

@@ -9,7 +9,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 **Required**: 
 - Node.js required for the sync scripts. 
-- [Mise](docs/external-utilities/mise.md) manager.
+- Mise manager. After installing with mise activation (=adding to the PATH) is required. Commands on [mise.md](docs/external-utilities/mise.md).
 
 ## Layout
 
@@ -47,7 +47,7 @@ Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/skills/
 ```
 
-Use `mise cfg` to inspect the active configuration. Activate Mise in your shell so `pi` and its supporting CLIs are on `PATH`; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.
+Use `mise current` to see the selected tool versions and `mise cfg` to inspect the active configuration. **Important: activate Mise in your shell after syncing so `pi` and its supporting CLIs are on `PATH`**, then restart the terminal; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.
 
 ## Local extras
 
