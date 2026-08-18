@@ -8,7 +8,7 @@
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-provider-litellm@2.1.0",
-    "npm:pi-mcp-adapter@2.26.0",
+    "npm:pi-mcp-adapter@2.26.1",
     "npm:context-mode@1.0.169",
     "npm:pi-hashline-readmap@0.14.0",
     "npm:@narumitw/pi-usage@0.52.0",
