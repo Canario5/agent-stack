@@ -39,6 +39,16 @@ Useful extras if you want better fallbacks and nicer output:
 - `difftastic` — better semantic edit summaries
 - `shellcheck`, `yq`, `scc` — handy extra CLI support
 
+The stack's `mise.toml` installs the cross-platform `ast-grep`, Nu, `fd`, difftastic, ShellCheck, and `yq` binaries wherever Pi runs. See the [Mise notes](../external-utilities/mise.md). `scc` stays opt-in.
+
+**Important**: Universal Ctags is the exception: install it separately only if you need fallback symbol maps. It is not currently pinned in `mise.toml` because its maintained release layout is not consistent across platforms:
+
+- Windows: `winget install --id UniversalCtags.Ctags --exact`
+- macOS: `brew install universal-ctags`
+- Linux: use the distribution package, for example `apt install universal-ctags`
+
+This exception is not Renovate-tracked by this repository.
+
 ### Notes
 
 - Good when you want safer edits and easier navigation in larger files.

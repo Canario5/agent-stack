@@ -14,17 +14,23 @@ OpenSpec works with Pi as an external CLI because its specs live in the reposito
 
 ### Install
 
-Install the CLI globally with npm:
+OpenSpec is pinned in the stack's `mise.toml`. Run the stack sync to install or update it consistently on Windows, macOS, Linux, and devcontainers:
+
+```bash
+node scripts/sync-pi.mjs
+```
+
+Without mise it can be installed with npm:
 
 ```bash
 npm install -g @fission-ai/openspec@latest
 ```
 
-Run the same command later to update the CLI.
+This bypasses the central `mise.toml` pin and is not updated by this repository's Renovate configuration. Do not keep a Mise-managed and npm-global OpenSpec installation active at the same time unless you intentionally control which one appears first on `PATH`.
 
 ### Setup
 
-Per project. The global install only makes the `openspec` command available. Initialize OpenSpec inside each repository that should use the workflow:
+Per project. The Mise install only makes the `openspec` command available. Initialize OpenSpec inside each repository that should use the workflow:
 
 ```bash
 cd your-project

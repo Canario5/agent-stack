@@ -4,18 +4,22 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 ## TLDR: Commands you use
 
-- `node scripts/sync-pi.mjs` — install or update Pi, required CLI tools, and config on a normal machine.
-- `update-pi-stack` — for devcontainers - it git sync files + sync-pi.mjs
+- `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
+- `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
 
+**Required**: 
+- Node.js required for the sync scripts. 
+- [Mise](docs/external-utilities/mise.md) manager.
 
 ## Layout
 
 - `scripts/sync-pi.mjs` — public sync command; also creates `update-pi-stack` for devcontainers.
-- `scripts/install-tools.mjs` — internal installer for Pi and required CLI tools.
+- `scripts/install-tools.mjs` — internal Mise manifest synchronizer and tool installer.
 - `scripts/sync-pi-config.mjs` — internal settings, MCP, and skills synchronizer.
 - `scripts/install-devcontainer.sh` — VS Code dotfiles entry point.
 - `settings.json` — tracked default Pi settings and extension packages for the stack.
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
+- `mise.toml` — tracked cross-platform versions for Pi and supporting CLIs.
 - `mcp.json` — tracked Pi MCP config.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
@@ -25,28 +29,25 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
 
 ## Sync Pi on a normal machine
-
-Preview first:
-
-```bash
-node scripts/sync-pi.mjs --dry-run
 ```
 
-Install the pinned Pi harness and required CLI tools globally with `npm`, then write the active Pi config:
+Install the pinned Pi harness and CLI tools to Mise's global config and write the active Pi config:
 
 ```bash
 node scripts/sync-pi.mjs
 ```
+Add --dry-run to preview changes first.
 
 It syncs:
 
 ```text
+Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/settings.json
 ~/.pi/agent/mcp.json
 ~/.pi/agent/skills/
 ```
 
-The Pi harness version is pinned in `scripts/install-tools.mjs`. The `context-mode` CLI version follows its package version in the selected settings file. Renovate tracks both.
+Use `mise cfg` to inspect the active configuration. Activate Mise in your shell so `pi` and its supporting CLIs are on `PATH`; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.
 
 ## Local extras
 
@@ -68,7 +69,7 @@ Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User 
 ```
 
 When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
-The setup installs Pi and required CLIs such as `context-mode` privately under `~/.pi`, then syncs config and creates `update-pi-stack`.
+The container must already provide Mise. The setup installs the pinned tools, syncs Pi config, configures Bash activation, and creates `update-pi-stack` commnand.
 
 ## Update an existing devcontainer
 

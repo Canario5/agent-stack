@@ -22,17 +22,20 @@
     {
       customType: 'regex',
       managerFilePatterns: [
-        '/^scripts/install-tools\\.mjs$',
+        '/^mise\\.toml$/',
       ],
       matchStrings: [
-        "const PI_PACKAGE = '@earendil-works/pi-coding-agent@(?<currentValue>[^']+)'",
+        '# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: versioning=(?<versioning>\\S+))?(?: extractVersion=(?<extractVersion>\\S+))?\\s+(?:"[^"]+"|[A-Za-z0-9_-]+)\\s*=\\s*"(?<currentValue>[^"]+)"',
       ],
-      depNameTemplate: '@earendil-works/pi-coding-agent',
-      datasourceTemplate: 'npm',
-      versioningTemplate: 'npm',
     },
   ],
   packageRules: [
+    {
+      description: 'The explicit Aqua Nushell package needs the custom regex manager.',
+      matchManagers: ['mise'],
+      matchDepNames: ['aqua:nushell/nushell'],
+      enabled: false,
+    },
     {
       groupName: 'Juicesharp RPIV extensions',
       matchPackageNames: [
