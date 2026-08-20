@@ -5,6 +5,9 @@
   "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
+  "editorPaddingX": 1,
+  "treeFilterMode": "no-tools",
+  "collapseChangelog": true,
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-provider-litellm@2.1.0",
@@ -45,6 +48,7 @@
       "upgrade-review",
       "plannotator-compound",
       "plannotator-setup-goal",
-      "plannotator-visual-explainer"]
+      "plannotator-visual-explainer"
+    ]
   }
 }
