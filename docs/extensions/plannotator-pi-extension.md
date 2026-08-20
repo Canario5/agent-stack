@@ -40,26 +40,19 @@ Use this test first because it exercises the most important Plannotator loop wit
 
 Expected result: the browser opens, you add one comment to the plan, Pi revises the plan, and then you approve it.
 
-1. Start Pi from this repo:
-
-   ```bash
-   cd C:/Dev/projects/agent-stack
-   pi
-   ```
-
-2. In Pi chat, start plan mode with a temporary plan file:
+1. In Pi chat, start plan mode with a temporary plan file:
 
    ```text
    /plannotator-plan-mode test-plan.md
    ```
 
-3. Ask for a tiny plan:
+2. Ask for a tiny plan:
 
    ```text
    Create a simple plan to add one sentence to README.md explaining that this repo documents my Pi extension stack. Do not edit files yet. Submit the plan for Plannotator review.
    ```
 
-4. The plan should be a short checklist, for example:
+3. The plan should be a short checklist, for example:
 
    ```markdown
    - [ ] Read README.md.
@@ -67,15 +60,15 @@ Expected result: the browser opens, you add one comment to the plan, Pi revises 
    - [ ] Check that the wording is concise.
    ```
 
-5. Wait for the browser UI. Pi should create or update `test-plan.md` and submit it to Plannotator.
+4. Wait for the browser UI. Pi should create or update `test-plan.md` and submit it to Plannotator.
 
-6. In the browser, add a short annotation such as `Keep the sentence short`, then deny/send feedback.
+5. In the browser, add a short annotation such as `Keep the sentence short`, then deny/send feedback.
 
-7. Return to Pi and wait for it to revise the plan.
+6. Return to Pi and wait for it to revise the plan.
 
-8. When the plan looks good, approve it in the browser. Approval is the handoff point: before approval, Pi should stay in planning/review behavior; after approval, it can execute the accepted plan.
+7. When the plan looks good, approve it in the browser. Approval is the handoff point: before approval, Pi should stay in planning/review behavior; after approval, it can execute the accepted plan.
 
-9. If you do not want to keep the test artifacts, ask Pi:
+8. If you do not want to keep the test artifacts, ask Pi:
 
    ```text
    Remove the Plannotator test plan file and undo the README test sentence if it was added.
