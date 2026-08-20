@@ -7,8 +7,10 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
 - `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
 
-**Required**: 
-- Node.js required for the sync scripts. 
+- there are two tools preset you can run `pi --preset base` or `pi --preset agents` also can be switched dynamically inside pi with slash command `/preset`
+
+**Required**:
+- Node.js required for the sync scripts.
 - Mise is required on pc hosts and must be activated in your shell; in devcontainers for Bash is Mise installed and activated automatically. See [Mise setup](docs/external-utilities/mise.md).
 
 ## Layout
@@ -23,6 +25,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `mcp.json` — tracked Pi MCP config.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
+- `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `base`/`agents` definitions, synced globally.
 - `skills-lock.json` — Skills CLI lock file for installed skills managed by vercel npx skills.
 - `docs/` — notes for extensions, skills, and external utilities.
 
@@ -45,6 +48,8 @@ Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/settings.json
 ~/.pi/agent/mcp.json
 ~/.pi/agent/skills/
+~/.pi/agent/extensions/preset.ts
+~/.pi/agent/presets.json
 ```
 
 Use `mise current` to see the selected tool versions and `mise cfg` to inspect the active configuration. **Important: activate Mise in your shell after syncing so `pi` and its supporting CLIs are on `PATH`**, then restart the terminal; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.

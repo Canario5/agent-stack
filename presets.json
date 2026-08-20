@@ -1,0 +1,17 @@
+{
+  "base": {
+    "excludeTools": [
+      "subagent",
+      "subagent_wait",
+      "subagent_supervisor",
+      "mcp",
+      "mcpScript",
+      "litellm_skill_create",
+      "litellm_skill_delete",
+      "litellm_skill_list"
+    ]
+  },
+  "agents": {
+    "excludeTools": []
+  }
+}

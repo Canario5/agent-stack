@@ -21,6 +21,8 @@ const settings = mergeJson(
 write(path.join(agentDir, 'settings.json'), `${JSON.stringify(settings, null, 2)}\n`);
 write(path.join(agentDir, 'mcp.json'), fs.readFileSync(repoPath('mcp.json'), 'utf8'));
 mirrorDirectory(repoPath('.pi/skills'), path.join(agentDir, 'skills'));
+write(path.join(agentDir, 'extensions', 'preset.ts'), fs.readFileSync(repoPath('extensions/preset.ts'), 'utf8'));
+write(path.join(agentDir, 'presets.json'), fs.readFileSync(repoPath('presets.json'), 'utf8'));
 
 console.log(`sync-pi-config ${dryRun ? 'dry run ' : ''}complete`);
 

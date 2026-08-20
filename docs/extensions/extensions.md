@@ -16,3 +16,4 @@
 | 12 | [pi-powerline](./pi-powerline.md) | Improves Pi's terminal UI with a Powerline-style header, footer, and breadcrumb. |
 | 13 | [pi-skillful](./pi-skillful.md) | Allows skills to be invoked anywhere in a prompt, selected skills to be hidden to reduce prompt context, and skill visibility to be toggled directly in a session. |
 | 14 | [@dietrichgebert/ponytail](./ponytail.md) | Keeps coding changes minimal by preferring reuse, standard libraries, and native platform features. |
+| 15 | [preset](./preset.md) | Switches the active Pi tool surface between the local `base` and `agents` presets. |
