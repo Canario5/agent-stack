@@ -32,7 +32,7 @@ function validateContextModeVersion() {
   for (const file of ['settings.json', 'settings.devcontainer.json']) {
     const settings = JSON.parse(fs.readFileSync(path.join(repoRoot, file), 'utf8'));
     const expected = `npm:context-mode@${match[1]}`;
-    if (!settings.packages.includes(expected)) {
+    if (!settings.packages.some((entry) => entry === expected || entry?.source === expected)) {
       fail(`${file} must use ${expected} to match mise.toml.`);
     }
   }

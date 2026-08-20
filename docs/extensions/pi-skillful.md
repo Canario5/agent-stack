@@ -10,10 +10,12 @@
 
 a. progressive loading of `.agents/skills/` from ancestor directories above the git repository root
 b. inline `/skill:name` invocation anywhere in a prompt, including multiple skills in one prompt
-c. selected skills can be hidden from the model's automatic skill-discovery prompt to reduce prompt context
-d. selected skills can be toggled on or off directly in the current Pi session
+c. selected global or project skills (not skills in package!) can be hidden from the model's automatic skill-discovery prompt to reduce prompt context
+ d. selected global or project skills can be toggled on or off directly in the current Pi session
 
-Hidden skills remain loaded and can still be invoked explicitly with `/skill:name`.
+> **Important:** `hiddenSkills` does not affect skills bundled by Pi packages. Package skills remain advertised and still consume their catalog-description context; use package filtering to stop loading them.
+
+Hidden global and project skills remain loaded and can still be invoked explicitly with `/skill:name`.
 
 ### Progressive skill loading
 
@@ -27,7 +29,7 @@ Open the skill visibility and toggle menu:
 /skillful
 ```
 
-Use the Global or Project tab to choose which settings file to edit. Toggle a skill off to hide it from the model's automatic `<available_skills>` prompt. Only global and project skills are configurable; skills bundled inside Pi packages are not affected.
+Use the Global or Project tab to choose which settings file to edit. Toggle a skill off to hide it from the model's automatic `<available_skills>` prompt. Only global and project skills are configurable; skills bundled inside Pi packages are not affected. To remove a package skill from the prompt, filter that package's `skills` resources in `settings.json`.
 
 You can still explicitly invoke hidden skills:
 
@@ -48,7 +50,7 @@ Assign up to nine skills to prompt-editor slots in settings:
 ```json
 {
   "skillful": {
-    "hiddenSkills": ["ctx-doctor", "ctx-stats"],
+    "hiddenSkills": ["upgrade-review"],
     "toggleSlots": {
       "1": "repo-explorer",
       "2": "code-quality"
