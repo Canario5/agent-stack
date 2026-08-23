@@ -21,12 +21,15 @@ Currently: `<pi agent dir>/mcp.json` mcp config scoped for pi harness only.
 }
 ```
 
-Precedence (highest first): `~/.config/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `.mcp.json` > `.pi/mcp.json`
+Precedence (highest first): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `.mcp.json` > `.pi/mcp.json`
 
 
 ### Usage
 
 The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type this — the agent does it.
+
+
+If the host reserves `/mcp`, use `/pi-mcp` as the equivalent interactive command. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
 
 | Action | Agent call |
 |--------|------------|
@@ -106,5 +109,3 @@ Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-
   ```
 
   `my-server` uses the global 10 min default. `chatty-server` overrides it to 30.
- 
-
