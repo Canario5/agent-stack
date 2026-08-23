@@ -10,7 +10,7 @@
   "defaultProjectTrust": "ask",
   "packages": [
     "npm:pi-provider-litellm@2.2.1",
-    "npm:pi-mcp-adapter@2.26.1",
+    "npm:pi-mcp-adapter@2.27.0",
     {
       "source": "npm:context-mode@1.0.169",
       "skills": [
