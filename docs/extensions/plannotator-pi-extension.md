@@ -30,9 +30,20 @@ Good uses:
 - Plan mode with a browser UI for approving or annotating markdown checklist plans.
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
+- Live localhost app annotation via `/plannotator-annotate http://localhost:5173`, using a loopback proxy; use `--static` for remote sessions.
 - Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
 - Optional Call Flow analysis in code review, enabled from the review UI when needed.
 - Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
+
+### Live app annotation
+
+Run your local dev server, then annotate the live app from Pi:
+
+```text
+/plannotator-annotate http://localhost:5173
+```
+
+This opens the running app inside Plannotator through a loopback proxy. Click elements to attach precise comments while keeping normal interaction, navigation, and hot reload. Replace `5173` with the port your server reports (for example, `3250`). Live mode is intended for local sessions; use `--static` for remote or tailnet sessions to review a snapshot instead.
 
 ### First test: plan review flow
 
