@@ -10,7 +10,7 @@
   "collapseChangelog": true,
   "defaultProjectTrust": "ask",
   "packages": [
-    "npm:pi-provider-litellm@2.1.0",
+    "npm:pi-provider-litellm@2.2.1",
     "npm:pi-mcp-adapter@2.26.1",
     {
       "source": "npm:context-mode@1.0.169",
