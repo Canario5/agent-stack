@@ -6,6 +6,6 @@ ast-grep = "0.45.1"
 difftastic = "0.70.0"
 fd = "10.4.2"
 # renovate: datasource=github-releases depName=nushell/nushell
-"aqua:nushell/nushell" = "0.115.0"
+"aqua:nushell/nushell" = "0.115.1"
 shellcheck = "0.11.0"
 yq = "4.53.6"
