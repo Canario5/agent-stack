@@ -17,6 +17,8 @@ Run `/hindsight` in Pi to inspect the effective server URL and memory profile. T
 
 The default self-hosted Hindsight URL is `http://localhost:8888`; this repository overrides it in the tracked `hindsight.jsonc`.
 
+`/hindsight` -> **Open hub** shows the active Hindsight configuration including project bank, memory scope, recall/retain enabled etc.
+
 ### Caveats
 
 - Hindsight requires a reachable Hindsight server.
