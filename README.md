@@ -23,6 +23,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
 - `mise.toml` — tracked cross-platform versions for Pi and supporting CLIs.
 - `mcp.json` — tracked Pi MCP config.
+- `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
 - `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `base`/`agents` definitions, synced globally.
@@ -47,6 +48,7 @@ It syncs:
 Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/settings.json
 ~/.pi/agent/mcp.json
+~/.pi/agent/hindsight.jsonc
 ~/.pi/agent/skills/
 ~/.pi/agent/extensions/preset.ts
 ~/.pi/agent/presets.json

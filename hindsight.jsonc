@@ -1,0 +1,21 @@
+{
+  "setupComplete": true,
+  "scope": {
+    "mode": "domain-tagged",
+    "projectIdStrategy": "remote"
+  },
+  "hindsight": {
+    "baseUrl": "http://ubuntu-llm.netbird.cloud:8888"
+  },
+  "agentUse": "coding",
+  "banks": {
+    "project": {
+      "enabled": true,
+      "derive": "manual",
+      "bankId": "canario-coding"
+    },
+    "user": {
+      "enabled": false
+    }
+  }
+}
