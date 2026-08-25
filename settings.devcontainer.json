@@ -5,6 +5,7 @@
   "defaultModel": "gpt-5.6-luna",
   "defaultThinkingLevel": "medium",
   "enableInstallTelemetry": false,
+  "enableAnalytics": false,
   "editorPaddingX": 1,
   "treeFilterMode": "no-tools",
   "collapseChangelog": true,
