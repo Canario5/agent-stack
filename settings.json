@@ -9,6 +9,7 @@
   "treeFilterMode": "no-tools",
   "collapseChangelog": true,
   "defaultProjectTrust": "ask",
+  "externalEditor": "code --wait",
   "packages": [
     "npm:pi-provider-litellm@2.2.1",
     "npm:pi-mcp-adapter@2.27.0",
