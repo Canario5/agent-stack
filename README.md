@@ -7,7 +7,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
 - `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
 
-- there are two tools preset you can run `pi --preset base` or `pi --preset agents` also can be switched dynamically inside pi with slash command `/preset`
+- there are three tool presets: `pi --preset nano` for minimal context polution, `pi --preset standard` for everyday work, and `pi --preset agents` for advanced tools; switch them dynamically with `/preset`
 
 **Required**:
 - Node.js required for the sync scripts.
@@ -26,7 +26,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
-- `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `base`/`agents` definitions, synced globally.
+- `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `nano`/`standard`/`agents` definitions, synced globally.
 - `skills-lock.json` — Skills CLI lock file for installed skills managed by vercel npx skills.
 - `docs/` — notes for extensions, skills, and external utilities.
 

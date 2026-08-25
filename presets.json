@@ -1,5 +1,5 @@
 {
-  "base": {
+  "nano": {
     "excludeTools": [
       "subagent",
       "subagent_wait",
@@ -8,10 +8,52 @@
       "mcpScript",
       "litellm_skill_create",
       "litellm_skill_delete",
-      "litellm_skill_list"
+      "litellm_skill_list",
+      "ctx_execute",
+      "ctx_execute_file",
+      "ctx_batch_execute",
+      "ctx_index",
+      "ctx_search",
+      "ctx_fetch_and_index",
+      "ctx_stats",
+      "ctx_doctor",
+      "ctx_upgrade",
+      "ctx_purge",
+      "ctx_insight",
+      "batch_web_fetch",
+      "repo_explorer_explore",
+      "hindsight_seed_git",
+      "hindsight_config",
+      "hindsight_bank",
+      "hindsight_mental_model",
+      "hindsight_knowledge",
+      "hindsight_scope_migrate"
+    ]
+  },
+  "standard": {
+    "excludeTools": [
+      "subagent",
+      "subagent_wait",
+      "subagent_supervisor",
+      "mcp",
+      "mcpScript",
+      "litellm_skill_create",
+      "litellm_skill_delete",
+      "litellm_skill_list",
+      "ctx_stats",
+      "ctx_doctor",
+      "ctx_upgrade",
+      "ctx_purge",
+      "ctx_insight",
+      "hindsight_seed_git",
+      "hindsight_scope_migrate"
     ]
   },
   "agents": {
-    "excludeTools": []
+    "excludeTools": [
+      "litellm_skill_create",
+      "litellm_skill_delete",
+      "ctx_insight"
+    ]
   }
 }
