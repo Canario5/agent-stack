@@ -4,9 +4,6 @@
 - **Purpose:** Adds persistent project memory to Pi using a Hindsight server.
 - **Full docs:** [Pi Hindsight documentation](https://luxus.github.io/pi-hindsight/)
 
-### Important
-Cloudflare protection blocked queries from Hindsight server to litellm `/v1/chat/completions` endpoint.
-
 ### What it adds
 
 - Recalls relevant project memory before model calls.
