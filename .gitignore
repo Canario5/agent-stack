@@ -6,6 +6,9 @@
 # Machine-local Pi stack overrides
 .pi/settings.local.json
 
+# Block local Hindsight data
+.pi/hindsight/
+
 # OS files
 .DS_Store
 Thumbs.db
