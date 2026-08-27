@@ -44,7 +44,8 @@
         "skills/ponytail-review/SKILL.md"
       ]
     },
-    "npm:@luxusai/pi-hindsight@0.12.0"
+    "npm:@luxusai/pi-hindsight@0.12.0",
+    "npm:pi-context-view@0.4.3"
   ],
   "skillful": {
     "hiddenSkills": [
