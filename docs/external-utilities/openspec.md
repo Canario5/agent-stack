@@ -39,6 +39,12 @@ openspec init
 
 Review the generated files and commit them if the project should use OpenSpec. Do not try to maintain one global OpenSpec configuration for all Pi projects; each project has different specs, change history, and agent guidance.
 
+In an initialized project after upgrading the CLI run `openspec update` to regenerate its instruction files and workflows:
+
+```bash
+openspec update
+```
+
 ### Use with Pi
 
 Recommended flow:
@@ -63,7 +69,10 @@ Non-goals:
 - do not change unrelated layout or navigation
 
 First read the existing OpenSpec files. Then draft the proposal/spec and show me the requirements, affected areas, and acceptance checks before editing code. After I approve, implement it and verify the result against the spec.
+
 ```
+
+For scripted checks, `openspec status --all` reports every active change, and `openspec show <change> --diff` shows only the requirement lines that changed.
 
 ### Tests and review
 
