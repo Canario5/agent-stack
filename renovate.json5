@@ -22,6 +22,18 @@
     {
       customType: 'regex',
       managerFilePatterns: [
+        '/^settings(?:\\.devcontainer)?\\.json$/',
+      ],
+      matchStrings: [
+        '"lastChangelogVersion"\\s*:\\s*"(?<currentValue>[^"\\n]+)"',
+      ],
+      depNameTemplate: '@earendil-works/pi-coding-agent',
+      datasourceTemplate: 'npm',
+      versioningTemplate: 'npm',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: [
         '/^mise\\.toml$/',
       ],
       matchStrings: [
