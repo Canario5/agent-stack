@@ -19,6 +19,8 @@
       datasourceTemplate: 'npm',
       versioningTemplate: 'npm',
     },
+    //? ///////////////////////////////////////////////////////////
+    //? Keep Pi's changelog marker aligned with the Pi CLI version.
     {
       customType: 'regex',
       managerFilePatterns: [
@@ -31,6 +33,8 @@
       datasourceTemplate: 'npm',
       versioningTemplate: 'npm',
     },
+    //? ///////////////////////////////////////////////////////////////
+    //? Track annotated non-registry Mise tools, currently Aqua/Nushell
     {
       customType: 'regex',
       managerFilePatterns: [
