@@ -1,7 +1,7 @@
 ## @narumitw/pi-usage
 
 - **Install:** `pi install npm:@narumitw/pi-usage@x.x.x`
-- **Purpose:** Shows current-account usage for OpenAI Codex, GitHub Copilot, OpenRouter, and OpenCode Go (Zen) inside Pi.
+- **Purpose:** Shows current-account usage for OpenAI Codex, Kimi For Coding, GitHub Copilot, OpenRouter, OpenCode Go (Zen), and xAI OAuth subscriptions inside Pi.
 - **Full docs:** [pi-usage README](https://github.com/narumiruna/pi-extensions/blob/main/packages/pi-usage/README.md)
 
 ### Usage
@@ -23,3 +23,4 @@
 - Copilot quota uses Pi's stored OAuth credential only when it matches the active runtime credential. Copilot and Codex usage endpoints are undocumented provider APIs.
 - OpenRouter reports per-key credit/spend limits, not account-level credits.
 - OpenCode Go reports rolling, weekly, and monthly Zen usage windows.
+- Kimi For Coding reports plan windows and a separately labeled booster wallet; xAI OAuth usage is enabled by default, available through explicit `/usage` actions, and is not added to the statusline.
