@@ -34,6 +34,7 @@ Good uses:
 - Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
 - Optional Call Flow analysis in code review, enabled from the review UI when needed.
 - Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
+- Browser-integrated agents can inspect documents and add their own comments through WebMCP; human approval decisions remain required.
 
 ### Live app annotation
 
