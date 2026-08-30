@@ -2,7 +2,7 @@
 
 A small, practical home for the Pi extensions, skills, MCP config, and related external utilities I use.
 
-## TLDR: Commands you use
+## TLDR: Quick usage
 
 - `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
 - `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
