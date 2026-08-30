@@ -1,4 +1,4 @@
-# Pi extension stack
+# Pi harness stack config
 
 A small, practical home for the Pi extensions, skills, MCP config, and related external utilities I use.
 
@@ -7,11 +7,13 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
 - `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
 
-- there are three tool presets: `pi --preset nano` for minimal context polution, `pi --preset standard` for everyday work, and `pi --preset agents` for advanced tools; switch them dynamically with `/preset`
+- There are three tool presets: `pi --preset nano` for minimal context polution, `pi --preset standard` for everyday work, and `pi --preset agents` for advanced tools; switch them dynamically with `/preset`
+- Memory retention can be temporarily disabled for the next session with `/hindsight:next-opt-out`
 
 **Required**:
 - Node.js required for the sync scripts.
 - Mise is required on pc hosts and must be activated in your shell; in devcontainers for Bash is Mise installed and activated automatically. See [Mise setup](docs/external-utilities/mise.md).
+- A reachable Hindsight server is required for memory operations.
 
 ## Layout
 
@@ -33,7 +35,6 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
 
 ## Sync Pi on a normal machine
-```
 
 Install the pinned Pi harness and CLI tools to Mise's global config and write the active Pi config:
 
@@ -78,7 +79,7 @@ Add this to VS Code User Settings JSON (`CTRL+SHIFT+P -> Preferences: Open User 
 When VS Code creates a devcontainer, it clones this repo to `~/agent-stack` and runs the install command from there.
 If Mise is absent, the setup installs it user-locally with Mise's [official Bash installer](https://mise.jdx.dev/installing-mise.html). It then installs the pinned tools, syncs Pi config, configures Bash activation, and creates `update-pi-stack`.
 
-## Update an existing devcontainer
+**Update in existing devcontainer**
 
 ```bash
 update-pi-stack
