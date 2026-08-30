@@ -29,7 +29,8 @@
       matchStrings: [
         '"lastChangelogVersion"\\s*:\\s*"(?<currentValue>[^"\\n]+)"',
       ],
-      depNameTemplate: '@earendil-works/pi-coding-agent',
+      depNameTemplate: 'npm:@earendil-works/pi-coding-agent',
+      packageNameTemplate: '@earendil-works/pi-coding-agent',
       datasourceTemplate: 'npm',
       versioningTemplate: 'npm',
     },
