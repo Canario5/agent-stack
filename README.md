@@ -1,6 +1,8 @@
 # Pi harness stack config
 
-A small, practical home for the Pi extensions, skills, MCP config, and related external utilities I use.
+A small, practical home for the Pi extensions, skills, subagent roles, prompt templates, MCP config, and related external utilities I use.
+
+> **Warning:** Sync script mirrors the repository's `.pi/skills/`, `agents/`, and `prompts/` folders into global `~/.pi/agent/`. Manually added files in those target directories will be deleted. Run sync script with `--dry-run` first and commit or back up local files you want to keep.
 
 ## TLDR: Quick usage
 
@@ -19,7 +21,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 - `scripts/sync-pi.mjs` — public sync command; also creates `update-pi-stack` for devcontainers.
 - `scripts/install-tools.mjs` — internal Mise manifest synchronizer and tool installer.
-- `scripts/sync-pi-config.mjs` — internal settings, MCP, and skills synchronizer.
+- `scripts/sync-pi-config.mjs` — internal settings, MCP, skills, agents, and prompt-template synchronizer.
 - `scripts/install-devcontainer.sh` — VS Code dotfiles entry point.
 - `settings.json` — tracked default Pi settings and extension packages for the stack.
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
@@ -27,7 +29,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `mcp.json` — tracked Pi MCP config.
 - `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
-- `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
+- `.pi/skills/`, `agents/`, and `prompts/` — mirrored into global `~/.pi/agent/skills/`, `~/.pi/agent/agents/`, and `~/.pi/agent/prompts/` by `scripts/sync-pi.mjs`.
 - `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `nano`/`standard`/`agents` definitions, synced globally.
 - `skills-lock.json` — Skills CLI lock file for installed skills managed by vercel npx skills.
 - `docs/` — notes for extensions, skills, and external utilities.
@@ -51,11 +53,24 @@ Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/mcp.json
 ~/.pi/agent/hindsight.jsonc
 ~/.pi/agent/skills/
+~/.pi/agent/agents/
+~/.pi/agent/prompts/
 ~/.pi/agent/extensions/preset.ts
 ~/.pi/agent/presets.json
 ```
 
 Use `mise current` to see the selected tool versions and `mise cfg` to inspect the active configuration. **Important: activate Mise in your shell after syncing so `pi` and its supporting CLIs are on `PATH`**, then restart the terminal; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.
+
+## Subagent roles and workflow prompts
+
+`agents/` contains global Pi Subagents roles. `prompts/` contains reusable Pi prompt templates that instruct the parent agent to orchestrate those roles; Pi Subagents supplies the runtime workflow machinery.
+
+```text
+/docs-architecture C:/path/to/project
+/docs-change-check C:/path/to/project
+```
+
+See [`agents/README.md`](agents/README.md) for role authority, Hindsight/wiki boundaries, and when to use a stored `workflowScript` instead of a prompt.
 
 ## Local extras
 
@@ -85,7 +100,7 @@ If Mise is absent, the setup installs it user-locally with Mise's [official Bash
 update-pi-stack
 ```
 
-It fast-forward pulls `~/agent-stack` and reapplies its pinned Pi, CLI tools, settings, MCP config, and skills.
+It fast-forward pulls `~/agent-stack` and reapplies its pinned Pi, CLI tools, settings, MCP config, skills, agents, and prompt templates.
 
 ## Indexes
 
