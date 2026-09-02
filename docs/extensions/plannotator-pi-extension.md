@@ -201,6 +201,10 @@ Example project override:
 }
 ```
 
+### Feedback history
+
+Since 0.27.11, submitted plan, code-review, and annotation feedback is archived locally under `~/.plannotator/feedback/` by default. Disable it with `PLANNOTATOR_FEEDBACK_HISTORY=0` or `"feedbackHistory": false` in `~/.plannotator/config.json`; delete that directory to remove existing records.
+
 ### Notes
 
 - Plan mode intentionally restricts destructive commands and limits writes while planning.
