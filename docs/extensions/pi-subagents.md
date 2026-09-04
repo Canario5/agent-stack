@@ -90,6 +90,8 @@ Review for security risks, unsafe defaults, missing validation, and risky depend
 
 Use `tools` to limit normal tools. Use `mcp:<server-or-tool-group>` entries for direct MCP tools when `pi-mcp-adapter` is installed. MCP servers themselves are still configured in `mcp.json`; the agent config only decides which tools the child may receive.
 
+**Important:** Run agents in the background if they need MCP tools or provider extensions. Background agents require Pi installed from npm; the standalone Pi binary cannot run them.
+
 ### Recommended workflow
 
 A workflow is simply a repeatable recipe for coordinating agents. You can also use agents directly without a workflow.
