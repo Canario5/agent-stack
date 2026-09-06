@@ -124,6 +124,7 @@ The `return` value is shown in the parent conversation. It does not create a fil
 - **Runtime state:** Active runs, mission state, status, and artifacts are managed under `.pi/subagents/`. Inspect them through Pi's status/Fleet commands; do not edit these files manually.
 
 Use `/run <agent> [task]` for a direct child run. The legacy `/chain`, `/parallel`, and `/run-chain` slash commands are not registered in current releases.
+When a run has a pending supervisor question, answer it explicitly before steering or following up on that background run.
 
 Other useful commands:
 
