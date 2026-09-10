@@ -123,6 +123,14 @@ Choose the command by what you need to inspect. Use `/plannotator-annotate <targ
 
 Use `/plannotator-review` when Pi or another developer changed files and you want to review those changes before accepting them. It opens a diff view: added lines, removed lines, renamed files, and changed files. This is the mode to use after Pi edits code or docs, or when reviewing a pull request.
 
+For stacked Git branches, open a review against a specific base and choose its initial diff view:
+
+```text
+/plannotator-review --base feature/part-1 --diff-type merge-base
+```
+
+Here, --base names the branch below the current one. --diff-type merge-base opens the committed-changes view for that comparison. Both options only choose the browser’s starting view; you can change it afterward. The base may be a branch, remote branch, tag, commit, or revision such as HEAD~3.
+
 ### Programmatic plan mode
 
 Users normally start plan mode with `/plannotator-plan-mode`, `Ctrl+Alt+P`, or `pi --plan`.
