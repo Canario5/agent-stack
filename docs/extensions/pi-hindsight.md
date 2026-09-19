@@ -9,7 +9,7 @@
 - Recalls relevant project memory before model calls.
 - Retains structured session changes after completed agent runs.
 - Provides explicit tools for retaining, recalling, and reflecting on memory.
-- Keeps project memory isolated by project bank; user memory is opt-in.
+- Keeps project memory scoped by project identity within the configured project bank; user memory is opt-in.
 
 ### Usage
 
