@@ -36,7 +36,7 @@
     "npm:@micuintus/llm-wiki@1.4.8",
     "npm:pi-skillful@0.4.0",
     {
-      "source": "npm:@dietrichgebert/ponytail@4.9.0",
+      "source": "npm:@dietrichgebert/ponytail@4.10.0",
       "skills": [
         "skills/ponytail/SKILL.md",
         "skills/ponytail-audit/SKILL.md",
