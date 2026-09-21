@@ -31,6 +31,10 @@ The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type thi
 
 If the host reserves `/mcp`, use `/pi-mcp` as the equivalent interactive command. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
 
+### TypeSafe semantic search
+
+With a valid TypeSafe key, adapter 2.36.0 enables semantic search across enabled MCP tools by default. Run `/mcp jev setup` to choose which servers may share semantic-search data; the project policy is saved and Pi reloads. Script evaluation remains opt-in.
+
 | Action | Agent call |
 |--------|------------|
 | Status | `mcp({ })` |
