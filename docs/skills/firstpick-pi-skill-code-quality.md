@@ -3,11 +3,11 @@
 - **Install:** `pi install npm:@firstpick/pi-skill-code-quality@x.x.x`
 - **Package:** `@firstpick/pi-skill-code-quality`
 - **Category:** Quality / review
-- **Full docs:** [code-quality README](https://github.com/Firstp1ck/npm-packages/tree/main/pi-skill-code-quality#readme)
+- **Full docs:** [code-quality README](https://github.com/Firstp1ck/pi-coding-agent-forge/tree/main/pi-skill-code-quality#readme)
 
 ### What it adds
 
-`code-quality` gives Pi a quality-focused review workflow for maintainability, standards, and verification.
+`code-quality` instructs Pi to improve permanent code as it writes, with focused review and verification guidance for maintainability and standards.
 
 Use it for:
 - code reviews and warning cleanup
@@ -39,4 +39,5 @@ Review this diff for maintainability, warnings, and unnecessary complexity.
 
 - Prefer focused review scopes over broad repo-wide audits.
 - Ask for evidence-backed findings and fixes worth doing now.
+- When enabled, apply its writing practices to permanent code changes; explicit review-only requests remain read-only.
 - Pair with `repo-explorer` first when the codebase is unfamiliar.
