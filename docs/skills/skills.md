@@ -32,6 +32,7 @@ Repository-tracked skills copied into Pi by `scripts/sync-pi.mjs`.
 | Skill | Category | Status | Notes |
 |---|---|---|---|
 | [upgrade-review](./upgrade-review.md) | Maintenance / diagnostics | Trial | Reviews Renovate dependency updates and updates only affected documentation. |
+| [skill-creator](./skill-creator.md) | Maintenance / diagnostics | Trial | Port Anthropic's draft/eval/review loop to Pi with paired runs and a feedback viewer. |
 
 ### Standalone skill packages
 
