@@ -152,8 +152,6 @@ For example, another extension could recognize a request like `plan this first` 
 | Review a PR or branch diff | `/plannotator-review <PR-or-diff-target>` | You want Plannotator as a browser review UI for pull requests or larger diffs. |
 | Review docs or specs | `/plannotator-annotate <file.md>` | You want inline comments on requirements, README edits, or docs before Pi codes against them. |
 | Correct Pi's latest answer | `/plannotator-last` | Pi gave a long plan or explanation and exact visual feedback is clearer than chat. |
-| Clarify the goal first | `plannotator-setup-goal` extra skill | The request is vague, risky, or easy to misunderstand. |
-| Break up big work | `plannotator-compound` extra skill | You want staged plan/review/execute cycles instead of one large run. |
 
 ### Code review loop
 

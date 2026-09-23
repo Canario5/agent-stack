@@ -1,7 +1,7 @@
 ## Plannotator CLI
 
 - **Command:** `plannotator`
-- **Used by:** [Plannotator extra skills](../skills/plannotator-extra-skills.md) and non-Pi Plannotator hook integrations.
+- **Used by:** Non-Pi Plannotator hook integrations.
 - **Scope:** User-level CLI, not a Pi extension package.
 - **Full docs:** [Plannotator installation guide](https://plannotator.ai/docs/getting-started/installation/)
 
@@ -9,7 +9,7 @@
 
 The Plannotator CLI opens the local browser review UI for plan review, markdown/file annotation, assistant-message annotation, code review, and archived sessions.
 
-For Pi’s built-in slash commands, keep using [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md). The CLI matters when a skill or external hook shells out to `plannotator ...`.
+For Pi’s built-in slash commands, use [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md). Install the CLI only when an external hook needs to shell out to `plannotator ...`.
 
 ### Installation
 

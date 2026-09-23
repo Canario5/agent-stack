@@ -49,10 +49,7 @@
   ],
   "skillful": {
     "hiddenSkills": [
-      "upgrade-review",
-      "plannotator-compound",
-      "plannotator-setup-goal",
-      "plannotator-visual-explainer"
+      "upgrade-review"
     ]
   }
 }
