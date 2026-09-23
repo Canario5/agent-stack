@@ -29,6 +29,7 @@ Builtin agents include:
 - `researcher` — web/docs research with sources (default researcher requires `pi-web-access` for web tools)
 - `worker` — approved implementation work
 - `reviewer` — code review and small fixes
+- Packaged `worker` starts with fresh context by default; request fork context explicitly when you need the parent conversation.
 - `oracle` — second-opinion advisory review
 - `delegate` — lightweight generic delegation
 
