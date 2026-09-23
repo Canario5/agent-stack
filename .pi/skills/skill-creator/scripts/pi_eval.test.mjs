@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { once } from 'node:events';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { grade, parseEvents, run } from './pi_eval.mjs';
+import { aggregate, main as writeBenchmark } from './aggregate_benchmark.mjs';
+import { findRuns, generateHtml, main as writeViewer, serve } from '../eval-viewer/generate_review.mjs';
 
 const runnerDir = path.dirname(fileURLToPath(import.meta.url));
 
@@ -35,16 +37,77 @@ test('runner produces paired artifacts without a provider', () => {
     assert.deepEqual(reports.map((x) => x.skillRead), [true, false, true, false]);
     assert.deepEqual(reports.map((x) => x.triggerMatched), [true, null, false, null]);
     assert.equal(fs.readFileSync(path.join(workspace, 'eval-0/without_skill/run-1/outputs/answer.md'), 'utf8'), 'baseline');
-    const python = process.platform === 'win32' ? 'py' : 'python3';
-    const aggregate = spawnSync(python, [path.join(runnerDir, 'aggregate_benchmark.py'), workspace, '--skill-name', 'demo'], { encoding: 'utf8' });
-    assert.equal(aggregate.status, 0, aggregate.stderr);
-    assert.equal(fs.existsSync(path.join(workspace, 'benchmark.json')), true);
-    const viewer = spawnSync(python, [path.join(runnerDir, '..', 'eval-viewer/generate_review.py'), workspace, '--skill-name', 'demo', '--benchmark', path.join(workspace, 'benchmark.json'), '--static', path.join(workspace, 'review.html')], { encoding: 'utf8' });
-    assert.equal(viewer.status, 0, viewer.stderr);
-    assert.equal(fs.existsSync(path.join(workspace, 'review.html')), true);
-    assert.throws(() => run([skill, evals, workspace, '--pi', fake]), /already exists/);
     assert.equal(fs.existsSync(path.join(workspace, 'eval-1/with_skill/run-1/grading.json')), false);
+    assert.throws(() => aggregate(workspace, 'demo'), /Missing grading.json/);
+    for (const [condition, passed] of [['with_skill', 1], ['without_skill', 0]]) {
+      const runDir = path.join(workspace, 'eval-1', condition, 'run-1');
+      fs.writeFileSync(path.join(runDir, 'grading.json'), JSON.stringify({
+        expectations: [{ text: 'manual quality check', passed: Boolean(passed), evidence: 'Reviewed' }],
+        summary: { passed, failed: 1 - passed, total: 1, pass_rate: passed },
+      }));
+    }
+    const benchmark = aggregate(workspace, 'demo');
+    assert.equal(benchmark.run_summary.delta.pass_rate, '+1.00');
+    assert.equal(benchmark.metadata.runs_per_configuration, 1);
+    writeBenchmark([workspace, '--skill-name', 'demo']);
+    assert.throws(() => writeBenchmark([workspace, '--unknown', 'value']), /Invalid option/);
+    assert.equal(fs.existsSync(path.join(workspace, 'benchmark.md')), true);
+    const htmlPath = path.join(workspace, 'review.html');
+    writeViewer([workspace, '--skill-name', 'demo', '--benchmark', path.join(workspace, 'benchmark.json'), '--static', htmlPath]);
+    assert.throws(() => writeViewer([workspace, '--static']), /Invalid option/);
+    assert.equal(findRuns(workspace).length, 4);
+    assert.match(fs.readFileSync(htmlPath, 'utf8'), /const EMBEDDED_DATA =/);
+    assert.throws(() => run([skill, evals, workspace, '--pi', fake]), /already exists/);
+    for (const evalName of ['eval-0', 'eval-1']) {
+      fs.renameSync(path.join(workspace, evalName, 'without_skill'), path.join(workspace, evalName, 'old_skill'));
+    }
+    assert.equal(aggregate(workspace, 'demo').run_summary.delta.pass_rate, '+1.00');
+    fs.rmSync(path.join(workspace, 'eval-1/old_skill'), { recursive: true });
+    assert.throws(() => aggregate(workspace, 'demo'), /Incomplete or unbalanced/);
   } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('viewer embeds previous feedback safely and serves local review feedback', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pi-review-test-'));
+  let server;
+  try {
+    const prior = path.join(dir, 'prior');
+    const current = path.join(dir, 'current');
+    for (const root of [prior, current]) {
+      const runDir = path.join(root, 'eval-0', 'with_skill', 'run-1');
+      fs.mkdirSync(path.join(runDir, 'outputs'), { recursive: true });
+      fs.writeFileSync(path.join(runDir, 'eval_metadata.json'), JSON.stringify({ eval_id: 0, prompt: 'Review output' }));
+      fs.writeFileSync(path.join(runDir, 'outputs', 'answer.md'), '</script><script>alert(1)</script>');
+      fs.writeFileSync(path.join(runDir, 'outputs', 'chart.png'), Buffer.from([137, 80, 78, 71]));
+    }
+    fs.writeFileSync(path.join(prior, 'feedback.json'), JSON.stringify({ reviews: [{ run_id: 'eval-0-with_skill-run-1', feedback: 'Prior feedback' }] }));
+    const html = generateHtml(current, 'demo', prior);
+    assert.match(html, /\\u003c\/script>/);
+    assert.doesNotMatch(html, /<script>alert\(1\)<\/script>/);
+    assert.match(html, /Prior feedback/);
+    assert.match(html, /data:image\/png;base64,/);
+    server = serve(current, 'demo', prior, null, 0);
+    await once(server, 'listening');
+    const base = `http://127.0.0.1:${server.address().port}`;
+    const page = await fetch(base);
+    assert.equal(page.status, 200);
+    assert.match(await page.text(), /Review output/);
+    const rejected = await fetch(`${base}/api/feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'http://evil.example' }, body: '{"reviews":[]}' });
+    assert.equal(rejected.status, 403);
+    const invalid = await fetch(`${base}/api/feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"reviews":null}' });
+    assert.equal(invalid.status, 400);
+    const feedback = { reviews: [{ run_id: 'eval-0-with_skill-run-1', feedback: 'Good', timestamp: 'today' }], status: 'complete' };
+    const saved = await fetch(`${base}/api/feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(feedback) });
+    assert.equal(saved.status, 200);
+    assert.deepEqual(await (await fetch(`${base}/api/feedback`)).json(), feedback);
+    feedback.reviews[0].feedback = 'Updated';
+    const updated = await fetch(`${base}/api/feedback`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(feedback) });
+    assert.equal(updated.status, 200);
+    assert.deepEqual(await (await fetch(`${base}/api/feedback`)).json(), feedback);
+  } finally {
+    if (server) await new Promise((resolve) => server.close(resolve));
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });

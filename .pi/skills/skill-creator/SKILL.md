@@ -2,12 +2,12 @@
 name: skill-creator
 description: Create, port, test, and improve Pi Agent Skills. Use when a user wants a new SKILL.md, a reusable workflow, skill evaluation against a baseline, review of skill outputs, or better automatic triggering.
 license: Apache-2.0
-compatibility: Pi 0.87+; Node.js for Pi eval runs; Python 3 for the optional upstream benchmark viewer.
+compatibility: Pi 0.87+ and Node.js; no Python required for the Pi workflow.
 ---
 
 # Skill Creator for Pi
 
-This is a Pi port of Anthropic's `skill-creator`, not the Claude Code CLI workflow. Keep the upstream license and bundled reviewer, benchmark, grader, analyzer, and schema references. The Pi runner is `scripts/pi_eval.mjs`; do **not** run the bundled `run_eval.py`, `run_loop.py`, or `improve_description.py` (they launch `claude -p`).
+This is a Pi port of Anthropic's `skill-creator`, not the Claude Code CLI workflow. Keep the upstream license and bundled reviewer, grader, analyzer, and schema references. Pi uses `scripts/pi_eval.mjs`, `scripts/aggregate_benchmark.mjs`, and `eval-viewer/generate_review.mjs`; do **not** run bundled `run_eval.py`, `run_loop.py`, or `improve_description.py` (they launch `claude -p`).
 
 ## Decide what to build
 
@@ -58,11 +58,11 @@ Use `--baseline path/to/old-skill` for an existing skill. On Windows, add `--pi 
 
 - Review `eval-N/{with_skill,without_skill}/run-1/outputs/` and `events.jsonl`; for an old-skill comparison the baseline directory is `old_skill`. Programmatic assertions have weak semantics: do not let literal string matches override visible failures.
 - For subjective or file-based criteria, use the bundled `agents/grader.md` guidance to write `grading.json` with `expectations: [{text, passed, evidence}]` and a `summary` for **each** condition. Use `agents/analyzer.md` to look for non-discriminating criteria, variance and cost regressions. For close calls use `agents/comparator.md` for a blind comparison.
-- Use `python <this-skill-dir>/scripts/aggregate_benchmark.py <workspace> --skill-name <name>` to aggregate graded cases. Read `references/schemas.md` if editing a benchmark file; its exact field names matter to the viewer.
-- Render the actual outputs for user review with `python <this-skill-dir>/eval-viewer/generate_review.py <workspace> --skill-name <name> --static <workspace>/review.html` (optionally `--benchmark <workspace>/benchmark.json`). Show the output path and collect the exported `feedback.json`; do not treat silence as approval.
+- Use `node <this-skill-dir>/scripts/aggregate_benchmark.mjs <workspace> --skill-name <name>` to aggregate fully graded cases. Missing or ungraded runs are rejected rather than reported as 0% pass. Read `references/schemas.md` if editing a benchmark file; its field names matter to the viewer.
+- Render outputs with `node <this-skill-dir>/eval-viewer/generate_review.mjs <workspace> --skill-name <name> --static <workspace>/review.html` (optionally `--benchmark <workspace>/benchmark.json`). For live autosave, omit `--static` and open the printed localhost URL; the Node server writes `feedback.json`. Static mode downloads `feedback.json` from the browser. Show the output path and collect the user's feedback; do not treat silence as approval.
 - Improve the skill based on observed failure modes, not only a benchmark number. Compare again against the same baseline and at least one fresh prompt; stop when feedback is satisfactory or further revisions cease to help. For description tuning, revise the description and rerun positive/negative trigger prompts, including held-out near-misses. The upstream automated Claude-only description optimizer has **not** been ported; do not claim automatic optimization.
 
-If Python or an interactive viewer is unavailable, inspect paired `answer.md`, other output files and `grading.json` directly with the user. If the runner cannot access a provider, report that as an untested integration rather than claiming the eval passed.
+If a browser is unavailable, inspect paired `answer.md`, other output files and `grading.json` directly with the user. If the runner cannot access a provider, report that as an untested integration rather than claiming the eval passed.
 
 ## Finish
 
