@@ -2,12 +2,12 @@
 name: skill-creator
 description: Create, port, test, and improve Pi Agent Skills. Use when a user wants a new SKILL.md, a reusable workflow, skill evaluation against a baseline, review of skill outputs, or better automatic triggering.
 license: Apache-2.0
-compatibility: Pi 0.87+ and Node.js; no Python required for the Pi workflow.
+compatibility: Pi 0.87+ and Node.js
 ---
 
 # Skill Creator for Pi
 
-This is a Pi port of Anthropic's `skill-creator`, not the Claude Code CLI workflow. Keep the upstream license and bundled reviewer, grader, analyzer, and schema references. Pi uses `scripts/pi_eval.mjs`, `scripts/aggregate_benchmark.mjs`, and `eval-viewer/generate_review.mjs`; do **not** run bundled `run_eval.py`, `run_loop.py`, or `improve_description.py` (they launch `claude -p`).
+This is a Pi port of Anthropic's `skill-creator`, not the Claude Code CLI workflow. Keep the upstream license and bundled reviewer, grader, analyzer, and schema references. Pi uses `scripts/pi_eval.mjs`, `scripts/aggregate_benchmark.mjs`, and `eval-viewer/generate_review.mjs`. Python-based upstream utilities are intentionally not included; this port requires Node.js.
 
 ## Decide what to build
 
