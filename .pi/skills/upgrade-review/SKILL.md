@@ -15,13 +15,13 @@ Accept either:
 - a Renovate branch or pull request; or
 - no arguments, in which case inspect the current branch's dependency diff against its merge base with `main`.
 
-If the target cannot be determined from the input or diff, ask the user for it before researching.
+For an explicit package/version input, do not run Git commands unless the target is ambiguous and Git evidence is needed to resolve it. For branch/PR inputs, inspect the referenced update; for no arguments, inspect the current branch's dependency diff. If the required branch diff or merge base is unavailable, ask the user for the missing package/version details instead of guessing.
 
 ## Workflow
 
 ### 1. Establish the exact update
 
-1. Inspect the dependency diff and identify every changed package, old version, and new version.
+1. For a branch/PR or no-argument review, inspect the dependency diff and identify every changed package, old version, and new version. For an explicit package/version input, use that range and do not run Git commands or inspect unrelated branch changes.
 2. Locate all tracked configuration locations for each package. Do not assume a specific file: search the repository for the exact package identifier and verify whether equivalent runtime configs remain aligned.
 3. State the update range and configuration files in scope. Keep grouped Renovate updates as separate package reviews unless their upstream release notes explicitly make them interdependent.
 
