@@ -8,7 +8,6 @@
 
 Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for shared global config. Pi also reads `~/.agents/mcp.json` and `~/.agents/mcp/mcp.json`.
 
-Currently: `<pi agent dir>/mcp.json` mcp config scoped for pi harness only.
 
 ```json
 {
@@ -21,7 +20,9 @@ Currently: `<pi agent dir>/mcp.json` mcp config scoped for pi harness only.
 }
 ```
 
-Precedence (highest first): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `.mcp.json` > `.pi/mcp.json`
+Adapter-owned settings and overrides belong in `<pi agent dir>/mcp-adapter.json` (normally `~/.pi/agent/mcp-adapter.json`) and `.pi/mcp-adapter.json`.
+
+Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp-adapter.json` > `.mcp.json` > `.pi/mcp-adapter.json`.
 
 
 ### Usage
@@ -29,11 +30,11 @@ Precedence (highest first): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~
 The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type this — the agent does it.
 
 
-If the host reserves `/mcp`, use `/pi-mcp` as the equivalent interactive command. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
+The interactive command is `/mcp-adapter`; use it instead of default Pi's `/mcp`. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
 
 ### System One semantic search
 
-With a valid System One key, adapter 2.37.0 enables semantic search across enabled MCP tools by default. TypeSafe remains the default provider; set `SYSTEMONE_ENDPOINT` to use another compatible provider and use `pi-mcp-adapter key set systemone` to store its key. `/mcp jev setup` chooses which servers may share semantic-search data; the project policy is saved and Pi reloads. Script evaluation remains opt-in.
+With a valid System One key, the adapter can provide semantic search across enabled MCP tools. TypeSafe remains the default provider; set `SYSTEMONE_ENDPOINT` to use another compatible provider and use `pi-mcp-adapter key set systemone` to store its key. `/mcp-adapter jev setup` chooses which servers may share semantic-search data; the project policy is saved and Pi reloads. Script evaluation remains opt-in.
 
 | Action | Agent call |
 |--------|------------|
@@ -46,7 +47,7 @@ With a valid System One key, adapter 2.37.0 enables semantic search across enabl
 `args` may be a JSON object or a JSON string. Prefer the object form; use a string for providers that require simpler schemas.
 
 
-Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp disable` / `/mcp enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows.
+Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp-adapter disable` / `/mcp-adapter enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows.
 
 ### Tips
 
@@ -81,7 +82,7 @@ Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-
 
   Good for 5–20 tools. Beyond that, the token cost of listing them all outweighs the convenience.
 
-  You can also toggle this per-server in the `/mcp` interactive panel — no manual JSON editing needed.
+  You can also toggle this per-server in the `/mcp-adapter` interactive panel — no manual JSON editing needed.
 
 - **Lifecycle modes** — controls when servers connect:
   - `"lazy"` (default) — connects on first tool call. Disconnects after `idleTimeout` (default 10 min).

@@ -24,7 +24,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `settings.json` — tracked default Pi settings and extension packages for the stack.
 - `settings.devcontainer.json` — tracked full Pi config used by `scripts/sync-pi.mjs --devcontainer`.
 - `mise.toml` — tracked cross-platform versions for Pi and supporting CLIs.
-- `mcp.json` — tracked Pi MCP config.
+- `mcp-adapter.json` — tracked MCP adapter config, synced to Pi's global agent directory.
 - `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.pi/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
@@ -32,7 +32,7 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `skills-lock.json` — Skills CLI lock file for installed skills managed by vercel npx skills.
 - `docs/` — notes for extensions, skills, and external utilities.
 
-Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
+Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp-adapter.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
 
 ## Sync Pi on a normal machine
 
@@ -48,7 +48,7 @@ It syncs:
 ```text
 Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/settings.json
-~/.pi/agent/mcp.json
+~/.pi/agent/mcp-adapter.json
 ~/.pi/agent/hindsight.jsonc
 ~/.pi/agent/skills/
 ~/.pi/agent/extensions/preset.ts

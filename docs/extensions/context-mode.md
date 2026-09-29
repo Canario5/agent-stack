@@ -11,7 +11,7 @@
    ```bash
    pi install npm:context-mode@x.x.x
    ```
-3. Make sure `mcp.json` contains the MCP server:
+3. Make sure the synced `~/.pi/agent/mcp-adapter.json` contains the MCP server (the repo's `mcp-adapter.json` is synced there):
    ```json
    {
      "mcpServers": {

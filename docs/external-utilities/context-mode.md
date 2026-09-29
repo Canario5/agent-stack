@@ -17,7 +17,7 @@ Direct npm installation bypasses the central Mise manifest and is not updated by
 
 2. Install the [Pi package](../extensions/context-mode.md).
 
-3. Make sure `mcp.json` contains the MCP server:
+3. The tracked `mcp-adapter.json` is synced to `~/.pi/agent/mcp-adapter.json` by the command above and already contains the `context-mode` server. If configuring it manually, use this shape:
    ```json
    {
      "mcpServers": {
