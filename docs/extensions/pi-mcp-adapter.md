@@ -47,7 +47,7 @@ With a valid System One key, the adapter can provide semantic search across enab
 `args` may be a JSON object or a JSON string. Prefer the object form; use a string for providers that require simpler schemas.
 
 
-Since 2.21.x, the adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp-adapter disable` / `/mcp-adapter enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows.
+The adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp-adapter disable` / `/mcp-adapter enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows. `mcpScript` is off by default; enable it with `"settings": { "scriptMode": true }` in `mcp-adapter.json`.
 
 ### Tips
 
