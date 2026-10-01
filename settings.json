@@ -6,6 +6,7 @@
   "enableInstallTelemetry": false,
   "enableAnalytics": false,
   "editorPaddingX": 1,
+  "tuiMode": "regular",
   "treeFilterMode": "no-tools",
   "collapseChangelog": true,
   "defaultProjectTrust": "ask",
