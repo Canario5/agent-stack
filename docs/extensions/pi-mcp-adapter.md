@@ -20,9 +20,9 @@ Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for shared g
 }
 ```
 
-Adapter-owned settings and overrides belong in `<pi agent dir>/mcp-adapter.json` (normally `~/.pi/agent/mcp-adapter.json`) and `.pi/mcp-adapter.json`.
+Adapter-owned settings and overrides belong in `<pi agent dir>/mcp-adapter.json` (normally `~/.pi/agent/mcp-adapter.json`) and `.pi/mcp-adapter.json`. On Pi 0.99+, the adapter also reads `<pi agent dir>/mcp.json` and `.pi/mcp.json`.
 
-Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp-adapter.json` > `.mcp.json` > `.pi/mcp-adapter.json`.
+Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `<pi agent dir>/mcp-adapter.json` > `.mcp.json` > `.pi/mcp.json` > `.pi/mcp-adapter.json`.
 
 
 ### Usage
@@ -30,7 +30,7 @@ Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` 
 The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type this — the agent does it.
 
 
-The interactive command is `/mcp-adapter`; use it instead of default Pi's `/mcp`. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
+The interactive command is `/mcp-adapter`; on Pi 0.99+ `/mcp` also opens the adapter, which replaces Pi's built-in MCP for the session and disables it in user settings on first start. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
 
 ### System One semantic search
 
