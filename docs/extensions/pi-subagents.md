@@ -8,7 +8,7 @@
 
 - **Agent Markdown files** define reusable worker roles. Project agents live in `.pi/agents/`; user-wide agents live in `~/.pi/agent/agents/`.
 - **Your prompt** gives an agent a task. You can use agents directly without creating a workflow.
-- **`workflowScript`** is an optional recipe for coordinating multiple agents when you repeat the same process.
+- **Workflow scripts** are optional recipes for coordinating multiple agents when you repeat the same process.
 - **`return`** sends a workflow result back to the parent Pi conversation. It does not create a file or edit the project.
 - **Files and artifacts** are created only when you explicitly configure output or ask an agent to write one.
 
@@ -103,25 +103,23 @@ clarify requirements → scout the code → worker implements → fresh reviewer
 
 `clarify requirements` is a conversation step. The other steps are typical agent roles.
 
-For repeatable recipes, `workflowScript` is a small JavaScript program that starts agents, waits for their results, and returns a result to the parent Pi conversation:
+For repeatable recipes, write the JavaScript in a `js workflow` code block and call `subagent({ workflow: true })` in the same reply. The script can start agents, wait for their results, and return a result to the parent Pi conversation:
 
-```js
-subagent({ workflowScript: `
-  const scan = await runs.run("scan", { agent: "scout", task: "Scan the codebase" });
-  const reviews = await runs.all([
-    { key: "correctness", agent: "reviewer", task: "Review correctness: " + scan.output },
-    { key: "tests", agent: "reviewer", task: "Review tests: " + scan.output }
-  ]);
-  return reviews.map(result => result.output);
-` });
+```js workflow
+const scan = await runs.run("scan", { agent: "scout", task: "Scan the codebase" });
+const reviews = await runs.all([
+  { key: "correctness", agent: "reviewer", task: "Review correctness: " + scan.output },
+  { key: "tests", agent: "reviewer", task: "Review tests: " + scan.output }
+]);
+return reviews.map(result => result.output);
 ```
 
 The `return` value is shown in the parent conversation. It does not create a file unless you explicitly configure output or ask an agent to write one.
 
 ### Where workflows live
 
-- **One-off workflow:** Pi can create the `workflowScript` inline for the current request. You do not need to save it.
-- **Reusable workflow:** Put a prompt template in `.pi/prompts/` for this project or `~/.pi/agent/prompts/` for all projects, then run it with `/prompt-workflow`. Templates with `chain:` frontmatter are translated into `workflowScript`.
+- **One-off workflow:** Pi can write a `js workflow` code block inline for the current request. You do not need to save it.
+- **Reusable workflow:** Put a prompt template in `.pi/prompts/` for this project or `~/.pi/agent/prompts/` for all projects, then run it with `/prompt-workflow`.
 - **Runtime state:** Active runs, mission state, status, and artifacts are managed under `.pi/subagents/`. Inspect them through Pi's status/Fleet commands; do not edit these files manually.
 
 Use `/run <agent> [task]` for a direct child run. The legacy `/chain`, `/parallel`, and `/run-chain` slash commands are not registered in current releases.
