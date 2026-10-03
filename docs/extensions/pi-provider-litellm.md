@@ -1,7 +1,7 @@
 ## pi-provider-litellm
 - **Install:** `pi install npm:pi-provider-litellm@x.x.x`
 - **Purpose:** Registers LiteLLM proxy models in Pi and enriches them with metadata such as context size and pricing.
-- **Login:** Use `/login litellm`, or `/login` → `Sign in with an API key` → `LiteLLM API key`.
+- **Login:** Use `/login litellm` for API-key or supported LiteLLM SSO login. For proxies using LiteLLM JWT auth with an external OpenID Connect identity provider, configure `litellm.providers.litellm.oidc` in global Pi settings to enable direct browser login (authorization code + PKCE); the IdP needs a public client with a loopback redirect, and the browser must run on Pi's machine. See the [upstream direct OIDC setup](https://github.com/balcsida/pi-provider-litellm/blob/v3.3.0/README.md#direct-oidc-login).
 - **Backup fallback:** Manual auth editing should not normally be needed, but keep this short `auth.json` excerpt as a future fallback/backup reference:
 ```
 "litellm": {
