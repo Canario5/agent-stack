@@ -27,7 +27,7 @@ It does **not** remove input validation, data-loss handling, security measures, 
 | `ultra` | Challenge unnecessary work first; favor deletion or a one-line solution. |
 | `off` | Turn Ponytail off for the current session. |
 
-Run `/ponytail` without an argument to see the current level. `stop ponytail` or `normal mode` also turns it off.
+Run `/ponytail` to turn Ponytail on if it is off, or report the current level if it is already on. `stop ponytail` or `normal mode` turns it off.
 
 ### Practical tips
 
