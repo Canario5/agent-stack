@@ -78,7 +78,7 @@ Expected result: the browser opens, you add one comment to the plan, Pi revises 
 
 6. Return to Pi and wait for it to revise the plan.
 
-7. When the plan looks good, approve it in the browser. Approval is the handoff point: before approval, Pi should stay in planning/review behavior; after approval, it can execute the accepted plan.
+7. When the plan looks good, approve it in the browser. Approval is the handoff point: before approval, Pi stays in planning/review behavior; after approval, it can execute the accepted plan. The review opens without blocking the session turn, but execution remains gated until approval.
 
 8. If you do not want to keep the test artifacts, ask Pi:
 
@@ -147,7 +147,7 @@ For example, another extension could recognize a request like `plan this first` 
 
 | Workflow | Command | Use when |
 |---|---|---|
-| Approve a plan before coding | `/plannotator-plan-mode <plan-file.md>` | You want Pi blocked until you approve the plan. |
+| Approve a plan before coding | `/plannotator-plan-mode <plan-file.md>` | You want Pi to wait for approval before executing the plan. |
 | Review Pi's code changes | `/plannotator-review` | Pi edited files and you want line-level feedback before it continues. |
 | Review a PR or branch diff | `/plannotator-review <PR-or-diff-target>` | You want Plannotator as a browser review UI for pull requests or larger diffs. |
 | Review docs or specs | `/plannotator-annotate <file.md>` | You want inline comments on requirements, README edits, or docs before Pi codes against them. |
