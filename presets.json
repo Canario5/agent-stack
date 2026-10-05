@@ -20,7 +20,6 @@
       "ctx_upgrade",
       "ctx_purge",
       "ctx_insight",
-      "batch_web_fetch",
       "repo_explorer_explore",
       "hindsight_seed_git",
       "hindsight_config",

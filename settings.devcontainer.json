@@ -30,7 +30,6 @@
     "npm:@juicesharp/rpiv-ask-user-question@2.12.0",
     "npm:@juicesharp/rpiv-btw@2.12.0",
     "npm:@juicesharp/rpiv-args@2.12.0",
-    "npm:pi-smart-fetch@0.3.17",
     "npm:pi-powerline@0.11.1",
     "npm:@firstpick/pi-skill-tech-deep-dive@0.1.5",
     "npm:@firstpick/pi-skill-code-quality@0.1.6",
@@ -46,7 +45,8 @@
       ]
     },
     "npm:@luxusai/pi-hindsight@0.13.0",
-    "npm:pi-context-view@0.6.0"
+    "npm:pi-context-view@0.6.0",
+    "npm:pi-web-access@0.36.0"
   ],
   "skillful": {
     "hiddenSkills": [
