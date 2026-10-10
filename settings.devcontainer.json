@@ -1,6 +1,6 @@
 {
   "//": "Full Pi config used by scripts/sync-pi.mjs --devcontainer.",
-  "lastChangelogVersion": "1.0.3",
+  "lastChangelogVersion": "1.0.4",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
   "defaultThinkingLevel": "medium",
