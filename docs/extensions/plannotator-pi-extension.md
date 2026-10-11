@@ -36,6 +36,9 @@ Good uses:
 - Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
 - Browser-integrated agents can inspect documents and add their own comments through WebMCP; human approval decisions remain required.
 
+
+Plannotator Inbox collects agent questions, messages, attached files, and guided reviews in one local window. Pi's `plannotator_inbox` tool is off by default; enable it with `PLANNOTATOR_INBOX_TOOL=1` if you want agents to start and use the Inbox. The Inbox can also be started directly with `plannotator inbox`.
+
 ### Live app annotation
 
 Run your local dev server, then annotate the live app from Pi:
