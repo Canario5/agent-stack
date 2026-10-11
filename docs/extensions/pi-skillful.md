@@ -71,3 +71,4 @@ Configured slots appear on the prompt editor border. Press `alt+1` through `alt+
 - Hidden skills show in Pi's startup skill list with the error color.
 - `/new` preserves the current toggle state; resuming, forking, cloning, reloading, or restarting Pi resets toggles from settings.
 - When a project settings file contains only `skillful` settings and the project override is removed, `.pi/settings.json` is deleted instead of leaving an empty settings file behind.
+- Install/update telemetry sends the package name/version and platform/runtime/architecture once per package version. Disable it with `"enableInstallTelemetry": false` in Pi settings; CI, `PI_OFFLINE`, and Pi telemetry settings also gate it.
