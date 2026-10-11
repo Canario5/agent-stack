@@ -61,6 +61,9 @@ Workflows/chains decide **when** agents run. Agent files and settings decide **w
 
 For small changes to bundled agents, use `subagents.agentOverrides` in settings. Project settings go in `.pi/settings.json`; user-wide settings go in `~/.pi/agent/settings.json`.
 
+
+When Pi project trust is declined, pi-subagents ignores project agents and settings; `agentScope: "project"` is not available in that session.
+
 ```json
 {
   "subagents": {
