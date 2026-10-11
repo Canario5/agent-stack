@@ -34,7 +34,7 @@ Run `/ponytail` to turn Ponytail on if it is off, or report the current level if
 - Use `full` for normal feature work and bug fixes.
 - Use `lite` when you want to decide whether to take the simpler alternative.
 - Use `ultra` for cleanup or when a request may be speculative.
-- For a deliberate shortcut with a known limit, ask Pi to leave a `ponytail:` comment that names the limit and upgrade path.
+- For a deliberate shortcut with a known limit, ask Pi to leave a `shortcut:` comment naming the limit and when to upgrade. `/ponytail-debt` also finds legacy `ponytail:` markers.
 
 ### Useful commands
 
@@ -42,7 +42,7 @@ Run `/ponytail` to turn Ponytail on if it is off, or report the current level if
 |---|---|
 | `/ponytail-review` | You want a delete-list for unnecessary complexity in the current diff. |
 | `/ponytail-audit` | You want a whole-repository over-engineering audit. |
-| `/ponytail-debt` | You want to list deferred `ponytail:` shortcuts. |
+| `/ponytail-debt` | You want to find deferred `shortcut:` comments and legacy `ponytail:` markers. |
 | `/ponytail-gain` | You want Ponytail's benchmark impact summary. |
 | `/ponytail-help` | You want the command quick reference. |
 
