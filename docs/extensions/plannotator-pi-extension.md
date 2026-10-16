@@ -215,6 +215,8 @@ Example project override:
 Since 0.27.11, submitted plan, code-review, and annotation feedback is archived locally under `~/.plannotator/feedback/` by default. Disable it with `PLANNOTATOR_FEEDBACK_HISTORY=0` or `"feedbackHistory": false` in `~/.plannotator/config.json`; delete that directory to remove existing records.
 
 ### Notes
+- Each Plannotator session prints its URL even when no browser opens. Set `PLANNOTATOR_BROWSER=none` to suppress browser launching; `false`, `0`, `off`, `no`, `true`, `1`, and `:` are also treated as no-browser values in this release.
+- Servers now reject browser write requests identified as coming from another website. If a reverse proxy rewrites the `Host` header, add its hostname to `PLANNOTATOR_ALLOWED_HOSTS`.
 
 - Plan mode intentionally restricts destructive commands and limits writes while planning.
 - Approving with notes is useful when the plan is good but implementation needs constraints.

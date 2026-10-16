@@ -9,7 +9,7 @@
 
 The Plannotator CLI opens the local browser UI for plan review, markdown/file annotation, assistant-message annotation, code review, archived sessions, and the Plannotator Inbox (`plannotator inbox`) for agent messages, questions, files, and guided reviews.
 
-For Pi’s built-in slash commands and optional Inbox tool, use [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md). The CLI is also used directly to start the Inbox with `plannotator inbox`, or by external hooks that shell out to `plannotator ...`.
+For Pi’s built-in slash commands and optional Inbox tool, use [`@plannotator/pi-extension`](../extensions/plannotator-pi-extension.md). Running `plannotator inbox` interactively also connects detected agent integrations by default; set `PLANNOTATOR_INBOX_CONNECT=0` to skip that step. The CLI can also start the Inbox directly, or be used by external hooks that shell out to `plannotator ...`.
 
 ### Installation
 
