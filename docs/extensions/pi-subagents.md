@@ -132,6 +132,7 @@ Other useful commands:
 
 - `/subagents-doctor` — check setup and async/intercom state
 - `/subagents-guide [topic]` — read the installed package's current guide
+- `/subagents-stop` — stop all running background subagents; they keep running if you only stop the parent with `Esc`.
 
 ### Optional shortcuts
 
