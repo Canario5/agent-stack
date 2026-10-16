@@ -16,7 +16,7 @@
 
 It also adds or improves:
 - `ast_search`
-- optional `nu`
+- optional `nu` (deprecated, still available)
 - compressed `bash` output for noisier commands
 
 ### Usage
@@ -33,13 +33,12 @@ Useful patterns:
 
 Useful extras if you want better fallbacks and nicer output:
 - `ast-grep` — fallback for `ast_search`
-- `nushell` — fallback for the `nu` tool
 - `fd` — speeds up `find`
 - `universal-ctags` — better symbol maps on fallback paths
 - `difftastic` — better semantic edit summaries
 - `shellcheck`, `yq`, `scc` — handy extra CLI support
 
-The stack's `mise.toml` installs the cross-platform `ast-grep`, Nu, `fd`, difftastic, ShellCheck, and `yq` binaries wherever Pi runs. See the [Mise notes](../external-utilities/mise.md). `scc` stays opt-in.
+The stack's `mise.toml` installs the cross-platform `ast-grep`, `fd`, difftastic, ShellCheck, and `yq` binaries wherever Pi runs. See the [Mise notes](../external-utilities/mise.md). `scc` stays opt-in.
 
 **Important**: Universal Ctags is the exception: install it separately only if you need fallback symbol maps. It is not currently pinned in `mise.toml` because its maintained release layout is not consistent across platforms:
 
