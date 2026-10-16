@@ -4,6 +4,8 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 
 ## TLDR: Quick usage
 
+> **Warning:** `sync-pi.mjs` writes to your global `~/.pi/agent/` directory and replaces several existing configs, including `mcp-adapter.json` (custom MCP entries are not merged) and the global skills directory. Back up your config first; use `--dry-run` to preview affected files.
+
 - `node scripts/sync-pi.mjs` — install or update Pi, CLI tools (with [Mise](./docs/external-utilities/mise.md)) and sync Pi configs.
 - `update-pi-stack` — for devcontainers simplified command - it git pull files + run sync-pi.mjs
 
@@ -42,6 +44,7 @@ Install the pinned Pi harness and CLI tools to Mise's global config and write th
 node scripts/sync-pi.mjs
 ```
 Add --dry-run to preview changes first.
+
 
 It syncs:
 
