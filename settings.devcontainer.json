@@ -14,7 +14,7 @@
   "externalEditor": "code --wait",
   "packages": [
     "npm:pi-provider-litellm@4.2.0",
-    "npm:pi-mcp-adapter@5.3.1",
+    "npm:pi-mcp-adapter@5.3.2",
     {
       "source": "npm:context-mode@1.0.169",
       "skills": [
