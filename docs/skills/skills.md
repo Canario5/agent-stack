@@ -27,7 +27,7 @@ New skills start as **Trial** until they prove useful in normal Pi work.
 
 ### Local skills
 
-Repository-tracked skills copied into Pi by `scripts/sync-pi.mjs`.
+Repository skills live in `.agents/skills/` and are copied into Pi's global skills directory by `scripts/sync-pi.mjs`.
 
 | Skill | Category | Status | Notes |
 |---|---|---|---|

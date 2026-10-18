@@ -1,10 +1,10 @@
 ## skill-creator (Pi port)
 
-- **Location:** `.pi/skills/skill-creator/` (synced by `node scripts/sync-pi.mjs`).
+- **Location:** `.agents/skills/skill-creator/` (synced by `node scripts/sync-pi.mjs`).
 - **Source:** [Anthropic skill-creator](https://github.com/anthropics/skills/tree/34040c9c568585f6929bedeaad110ad08f079624/skills/skill-creator), Apache-2.0; upstream assets and license are bundled. This is a local fork, not a Skills CLI-managed update.
 - **Use:** `/skill:skill-creator <skill to create, port or improve>`.
 - **Workflow:** Draft, approve eval cases, compare Pi JSON-mode candidate and baseline runs, aggregate fully graded cases with Node, review outputs in the bundled HTML viewer, iterate.
-- **Run:** `node .pi/skills/skill-creator/scripts/pi_eval.mjs <candidate-dir> <evals.json> <new-workspace> --model <provider/model>`; use `--baseline <old-skill-dir>` when improving a skill. On Windows add `--pi <path-to-pi/dist/bundle/cli.js>` instead of a `.cmd` shim.
-- **Review:** `node .pi/skills/skill-creator/scripts/aggregate_benchmark.mjs <workspace> --skill-name <name>` after grading every run, then `node .pi/skills/skill-creator/eval-viewer/generate_review.mjs <workspace> --benchmark <workspace>/benchmark.json --static <workspace>/review.html`. Omit `--static` for a localhost feedback server.
+- **Run:** `node .agents/skills/skill-creator/scripts/pi_eval.mjs <candidate-dir> <evals.json> <new-workspace> --model <provider/model>`; use `--baseline <old-skill-dir>` when improving a skill. On Windows add `--pi <path-to-pi/dist/bundle/cli.js>` instead of a `.cmd` shim.
+- **Review:** `node .agents/skills/skill-creator/scripts/aggregate_benchmark.mjs <workspace> --skill-name <name>` after grading every run, then `node .agents/skills/skill-creator/eval-viewer/generate_review.mjs <workspace> --benchmark <workspace>/benchmark.json --static <workspace>/review.html`. Omit `--static` for a localhost feedback server.
 - **Caveats:** Eval runs cost tokens and can execute tools; confirm prompts before running. Sessions isolate skills/extensions and history, **not** file-system access. Node.js is required; Python-based upstream utilities are intentionally not included in this Pi port. Description optimization remains manual iteration over Pi trigger tests. A paired two-prompt smoke run succeeded on `openai-codex/gpt-5.6-luna`; broader quality and provider compatibility remain unverified.
 - **Viewer network caveat:** The upstream HTML template still loads SheetJS from a CDN for inline `.xlsx` previews and Google Fonts for styling. Review only trusted outputs; avoid opening sensitive reviews with network access if third-party scripts are a concern. This does not affect the Node benchmark or other output previews.

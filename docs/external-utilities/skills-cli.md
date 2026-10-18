@@ -10,9 +10,9 @@ Use it when a skill is distributed as plain `SKILL.md` files instead of as a Pi 
 
 ### Pi compatibility
 
-Pi is a supported target. Project installs write to `.pi/skills/`; global installs write to `~/.pi/agent/skills/`.
+Pi is a supported target. In this repo, `npx skills add <skill-name> --agent pi --copy` installs project skills under `.agents/skills/` (not `.pi/skills/`). Global installs use Pi's global agent skills directory.
 
-For this repo, prefer project installs with copied files so the installed skill content, `skills-lock.json`, and docs can be reviewed and committed together.
+Keep `.agents/skills/` as the repo's single skill directory. `skills-lock.json` records only skills installed and managed by the Skills CLI; it does not claim ownership of custom skills maintained directly in this repo.
 
 ### Install / run
 
@@ -48,11 +48,13 @@ npx skills init my-skill
 
 ### Tracking convention
 
-Commit these when installing repo-local skills:
+Track the files for upstream skills installed with the Skills CLI:
 
-- `.pi/skills/<skill-name>/` — copied skill files loaded by Pi.
-- `skills-lock.json` — source, upstream path, and computed hash.
-- `docs/skills/<skill-name>.md` and `docs/skills/skills.md` — human-facing notes and caveats.
+- `.agents/skills/<skill-name>/` — copied skill files discovered by Pi.
+- `skills-lock.json` — upstream source, path, and computed hash for CLI-managed skills.
+- `docs/skills/<skill-name>.md` and `docs/skills/skills.md` — human-facing notes and index entry.
+
+Custom skills also live in `.agents/skills/` and are tracked as ordinary repo files, but do not belong in `skills-lock.json` unless installed and managed by the Skills CLI.
 
 Do not put skill sources in `settings.json` unless they are npm Pi extension packages.
 
@@ -64,8 +66,8 @@ Run periodically:
 npx skills update -p -y
 ```
 
-Then review the git diff before committing. 
+Then review the git diff before committing.
 
 ### Local modifications
 
-Avoid editing vendored `.pi/skills/` files if you want clean upstream updates. 
+Avoid editing CLI-managed `.agents/skills/` files if you want clean upstream updates. Custom skills in `.agents/skills/` are maintained directly in this repository.

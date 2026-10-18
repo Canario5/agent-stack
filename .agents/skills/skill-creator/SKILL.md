@@ -20,7 +20,7 @@ For a port, inspect the original skill and its bundled resources, license, and e
 - Follow Pi's `docs/skills.md` and the Agent Skills spec: directory `skill-name/SKILL.md`, YAML `name` and `description` describing **what** and **when**, matching lowercase-hyphenated names. Use relative links to optional `references/`, `assets/`, and `scripts/`.
 - Put trigger conditions in the description; put workflow, decision branches, and output contract in the body. Make instructions specific enough that two runs take the same process, but avoid boilerplate and repeating general agent rules.
 - Put deterministic repeated operations in scripts when doing so saves work; make inputs, outputs, failure behavior and runtime requirements explicit. Review third-party scripts before running them.
-- For skills shared through this stack, place hand-written files in `.pi/skills/`, add a short `docs/skills/<name>.md` and an index entry in `docs/skills/skills.md`; `scripts/sync-pi.mjs` mirrors skills globally. Do not hand-edit Skills CLI-managed skills without deliberately forking and dropping their lock entry.
+- For skills shared through this stack, place hand-written files in `.agents/skills/`, add a short `docs/skills/<name>.md` and an index entry in `docs/skills/skills.md`; `scripts/sync-pi.mjs` mirrors skills globally. Do not hand-edit Skills CLI-managed skills without deliberately forking and dropping their lock entry.
 - For an existing skill, snapshot its **old** directory before editing. For a new skill, the baseline is no skill at all.
 
 ## Design real evaluations
@@ -45,7 +45,7 @@ Assertions in this Pi runner mean **literal text in the final answer**, not arbi
 The Node runner launches separate Pi 0.87+ JSON sessions with identical model and options, using `--no-skills --skill <candidate>` versus `--no-skills` (or `--skill <old-skill>`). It uses `--no-extensions --no-session` to avoid ambient skill collisions and session history. It records transcript events, token and time measurements, direct evidence of a `read` of `SKILL.md`, assertion results, and files from each temporary cwd. It does **not** run the repo's extensions, so a skill that depends on one needs a dedicated interactive test instead. On Windows pass the Pi JavaScript CLI file via `--pi`; a `.cmd` shim is not safe to invoke with arbitrary prompts through a shell.
 
 ```bash
-node .pi/skills/skill-creator/scripts/pi_eval.mjs \
+node .agents/skills/skill-creator/scripts/pi_eval.mjs \
   path/to/candidate path/to/evals.json path/to/new-workspace \
   --model provider/model-id --thinking medium
 ```

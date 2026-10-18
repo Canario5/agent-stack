@@ -59,7 +59,7 @@ Search the whole repository documentation and configuration surface for:
 - index and overview documents that link to or summarize the package;
 - integration docs describing a relationship between the updated package and another extension, skill, utility, script, or runtime.
 
-Start with `docs/`, `README.md`, tracked settings files, scripts, and local `.pi/skills/`, then expand only where search evidence indicates a dependency. Treat a document as in scope only when it contains an affected claim, setup path, integration, or discoverability entry. Do not rewrite unrelated documents or make speculative edits.
+Start with `docs/`, `README.md`, tracked settings files, scripts, and local `.agents/skills/`, then expand only where search evidence indicates a dependency. Treat a document as in scope only when it contains an affected claim, setup path, integration, or discoverability entry. Do not rewrite unrelated documents or make speculative edits.
 
 ### 4. Decide and edit
 
