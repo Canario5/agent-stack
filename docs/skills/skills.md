@@ -47,6 +47,7 @@ Skills installed mainly as skills get an index entry; add a separate page only w
 | 4 | [code-quality](./firstpick-pi-skill-code-quality.md) | `@firstpick/pi-skill-code-quality` | Quality / review | Needs adaptation | Review before relying on it; upstream assumptions may not fit this setup. |
 | 5 | [find-skills](./find-skills.md) | `vercel-labs/skills` (`find-skills`) | Discovery / workflow extension | Trial | Find and install reusable skills from the skills.sh ecosystem. |
 | 6 | `modern-javascript-patterns` | `wshobson/agents` (`modern-javascript-patterns`) | JavaScript / development | Trial | Practical ES6+ and functional patterns for refactoring and implementing JavaScript. |
+| 7 | `responsive-design` | `wshobson/agents` (`responsive-design`) | Design / frontend | Trial | Build responsive interfaces with mobile-first layouts, container queries, and fluid sizing. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.
 
