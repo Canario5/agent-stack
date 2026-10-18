@@ -37,7 +37,7 @@ Repository skills live in `.agents/skills/`; `scripts/sync-pi.mjs` mirrors them 
 
 ### Standalone skill packages
 
-Skills installed mainly as skills. These get their own short docs page.
+Skills installed mainly as skills get an index entry; add a separate page only when repo-specific usage or caveats are useful.
 
 | # | Skill | Package | Category | Status | Notes |
 |---:|---|---|---|---|---|
@@ -46,6 +46,7 @@ Skills installed mainly as skills. These get their own short docs page.
 | 3 | [tech-deep-dive](./firstpick-pi-skill-tech-deep-dive.md) | `@firstpick/pi-skill-tech-deep-dive` | Planning / decision support | Trial | Use before choosing libraries, frameworks, tools, APIs, models, or architecture. |
 | 4 | [code-quality](./firstpick-pi-skill-code-quality.md) | `@firstpick/pi-skill-code-quality` | Quality / review | Needs adaptation | Review before relying on it; upstream assumptions may not fit this setup. |
 | 5 | [find-skills](./find-skills.md) | `vercel-labs/skills` (`find-skills`) | Discovery / workflow extension | Trial | Find and install reusable skills from the skills.sh ecosystem. |
+| 6 | `modern-javascript-patterns` | `wshobson/agents` (`modern-javascript-patterns`) | JavaScript / development | Trial | Practical ES6+ and functional patterns for refactoring and implementing JavaScript. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.
 
@@ -65,4 +66,4 @@ Skills bundled with broader Pi extensions. List them here for discoverability, b
 | 8 | `ctx-purge` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Dangerous | Permanently delete indexed context-mode knowledge. |
 | 9 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, scripted workflows, parallel runs, and async work. |
 
-Rule of thumb: standalone skill package = table row plus own page. Extension-provided skill = table row only, linked back to the extension docs.
+Rule of thumb: standalone skill package = table row; add its own page only when it has repo-specific usage notes or caveats. Extension-provided skill = table row only, linked back to the extension docs.
