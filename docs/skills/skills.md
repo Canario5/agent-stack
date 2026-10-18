@@ -53,6 +53,7 @@ Skills installed mainly as skills get an index entry; add a separate page only w
 | 10 | `code-review-excellence` | `wshobson/agents` (`code-review-excellence`) | Quality / review | Trial | Constructive, systematic code review practices for finding issues and sharing actionable feedback. |
 | 11 | `typescript-advanced-types` | `wshobson/agents` (`typescript-advanced-types`) | TypeScript / development | Trial | Guidance on generics, conditional and mapped types, and reusable type utilities. |
 | 12 | `javascript-testing-patterns` | `wshobson/agents` (`javascript-testing-patterns`) | Testing / JavaScript | Trial | Testing strategies with Jest, Vitest, Testing Library, and TDD workflows. |
+| 13 | `debugging-strategies` | `wshobson/agents` (`debugging-strategies`) | Debugging | Trial | Systematic root-cause analysis and profiling strategies for bugs and unexpected behavior. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.
 

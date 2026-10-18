@@ -13,6 +13,12 @@
       "skillPath": "plugins/developer-essentials/skills/code-review-excellence/SKILL.md",
       "computedHash": "6333476c4019152991df61d759e9443f8c9e3a1b0b839cf0beaa67cfac5ebf28"
     },
+    "debugging-strategies": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/developer-essentials/skills/debugging-strategies/SKILL.md",
+      "computedHash": "3ee133a4dbecfc53930f69a1936ef4fdaa4a2514eca29bcd983e5c563aeb153e"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
