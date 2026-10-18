@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "auth-implementation-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/developer-essentials/skills/auth-implementation-patterns/SKILL.md",
+      "computedHash": "ba0135f217cc3d528224948b7216f0f97a4ae9003165fc06582597cc0143cea7"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
