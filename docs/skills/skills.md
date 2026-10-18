@@ -4,10 +4,11 @@ Skills are documented as a lightweight registry: what each package adds, when to
 
 ### Maintenance workflow
 
-Update skills from the `agent-stack` repo root, not from an arbitrary local Pi config directory.
+Update Skills CLI-managed project skills from the repo root, then review the diff. Name a skill to update only that one:
 
 ```bash
-npx skills update -p -y
+npx skills update --agent pi -p -y
+npx skills update --agent pi -p find-skills -y
 ```
 
 
@@ -27,7 +28,7 @@ New skills start as **Trial** until they prove useful in normal Pi work.
 
 ### Local skills
 
-Repository skills live in `.agents/skills/` and are copied into Pi's global skills directory by `scripts/sync-pi.mjs`.
+Repository skills live in `.agents/skills/`; `scripts/sync-pi.mjs` mirrors them into Pi's global `~/.pi/agent/skills/` directory.
 
 | Skill | Category | Status | Notes |
 |---|---|---|---|

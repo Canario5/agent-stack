@@ -10,7 +10,7 @@ Use it when a skill is distributed as plain `SKILL.md` files instead of as a Pi 
 
 ### Pi compatibility
 
-Pi is a supported target. In this repo, `npx skills add <skill-name> --agent pi --copy` installs project skills under `.agents/skills/`. Global installs use Pi's global agent skills directory.
+Pi is a supported target. In this repo, `npx skills add <owner/repo> <skill-name> --agent pi --copy -y` installs project skills under `.agents/skills/`. The CLI's own global install location is separate; `scripts/sync-pi.mjs` mirrors this repo's project skills into Pi's `~/.pi/agent/skills/` directory.
 
 Keep `.agents/skills/` as the repo's single skill directory.
 
@@ -60,13 +60,14 @@ Do not put skill sources in `settings.json` unless they are npm Pi extension pac
 
 ### Update workflow
 
-Run periodically:
+Run from the repo root, optionally naming one skill to update, then review the diff:
 
 ```bash
 npx skills update --agent pi -p -y
+# or update only find-skills
+npx skills update --agent pi -p find-skills -y
 ```
 
-Then review the git diff before committing.
 
 ### Local modifications
 

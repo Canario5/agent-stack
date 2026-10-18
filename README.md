@@ -29,9 +29,9 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `mcp-adapter.json` — tracked MCP adapter config, synced to Pi's global agent directory.
 - `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
-- `.agents/skills/` — copied into global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
+- `.agents/skills/` — canonical repo skill directory, synced into Pi's global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
 - `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `nano`/`standard`/`agents` definitions, synced globally.
-- `skills-lock.json` — Skills CLI lock file for installed skills managed by vercel npx skills.
+- `skills-lock.json` — Skills CLI lockfile for upstream-managed skills installed in `.agents/skills/`.
 - `docs/` — notes for extensions, skills, and external utilities.
 
 Keep active Pi config files at the repo root. Do not put `settings.json`, `settings.devcontainer.json`, or `mcp-adapter.json` under `.pi/` in this repo unless you intentionally want Pi to treat the repo as a project-local Pi config root and create local runtime state such as `.pi/npm/`.
