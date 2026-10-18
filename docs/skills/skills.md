@@ -50,6 +50,7 @@ Skills installed mainly as skills get an index entry; add a separate page only w
 | 7 | `responsive-design` | `wshobson/agents` (`responsive-design`) | Design / frontend | Trial | Build responsive interfaces with mobile-first layouts, container queries, and fluid sizing. |
 | 8 | `auth-implementation-patterns` | `wshobson/agents` (`auth-implementation-patterns`) | Security / authentication | Trial | Guidance for JWT, OAuth2, sessions, and role-based access control. |
 | 9 | `react-state-management` | `wshobson/agents` (`react-state-management`) | React / frontend | Trial | Guidance for local, global, and server state with Redux Toolkit, Zustand, Jotai, and React Query. |
+| 10 | `code-review-excellence` | `wshobson/agents` (`code-review-excellence`) | Quality / review | Trial | Constructive, systematic code review practices for finding issues and sharing actionable feedback. |
 
 `Needs adaptation` means the skill looks useful, but its upstream instructions should be reviewed or adjusted before relying on it as a normal workflow.
 
