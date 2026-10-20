@@ -21,6 +21,10 @@ Pi can call `plannotator_control` with either action:
 
 After entering, Pi drafts a Markdown plan and submits it with `plannotator_submit_plan`. You review and approve the plan before implementation. On a timeout, check status before retrying: the original request may have succeeded.
 
+**Execution order:** The tool uses `executionMode: "sequential"` so it finishes before later calls in the same batch. Pi should enter plan mode and wait for confirmation before continuing. If entry fails, later calls are not automatically cancelled.
+
+**Approval caveat:** The connector requires an interactive session. In Plannotator 0.28.23, missing review UI files can still cause automatic approval. During normal use, you review and approve the plan in your browser.
+
 ## Verify
 
 In a fresh, interactive Pi session, ask for a small but nontrivial change and tell Pi to plan first. Confirm that it calls `plannotator_control`, Plannotator opens a plan review, and Pi waits for your decision. Reject or comment once; Pi should revise the plan without implementing it. Approve only when ready.

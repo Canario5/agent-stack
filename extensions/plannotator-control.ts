@@ -56,8 +56,9 @@ export default function plannotatorControlExtension(pi: ExtensionAPI): void {
 	pi.registerTool(defineTool({
 		name: "plannotator_control",
 		label: "Plannotator Plan Mode",
+		executionMode: "sequential",
 		description:
-			"Enter Plannotator plan mode before drafting a nontrivial implementation plan, or check its current status. Does not approve plans or exit plan mode. If already executing, do not interrupt; ask the user before switching tasks.",
+			"Enter Plannotator plan mode before drafting a nontrivial implementation plan, or check its current status. Call enter separately and wait for success before dependent tools. Does not approve plans or exit plan mode; executing status alone does not prove human approval. If already executing, do not interrupt; ask the user before switching tasks.",
 		parameters: Type.Object({
 			action: Type.Union([
 				Type.Literal("enter"),
@@ -79,7 +80,7 @@ export default function plannotatorControlExtension(pi: ExtensionAPI): void {
 				return { content: [{ type: "text", text: "Plannotator is already in planning mode. Continue the current plan." }], details: { phase } };
 			}
 			if (phase === "executing") {
-				return { content: [{ type: "text", text: "Plannotator is already executing an approved plan. Do not switch tasks or interrupt it without asking the user." }], details: { phase } };
+				return { content: [{ type: "text", text: "Plannotator is already executing a plan. This status alone does not prove human approval. Do not switch tasks or interrupt it without asking the user." }], details: { phase } };
 			}
 
 			const response = await requestPlanMode(pi, "enter");
