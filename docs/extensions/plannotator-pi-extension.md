@@ -20,8 +20,9 @@ The basic loop is:
 Good uses:
 
 - Planning before coding: Pi writes a checklist plan, then waits for approval.
-- Safer changes: plan mode restricts destructive commands and limits writes while planning.
+- Plan mode for drafting and reviewing a Markdown checklist before implementation. During planning, Plannotator blocks Pi tool calls named `write` and `edit` when their target is not a Markdown file inside the working directory. It does **not** block shell commands or every other extension tool.
 - Precise feedback: annotate exact plan items, markdown sections, assistant text, or diff lines.
+- Optional approval gate for an annotated document. The separate model-callable `plannotator` tool can open an annotation with `gate: true` and returns the human's approval decision. Ordinary annotation is feedback; it is not plan-mode activation or, by itself, approval to implement.
 - Code review: inspect Pi's local changes in a browser diff UI, mark exact risky lines, then send feedback back to Pi.
 - Pull request review: open a PR diff, review changed files visually, and feed review notes back to the agent.
 

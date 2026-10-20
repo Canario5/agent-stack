@@ -30,6 +30,7 @@ Builtin agents include:
 - `worker` — approved implementation work
 - `reviewer` — code review and small fixes
 - Packaged `worker` starts with fresh context by default; request fork context explicitly when you need the parent conversation.
+- Under this stack's workflow policy, a worker may implement only within scope approved by the user and passed on by the parent. Workers and independent reviewers have different jobs: a worker receives a fresh, bounded implementation brief; a read-only reviewer independently inspects the result and reports evidence without editing.
 - `oracle` — second-opinion advisory review
 - `delegate` — lightweight generic delegation
 
@@ -60,6 +61,8 @@ For a first workflow, use `scout` when you need orientation, `worker` for approv
 Workflows/chains decide **when** agents run. Agent files and settings decide **what each agent is**.
 
 For small changes to bundled agents, use `subagents.agentOverrides` in settings. Project settings go in `.pi/settings.json`; user-wide settings go in `~/.pi/agent/settings.json`.
+
+**Agent precedence:** user-level files in `~/.pi/agent/agents/` override bundled agents of the same name; project-level agents can override user definitions when project trust is granted. A file under the user agent directory is a user-scope override even if it began as a copy of a bundled default. Check the effective definition before assuming which role Pi will run.
 
 
 When Pi project trust is declined, pi-subagents ignores project agents and settings; `agentScope: "project"` is not available in that session.
