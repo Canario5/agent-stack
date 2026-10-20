@@ -30,7 +30,9 @@ A small, practical home for the Pi extensions, skills, MCP config, and related e
 - `hindsight.jsonc` — tracked global Pi Hindsight memory configuration.
 - `settings.local.example.json` — example for `~/.pi/agent/settings.local.json` machine-local overrides.
 - `.agents/skills/` — canonical repo skill directory, synced into Pi's global `~/.pi/agent/skills/` by `scripts/sync-pi.mjs`.
-- `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `nano`/`standard`/`agents` definitions, synced globally.
+- `extensions/preset.ts` and `presets.json` — official Pi preset extension and the tracked `nano`/`standard`/`agents` definitions.
+- `extensions/plannotator-control.ts` — local [Plannotator plan-mode connector](docs/extensions/plannotator-control.md).
+- `global-workflow.md` — global routing/delegation policy, synced to `~/.pi/agent/AGENTS.md`.
 - `skills-lock.json` — Skills CLI lockfile for upstream-managed skills installed in `.agents/skills/`.
 - `docs/` — notes for extensions, skills, and external utilities.
 
@@ -55,7 +57,9 @@ Mise global [tools] entries declared in mise.toml
 ~/.pi/agent/hindsight.jsonc
 ~/.pi/agent/skills/
 ~/.pi/agent/extensions/preset.ts
+~/.pi/agent/extensions/plannotator-control.ts
 ~/.pi/agent/presets.json
+~/.pi/agent/AGENTS.md
 ```
 
 Use `mise current` to see the selected tool versions and `mise cfg` to inspect the active configuration. **Important: activate Mise in your shell after syncing so `pi` and its supporting CLIs are on `PATH`**, then restart the terminal; see the [Mise setup notes](docs/external-utilities/mise.md). Versions are pinned in `mise.toml`, and Renovate tracks them.

@@ -24,6 +24,8 @@ mirrorDirectory(repoPath('.agents/skills'), path.join(agentDir, 'skills'));
 write(path.join(agentDir, 'extensions', 'preset.ts'), fs.readFileSync(repoPath('extensions/preset.ts'), 'utf8'));
 write(path.join(agentDir, 'hindsight.jsonc'), fs.readFileSync(repoPath('hindsight.jsonc'), 'utf8'));
 write(path.join(agentDir, 'presets.json'), fs.readFileSync(repoPath('presets.json'), 'utf8'));
+write(path.join(agentDir, 'AGENTS.md'), fs.readFileSync(repoPath('global-workflow.md'), 'utf8'));
+write(path.join(agentDir, 'extensions', 'plannotator-control.ts'), fs.readFileSync(repoPath('extensions/plannotator-control.ts'), 'utf8'));
 
 console.log(`sync-pi-config ${dryRun ? 'dry run ' : ''}complete`);
 

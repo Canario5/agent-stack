@@ -19,3 +19,4 @@
 | 15 | [preset](./preset.md) | Switches the active Pi tool surface between the `nano`, `standard`, and `agents` presets. |
 | 16 | [@luxusai/pi-hindsight](./pi-hindsight.md) | Adds persistent project memory to Pi using a Hindsight server. |
 | 17 | [pi-context-view](./pi-context-view.md) | Visualizes context usage and exposes hidden system prompt, tool definitions, and extension injections. |
+| 18 | [plannotator-control](./plannotator-control.md) | Local enter/status adapter for Plannotator plan mode. |
