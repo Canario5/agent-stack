@@ -12,6 +12,7 @@
   "collapseChangelog": true,
   "defaultProjectTrust": "ask",
   "externalEditor": "code --wait",
+  "defaultTools": ["+codemode"],
   "packages": [
     "npm:pi-provider-litellm@4.4.1",
     "npm:pi-mcp-adapter@5.4.0",
