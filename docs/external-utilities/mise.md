@@ -10,7 +10,6 @@ Mise installs and pins executable developer tools across Windows, macOS, Linux, 
 `mise.toml` is the tracked source of truth for:
 
 - the Pi CLI
-- the `context-mode` MCP CLI
 - OpenSpec
 - hashline helper CLIs (`ast-grep`, `fd`, difftastic, ShellCheck, and `yq`)
 

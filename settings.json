@@ -14,14 +14,6 @@
   "packages": [
     "npm:pi-provider-litellm@4.4.1",
     "npm:pi-mcp-adapter@5.4.0",
-    {
-      "source": "npm:context-mode@1.0.169",
-      "skills": [
-        "skills/context-mode/SKILL.md",
-        "skills/ctx-index/SKILL.md",
-        "skills/ctx-search/SKILL.md"
-      ]
-    },
     "npm:pi-hashline-readmap@0.16.1",
     "npm:@narumitw/pi-usage@0.67.0",
     "npm:pi-subagents@0.80.0",

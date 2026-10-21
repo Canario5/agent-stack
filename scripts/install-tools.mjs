@@ -12,7 +12,6 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 const sourceConfig = path.join(repoRoot, 'mise.toml');
 const managedTools = readManagedTools();
 
-validateContextModeVersion();
 if (!dryRun && !commandAvailable('mise')) fail(miseInstallHelp());
 if (dryRun) {
   console.log(`[dry-run] mise use --global ${managedTools.map(({ name, version }) => `${name}@${version}`).join(' ')}`);
@@ -25,18 +24,6 @@ if (dryRun) {
 if (devcontainer) ensureDevcontainerActivation();
 else printActivationHelp();
 
-function validateContextModeVersion() {
-  const match = fs.readFileSync(sourceConfig, 'utf8').match(/"npm:context-mode"\s*=\s*"([^"]+)"/);
-  if (!match) fail('context-mode is missing from mise.toml.');
-
-  for (const file of ['settings.json', 'settings.devcontainer.json']) {
-    const settings = JSON.parse(fs.readFileSync(path.join(repoRoot, file), 'utf8'));
-    const expected = `npm:context-mode@${match[1]}`;
-    if (!settings.packages.some((entry) => entry === expected || entry?.source === expected)) {
-      fail(`${file} must use ${expected} to match mise.toml.`);
-    }
-  }
-}
 
 function readManagedTools() {
   let inTools = false;

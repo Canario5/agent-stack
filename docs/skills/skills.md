@@ -19,7 +19,7 @@ npx skills update --agent pi -p find-skills -y
 | Discovery / understanding | Finding key files, symbols, architecture, and onboarding context. |
 | Planning / decision support | Choosing tools, designing changes, and checking trade-offs before implementation. |
 | Quality / review | Code review, standards, maintainability, and safe cleanup. |
-| Context / memory | Indexing, searching, and keeping large outputs out of chat context. |
+| Context / memory | Project memory and knowledge management. |
 | Maintenance / diagnostics | Setup checks, upgrades, reset workflows, and health checks. |
 | Orchestration | Delegating work to agents, sessions, dashboards, or review flows. |
 | Annotation / review UI | Browser-based annotation, plan review, and code review feedback. |
@@ -63,14 +63,6 @@ Skills bundled with broader Pi extensions. List them here for discoverability, b
 
 | # | Skill | Provided by | Category | Status | Notes |
 |---:|---|---|---|---|---|
-| 1 | `context-mode` | [`context-mode`](../extensions/context-mode.md) | Context / memory | Core | Main workflow skill for context-mode behavior. |
-| 2 | `ctx-index` | [`context-mode`](../extensions/context-mode.md) | Context / memory | Utility | Index local files or directories into searchable knowledge. |
-| 3 | `ctx-insight` | [`context-mode`](../extensions/context-mode.md) | Context / memory | Utility | Open the context-mode analytics dashboard. |
-| 4 | `ctx-search` | [`context-mode`](../extensions/context-mode.md) | Context / memory | Utility | Search previously indexed context-mode knowledge. |
-| 5 | `ctx-stats` | [`context-mode`](../extensions/context-mode.md) | Context / memory | Utility | Show context savings and tool usage stats. |
-| 6 | `ctx-doctor` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Utility | Diagnose context-mode setup, hooks, and registration. |
-| 7 | `ctx-upgrade` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Utility | Upgrade context-mode and refresh hook setup. |
-| 8 | `ctx-purge` | [`context-mode`](../extensions/context-mode.md) | Maintenance / diagnostics | Dangerous | Permanently delete indexed context-mode knowledge. |
-| 9 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, scripted workflows, parallel runs, and async work. |
+| 1 | `pi-subagents` | [`pi-subagents`](../extensions/pi-subagents.md) | Orchestration | Core | Delegate to helper agents, scripted workflows, parallel runs, and async work. |
 
 Rule of thumb: standalone skill package = table row; add its own page only when it has repo-specific usage notes or caveats. Extension-provided skill = table row only, linked back to the extension docs.
