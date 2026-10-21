@@ -46,7 +46,7 @@
     },
     "npm:@luxusai/pi-hindsight@0.13.0",
     "npm:pi-context-view@0.7.2",
-    "npm:pi-web-access@0.43.0"
+    "npm:pi-web-access@0.44.0"
   ],
   "skillful": {
     "hiddenSkills": [
