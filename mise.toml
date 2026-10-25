@@ -1,6 +1,6 @@
 [tools]
 "npm:@earendil-works/pi-coding-agent" = "1.4.0"
-"npm:@fission-ai/openspec" = "1.14.3"
+"npm:@fission-ai/openspec" = "1.15.0"
 ast-grep = "0.51.0"
 difftastic = "0.71.0"
 fd = "10.5.0"
