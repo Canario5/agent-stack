@@ -17,7 +17,7 @@
     "npm:pi-provider-litellm@4.4.2",
     "npm:pi-mcp-adapter@5.4.0",
     "npm:pi-hashline-readmap@0.16.1",
-    "npm:@narumitw/pi-usage@0.68.1",
+    "npm:@narumitw/pi-usage@0.68.3",
     "npm:pi-subagents@0.81.0",
     "npm:@plannotator/pi-extension@0.28.29",
     "npm:@juicesharp/rpiv-ask-user-question@2.14.0",
