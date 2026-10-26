@@ -44,7 +44,7 @@ What Pi should do:
 | Start a wiki | Create `llm-wiki/` starter files and propose schema choices. |
 | Save notes or an article | Register the source, write or update topic pages, then update the wiki index and log. |
 | Ingest a Pi session | Read only the selected session log, extract durable decisions/errors/artifacts, then compile useful knowledge into the wiki. |
-| Ingest a web chat | Import one selected chat URL into `raw-sources/conversations/`, then compile useful knowledge into topic pages. |
+| Ingest a web chat | With the separate `@micuintus/ingest-web-chat` skill installed, import one selected chat URL into `raw-sources/conversations/`, then compile useful knowledge into topic pages. |
 | Ask the wiki | Read existing wiki pages and answer with links/citations where possible. |
 
 ### Importing sessions and web chats
@@ -65,7 +65,7 @@ Pi only imports the session you ask for. It can save useful decisions, problems,
 /skill:llm-wiki ingest this ChatGPT conversation into the project wiki: <url>
 ```
 
-The `ingest-web-chat` subskill imports one Claude.ai, ChatGPT, Gemini, or Le Chat conversation URL at a time. It does **not** require a Chrome DevTools MCP server. Instead, you start a normal Chrome browser with a special `--remote-debugging-port` option, sign in normally, and the import script connects to that browser through Chrome's built-in debugging API (CDP) to read the visible chat page. The extracted chat is saved into `llm-wiki/raw-sources/conversations/`. From there, the main `llm-wiki` workflow can compile the chat into topic pages.
+The `ingest-web-chat` skill is now a separate package: install it with `pi install npm:@micuintus/ingest-web-chat`. It imports one Claude.ai, ChatGPT, Gemini, or Le Chat conversation URL at a time. It does **not** require a Chrome DevTools MCP server. Instead, you start a normal Chrome browser with a special `--remote-debugging-port` option, sign in normally, and the import script connects to that browser through Chrome's built-in debugging API (CDP) to read the visible chat page. The extracted chat is saved into `llm-wiki/raw-sources/conversations/`. From there, the `llm-wiki` workflow can compile it into topic pages.
 
 Use these recipes when a specific session or chat contains durable knowledge worth preserving, not as a general transcript backup system.
 
