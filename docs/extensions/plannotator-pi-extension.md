@@ -29,10 +29,16 @@ Good uses:
 ### What it adds
 
 - Plan mode with a browser UI for approving or annotating markdown checklist plans.
+
+- Save plans to Notion, alongside supported local note apps.
 - Plan diffs when a plan is resubmitted after feedback.
 - Annotation UI for markdown files, folders, URLs, and rendered assistant messages.
+
+- Annotation supports AsciiDoc (`.adoc` and `.asciidoc`) files.
 - Live localhost app annotation via `/plannotator-annotate http://localhost:5173`, using a loopback proxy; use `--static` for remote sessions.
 - Code review UI for current git changes, staged changes, last commit, branch diffs, or pull request URLs.
+
+- Browse every repository file during code review, including files outside the diff, and comment on whole-file content.
 - Optional Call Flow analysis in code review, enabled from the review UI when needed.
 - Slash commands for user-driven workflows, plus event-based plan mode control for other Pi extensions.
 - Browser-integrated agents can inspect documents and add their own comments through WebMCP; human approval decisions remain required.
