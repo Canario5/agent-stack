@@ -21,4 +21,6 @@
 ### Requirements and cautions
 
 - Remote hosted extraction providers are opt-in for remote HTTP(S) URLs; review upstream security and privacy guidance before enabling them.
+
+- For pages that block ordinary fetches, `fetchContent.curl` can use a configured curl-compatible command; Exa or Tabstack hosted fetching requires enabling remote hosted providers and sends the page URL to that provider.
 - Video frame extraction requires `ffmpeg`; YouTube frame extraction also requires `yt-dlp`. Basic search and page fetching need neither.
