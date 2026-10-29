@@ -38,7 +38,7 @@
       ]
     },
     "npm:@luxusai/pi-hindsight@0.13.0",
-    "npm:pi-context-view@0.8.0",
+    "npm:pi-context-view@0.8.1",
     "npm:pi-web-access@0.46.0"
   ],
   "skillful": {
