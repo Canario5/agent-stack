@@ -15,7 +15,7 @@
   "defaultTools": ["+codemode"],
   "packages": [
     "npm:pi-provider-litellm@4.4.2",
-    "npm:pi-mcp-adapter@5.4.0",
+    "npm:pi-mcp-adapter@7.0.0",
     "npm:pi-hashline-readmap@0.16.1",
     "npm:@narumitw/pi-usage@0.68.4",
     "npm:pi-subagents@0.84.0",

@@ -1,13 +1,12 @@
 ## pi-mcp-adapter
 
 - **Install:** `pi install npm:pi-mcp-adapter@x.x.x`
-- **Purpose:** Use MCP servers through pi. One proxy tool (~200 tokens) instead of hundreds. Servers start lazily — only when you actually call a tool.
+- **Purpose:** Use MCP servers through Pi with one compact proxy tool instead of listing every server tool. Servers connect lazily by default.
 - **Full docs:** [pi-mcp-adapter README](https://github.com/nicobailon/pi-mcp-adapter/blob/main/README.md)
 
 ### Config
 
 Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for shared global config. Pi also reads `~/.agents/mcp.json` and `~/.agents/mcp/mcp.json`.
-
 
 ```json
 {
@@ -22,19 +21,29 @@ Preferred: `.mcp.json` in project root, or `~/.config/mcp/mcp.json` for shared g
 
 Adapter-owned settings and overrides belong in `<pi agent dir>/mcp-adapter.json` (normally `~/.pi/agent/mcp-adapter.json`) and `.pi/mcp-adapter.json`. On Pi 0.99+, the adapter also reads `<pi agent dir>/mcp.json` and `.pi/mcp.json`.
 
-Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `<pi agent dir>/mcp-adapter.json` > `.mcp.json` > `.pi/mcp.json` > `.pi/mcp-adapter.json`.
-
+Precedence (lowest to highest): `~/.config/mcp/mcp.json` > `~/.agents/mcp.json` > `~/.agents/mcp/mcp.json` > `<pi agent dir>/mcp.json` > `<pi agent dir>/mcp-adapter.json` > `.mcp.json` > `.pi/mcp.json` > `.pi/mcp-adapter.json`. Opt-in ancestor config roots are also loaded below the current directory's files.
 
 ### Usage
 
 The agent calls the `mcp` tool (same as `read`, `bash`, etc). You don't type this — the agent does it.
 
-
 The interactive command is `/mcp-adapter`; on Pi 0.99+ `/mcp` also opens the adapter, which replaces Pi's built-in MCP for the session and disables it in user settings on first start. For static bearer-token servers, `bearerTokenStore: true` enables OS credential storage; manage the token with `pi-mcp-adapter token set|status|remove <server>` rather than putting it in config.
 
-### System One semantic search
+### Semantic search
 
-With a valid System One key, the adapter can provide semantic search across enabled MCP tools. TypeSafe remains the default provider; set `SYSTEMONE_ENDPOINT` to use another compatible provider and use `pi-mcp-adapter key set systemone` to store its key. `/mcp-adapter jev setup` chooses which servers may share semantic-search data; the project policy is saved and Pi reloads. Script evaluation remains opt-in.
+Semantic search uses Pi's classifier models and credentials; v7 removed the adapter's key command and `SYSTEMONE_*` settings. Use Pi's `/login` for OpenRouter, set `TYPESAFE_API_KEY` or `OPENROUTER_API_KEY` in Pi's environment, or configure a provider in `models.json`.
+
+Run `/mcp-adapter semantic setup` to migrate `settings.jev`. For manual migration:
+
+- Rename `settings.jev` to `settings.semanticSearch`.
+- Rename `semanticCandidateLimit` to `candidateLimit` and `semanticMinProbability` to `minProbability`.
+- Format `model` as `provider/id`.
+- Remove `requestTimeoutMs`, `maxRetries`, `maxStateBytes`, and `maxQuestionsPerRequest`.
+- Change `settings.jev: false` to `settings.semanticSearch: false`.
+
+See the [migration guide](https://github.com/nicobailon/pi-mcp-adapter/blob/v7.0.0/docs/scripting.md#moving-from-a-system-one-key) for the full mapping.
+
+A previously stored System One key remains in the OS credential store; remove it if no longer needed.
 
 | Action | Agent call |
 |--------|------------|
@@ -46,18 +55,21 @@ With a valid System One key, the adapter can provide semantic search across enab
 
 `args` may be a JSON object or a JSON string. Prefer the object form; use a string for providers that require simpler schemas.
 
+The adapter exposes MCP prompts as slash commands, supports server overrides (`/mcp-adapter disable` and `/mcp-adapter enable`), and guards oversized results.
 
-The adapter also supports MCP prompts as slash commands, disabled-server overrides (`/mcp-adapter disable` / `/mcp-adapter enable`), oversized-output guarding, and optional `mcpScript` for trusted multi-call JavaScript workflows. `mcpScript` is off by default; enable it with `"settings": { "scriptMode": true }` in `mcp-adapter.json`.
+- Use Pi's `codemode` for multi-call scripts; this stack enables it with `"defaultTools": ["+codemode"]`. The adapter's `mcpScript` was removed in v6; reusable scripts can be configured as `scriptTools` (Pi 0.99+).
+- For servers that support MCP Tasks, set `"protocolVersion": "auto"` to run long calls in the background.
+- Typed extraction is optional. Set `settings.extraction.allowedServers` to name servers whose tool results may be sent to Cloudflare.
 
 ### Tips
 
-- **`directTools`** — by default, the agent discovers MCP tools through the proxy tool (`mcp({ search: ... })`). That saves tokens but adds a step. If you use a mcp server frequently (e.g., filesystem, github), set `"directTools": true` on it — its tools appear directly in the agent's tool list, no search trough mcp proxy needed.
+- **`directTools`** — by default, the agent discovers tools through `mcp({ search: ... })`, which saves tokens but adds a step. For frequently used servers, set `"directTools": true` to expose their tools directly.
 
   Expose all tools:
   ```json
   {
     "mcpServers": {
-      "filesystem": {
+      "github": {
         "command": "npx",
         "args": ["-y", "@modelcontextprotocol/server-github"],
         "directTools": true,
