@@ -28,7 +28,7 @@
     "npm:@firstpick/pi-skill-code-quality@0.1.7",
     "npm:@firstpick/pi-skill-repo-explorer@0.2.2",
     "npm:@micuintus/llm-wiki@1.4.12",
-    "npm:pi-skillful@0.5.0",
+    "npm:pi-skillful@0.5.1",
     {
       "source": "npm:@dietrichgebert/ponytail@5.3.3",
       "skills": [
