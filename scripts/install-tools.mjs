@@ -16,9 +16,12 @@ if (!dryRun && !commandAvailable('mise')) fail(miseInstallHelp());
 if (dryRun) {
   console.log(`[dry-run] mise use --global ${managedTools.map(({ name, version }) => `${name}@${version}`).join(' ')}`);
   console.log('[dry-run] mise reshim');
+  console.log('[dry-run] mise set --global NO_ANON_PING=1');
 } else {
   run('mise', ['use', '--global', ...managedTools.map(({ name, version }) => `${name}@${version}`)]);
   run('mise', ['reshim']);
+  // Disable Plannotator's own daily ping "NO_ANON_PING=1"; Pi's telemetry settings don't control it.
+  run('mise', ['set', '--global', 'NO_ANON_PING=1']);
 }
 
 if (devcontainer) ensureDevcontainerActivation();
