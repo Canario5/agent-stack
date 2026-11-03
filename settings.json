@@ -13,7 +13,7 @@
   "externalEditor": "code --wait",
   "defaultTools": ["+codemode"],
   "packages": [
-    "npm:pi-provider-litellm@4.7.1",
+    "npm:pi-provider-litellm@4.7.2",
     "npm:pi-mcp-adapter@7.0.0",
     "npm:pi-hashline-readmap@0.20.0",
     "npm:@narumitw/pi-usage@0.69.1",
