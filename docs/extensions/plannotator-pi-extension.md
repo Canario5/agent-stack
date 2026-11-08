@@ -45,6 +45,7 @@ Good uses:
 
 
 Plannotator Inbox collects agent questions, messages, attached files, and guided reviews in one local window. Pi's `plannotator_inbox` tool is off by default; enable it with `PLANNOTATOR_INBOX_TOOL=1` if you want agents to start and use the Inbox. The Inbox can also be started directly with `plannotator inbox`.
+Inbox agent launching is a separate feature, enabled by default on macOS and Linux; turn it off under **Settings → Agents**. Starting Pi from the Inbox requires Pi 0.79.1+ on `PATH`, runs only while the Inbox is open, and is not offered on Windows.
 
 ### Live app annotation
 
