@@ -3,6 +3,6 @@
 "npm:@fission-ai/openspec" = "1.16.1"
 ast-grep = "0.51.1"
 difftastic = "0.72.0"
-fd = "10.5.1"
+fd = "10.5.2"
 shellcheck = "0.11.0"
 yq = "4.54.2"
