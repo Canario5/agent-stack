@@ -52,5 +52,5 @@ This exception is not Renovate-tracked by this repository.
 
 - Good when you want safer edits and easier navigation in larger files.
 - `read`, `grep`, `ast_search`, and `write` results can feed follow-up edits.
-- `bash` output is post-processed to reduce noise while preserving useful results; `PI_RTK_BYPASS=1` skips route compression, but the default context guard may still trim oversized output.
+- `bash` output passes through Pi's output (with ANSI codes stripped) plus tool-use hints; it is no longer compressed or trimmed by this extension. Pi may still truncate oversized output.
 - The LLM automatically sees compact tool-use rules before calling tools, which helps it avoid invalid combinations. The detailed `prompts/*.md` files are reference docs; changing them alone does not change what the LLM sees.
